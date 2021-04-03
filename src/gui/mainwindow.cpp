@@ -74,6 +74,7 @@
 #include "aboutdialog.h"
 #include "addnewtorrentdialog.h"
 #include "autoexpandabledialog.h"
+#include "authdialog.h"
 #include "cookiesdialog.h"
 #include "downloadfromurldialog.h"
 #include "executionlogwidget.h"
@@ -184,6 +185,7 @@ MainWindow::MainWindow(QWidget *parent)
     m_ui->actionDonateMoney->setIcon(UIThemeManager::instance()->getIcon("wallet-open"));
     m_ui->actionExit->setIcon(UIThemeManager::instance()->getIcon("application-exit"));
     m_ui->actionLock->setIcon(UIThemeManager::instance()->getIcon("object-locked"));
+    m_ui->actionAuth->setIcon(UIThemeManager::instance()->getIcon("auth-button"));
     m_ui->actionOptions->setIcon(UIThemeManager::instance()->getIcon("configure", "preferences-system"));
     m_ui->actionPause->setIcon(UIThemeManager::instance()->getIcon("media-playback-pause"));
     m_ui->actionPauseAll->setIcon(UIThemeManager::instance()->getIcon("media-playback-pause"));
@@ -196,6 +198,10 @@ MainWindow::MainWindow(QWidget *parent)
     lockMenu->addAction(tr("&Set Password"), this, &MainWindow::defineUILockPassword);
     lockMenu->addAction(tr("&Clear Password"), this, &MainWindow::clearUILockPassword);
     m_ui->actionLock->setMenu(lockMenu);
+
+    QAction *loginUserAct = lockMenu->addAction(tr("&Set Password"));
+    connect(loginUserAct, &QAction::triggered, this, &MainWindow::defineUIAuth);
+    m_ui->actionAuth->setMenu(lockMenu);
 
     // Creating Bittorrent session
     connect(BitTorrent::Session::instance(), &BitTorrent::Session::fullDiskError, this, &MainWindow::fullDiskError);
@@ -628,6 +634,22 @@ void MainWindow::toolbarFollowSystem()
     Preferences::instance()->setToolbarTextPosition(Qt::ToolButtonFollowStyle);
 }
 
+bool MainWindow::defineUIAuth()
+{
+    bool ok = false;
+    const QString newPassword = AuthDialog::getText(this, tr("Authentication")
+        , tr("Password:"), QLineEdit::Password, {}, &ok);
+    if (!ok)
+        return false;
+
+    if (newPassword.size() < 3) {
+        QMessageBox::warning(this, tr("Invalid password"), tr("The password should contain at least 3 characters"));
+        return false;
+    }
+
+    return true;
+}
+
 bool MainWindow::defineUILockPassword()
 {
     bool ok = false;
@@ -652,6 +674,12 @@ void MainWindow::clearUILockPassword()
         , tr("Are you sure you want to clear the password?"), (QMessageBox::Yes | QMessageBox::No), QMessageBox::No);
     if (answer == QMessageBox::Yes)
         Preferences::instance()->setUILockPassword({});
+}
+
+void MainWindow::on_actionAuth_triggered()
+{
+    if (!defineUIAuth())
+        return;
 }
 
 void MainWindow::on_actionLock_triggered()

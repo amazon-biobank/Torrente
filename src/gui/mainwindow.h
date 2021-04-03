@@ -115,6 +115,7 @@ private slots:
     void handleDownloadFromUrlFailure(const QString &, const QString &) const;
     void tabChanged(int newTab);
     bool defineUILockPassword();
+    bool defineUIAuth();
     void clearUILockPassword();
     bool unlockUI();
     void notifyOfUpdate(const QString &);
@@ -173,6 +174,7 @@ private slots:
     void on_actionDownloadFromURL_triggered();
     void on_actionExit_triggered();
     void on_actionLock_triggered();
+    void on_actionAuth_triggered();
     // Check for unpaused downloading or seeding torrents and prevent system suspend/sleep according to preferences
     void updatePowerManagementState();
 
