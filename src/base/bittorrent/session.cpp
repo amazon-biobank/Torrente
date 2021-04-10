@@ -435,6 +435,8 @@ Session::Session(QObject *parent)
     , m_peerTurnover(BITTORRENT_SESSION_KEY("PeerTurnover"), 4)
     , m_peerTurnoverCutoff(BITTORRENT_SESSION_KEY("PeerTurnoverCutOff"), 90)
     , m_peerTurnoverInterval(BITTORRENT_SESSION_KEY("PeerTurnoverInterval"), 300)
+    , m_userEncryptedPublicKeyString(BITTORRENT_KEY("UserEncryptedPublicKeyString"), '')
+    , m_userEncryptedPrivateKeyString(BITTORRENT_KEY("UserEncryptedPrivateKeyString"), '')
     , m_bannedIPs("State/BannedIPs"
                   , QStringList()
                   , [](const QStringList &value)
@@ -931,6 +933,34 @@ void Session::setTrackerEnabled(const bool enabled)
     // call enableTracker() unconditionally, otherwise port change won't trigger
     // tracker restart
     enableTracker(enabled);
+}
+
+string Session::userEncryptedPublicKeyString() const
+{
+    return m_userEncryptedPublicKeyString;
+}
+
+void Session::setUserEncryptedPublicKeyString(const string val)
+{
+    if (val == m_userEncryptedPublicKeyString)
+        return;
+
+    m_userEncryptedPublicKeyString = val;
+    configureDeferred();
+}
+
+string Session::userEncryptedPrivateKeyString() const
+{
+    return m_userEncryptedPrivateKeyString;
+}
+
+void Session::setUserEncryptedPrivateKeyString(const string val)
+{
+    if (val == m_userEncryptedPrivateKeyString)
+        return;
+
+    m_userEncryptedPrivateKeyString = val;
+    configureDeferred();
 }
 
 qreal Session::globalMaxRatio() const

@@ -272,6 +272,10 @@ namespace BitTorrent
         void setTorrentContentLayout(TorrentContentLayout value);
         bool isTrackerEnabled() const;
         void setTrackerEnabled(bool enabled);
+        bool userEncryptedPublicKeyString() const;
+        void setUserEncryptedPublicKeyString(string val);
+        bool userEncryptedPrivateKeyString() const;
+        void setUserEncryptedPrivateKeyString(string val);
         bool isAppendExtensionEnabled() const;
         void setAppendExtensionEnabled(bool enabled);
         int refreshInterval() const;
@@ -734,6 +738,8 @@ namespace BitTorrent
         CachedSettingValue<int> m_peerTurnover;
         CachedSettingValue<int> m_peerTurnoverCutoff;
         CachedSettingValue<int> m_peerTurnoverInterval;
+        CachedSettingValue<bool> m_userEncryptedPublicKeyString;
+        CachedSettingValue<bool> m_userEncryptedPrivateKeyString;
         CachedSettingValue<QStringList> m_bannedIPs;
 #if defined(Q_OS_WIN)
         CachedSettingValue<OSMemoryPriority> m_OSMemoryPriority;
