@@ -272,9 +272,9 @@ namespace BitTorrent
         void setTorrentContentLayout(TorrentContentLayout value);
         bool isTrackerEnabled() const;
         void setTrackerEnabled(bool enabled);
-        bool userEncryptedPublicKeyString() const;
+        QString userEncryptedPublicKeyString() const;
         void setUserEncryptedPublicKeyString(QString val);
-        bool userEncryptedPrivateKeyString() const;
+        QString userEncryptedPrivateKeyString() const;
         void setUserEncryptedPrivateKeyString(QString val);
         bool isAppendExtensionEnabled() const;
         void setAppendExtensionEnabled(bool enabled);
