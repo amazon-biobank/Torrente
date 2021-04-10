@@ -15,6 +15,7 @@ aboutdialog.h
 addnewtorrentdialog.h
 advancedsettings.h
 autoexpandabledialog.h
+authdialog.h
 banlistoptionsdialog.h
 categoryfiltermodel.h
 categoryfilterproxymodel.h
@@ -70,6 +71,7 @@ aboutdialog.cpp
 addnewtorrentdialog.cpp
 advancedsettings.cpp
 autoexpandabledialog.cpp
+authdialog.cpp
 banlistoptionsdialog.cpp
 categoryfiltermodel.cpp
 categoryfilterproxymodel.cpp
@@ -124,6 +126,7 @@ utils.cpp
 aboutdialog.ui
 addnewtorrentdialog.ui
 autoexpandabledialog.ui
+authdialog.ui
 banlistoptionsdialog.ui
 cookiesdialog.ui
 deletionconfirmationdialog.ui

@@ -254,6 +254,7 @@
         <file>qbt-theme/application-exit.svg</file>
         <file>qbt-theme/application-rss+xml.svg</file>
         <file>qbt-theme/application-x-mswinurl.svg</file>
+        <file>qbt-theme/auth-button.svg</file>
         <file>qbt-theme/checked.svg</file>
         <file>qbt-theme/configure.svg</file>
         <file>qbt-theme/dialog-cancel.svg</file>
