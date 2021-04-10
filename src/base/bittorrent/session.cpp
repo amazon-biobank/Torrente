@@ -435,8 +435,8 @@ Session::Session(QObject *parent)
     , m_peerTurnover(BITTORRENT_SESSION_KEY("PeerTurnover"), 4)
     , m_peerTurnoverCutoff(BITTORRENT_SESSION_KEY("PeerTurnoverCutOff"), 90)
     , m_peerTurnoverInterval(BITTORRENT_SESSION_KEY("PeerTurnoverInterval"), 300)
-    , m_userEncryptedPublicKeyString(BITTORRENT_KEY("UserEncryptedPublicKeyString"), '')
-    , m_userEncryptedPrivateKeyString(BITTORRENT_KEY("UserEncryptedPrivateKeyString"), '')
+    , m_userEncryptedPublicKeyString(BITTORRENT_KEY("UserEncryptedPublicKeyString"), QString::fromStdString(''))
+    , m_userEncryptedPrivateKeyString(BITTORRENT_KEY("UserEncryptedPrivateKeyString"), QString::fromStdString(''))
     , m_bannedIPs("State/BannedIPs"
                   , QStringList()
                   , [](const QStringList &value)
@@ -935,12 +935,12 @@ void Session::setTrackerEnabled(const bool enabled)
     enableTracker(enabled);
 }
 
-string Session::userEncryptedPublicKeyString() const
+QString Session::userEncryptedPublicKeyString() const
 {
     return m_userEncryptedPublicKeyString;
 }
 
-void Session::setUserEncryptedPublicKeyString(const string val)
+void Session::setUserEncryptedPublicKeyString(const QString val)
 {
     if (val == m_userEncryptedPublicKeyString)
         return;
@@ -949,12 +949,12 @@ void Session::setUserEncryptedPublicKeyString(const string val)
     configureDeferred();
 }
 
-string Session::userEncryptedPrivateKeyString() const
+QString Session::userEncryptedPrivateKeyString() const
 {
     return m_userEncryptedPrivateKeyString;
 }
 
-void Session::setUserEncryptedPrivateKeyString(const string val)
+void Session::setUserEncryptedPrivateKeyString(const QString val)
 {
     if (val == m_userEncryptedPrivateKeyString)
         return;
