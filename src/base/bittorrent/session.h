@@ -267,6 +267,10 @@ namespace BitTorrent
         void setCreateTorrentSubfolder(bool value);
         bool isTrackerEnabled() const;
         void setTrackerEnabled(bool enabled);
+        bool userEncryptedPublicKeyString() const;
+        void setUserEncryptedPublicKeyString(string val);
+        bool userEncryptedPrivateKeyString() const;
+        void setUserEncryptedPrivateKeyString(string val);
         bool isAppendExtensionEnabled() const;
         void setAppendExtensionEnabled(bool enabled);
         uint refreshInterval() const;
@@ -704,6 +708,8 @@ namespace BitTorrent
         CachedSettingValue<bool> m_isDisableAutoTMMWhenDefaultSavePathChanged;
         CachedSettingValue<bool> m_isDisableAutoTMMWhenCategorySavePathChanged;
         CachedSettingValue<bool> m_isTrackerEnabled;
+        CachedSettingValue<bool> m_userEncryptedPublicKeyString;
+        CachedSettingValue<bool> m_userEncryptedPrivateKeyString;
         CachedSettingValue<QStringList> m_bannedIPs;
 #if defined(Q_OS_WIN)
         CachedSettingValue<OSMemoryPriority> m_OSMemoryPriority;

@@ -527,6 +527,8 @@ Session::Session(QObject *parent)
     , m_isDisableAutoTMMWhenDefaultSavePathChanged(BITTORRENT_SESSION_KEY("DisableAutoTMMTriggers/DefaultSavePathChanged"), true)
     , m_isDisableAutoTMMWhenCategorySavePathChanged(BITTORRENT_SESSION_KEY("DisableAutoTMMTriggers/CategorySavePathChanged"), true)
     , m_isTrackerEnabled(BITTORRENT_KEY("TrackerEnabled"), false)
+    , m_userEncryptedPublicKeyString(BITTORRENT_KEY("UserEncryptedPublicKeyString"), '')
+    , m_userEncryptedPrivateKeyString(BITTORRENT_KEY("UserEncryptedPrivateKeyString"), '')
     , m_bannedIPs("State/BannedIPs"
                   , QStringList()
                   , [](const QStringList &value)
@@ -1003,6 +1005,34 @@ void Session::setTrackerEnabled(const bool enabled)
     // call enableTracker() unconditionally, otherwise port change won't trigger
     // tracker restart
     enableTracker(enabled);
+}
+
+string Session::userEncryptedPublicKeyString() const
+{
+    return m_userEncryptedPublicKeyString;
+}
+
+void Session::setUserEncryptedPublicKeyString(const string val)
+{
+    if (val == m_userEncryptedPublicKeyString)
+        return;
+
+    m_userEncryptedPublicKeyString = val;
+    configureDeferred();
+}
+
+string Session::userEncryptedPrivateKeyString() const
+{
+    return m_userEncryptedPrivateKeyString;
+}
+
+void Session::setUserEncryptedPrivateKeyString(const string val)
+{
+    if (val == m_userEncryptedPrivateKeyString)
+        return;
+
+    m_userEncryptedPrivateKeyString = val;
+    configureDeferred();
 }
 
 qreal Session::globalMaxRatio() const
