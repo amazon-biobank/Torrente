@@ -636,16 +636,9 @@ void MainWindow::toolbarFollowSystem()
 
 bool MainWindow::defineUIAuth()
 {
-    bool ok = false;
-    const QString newPassword = AuthDialog::getText(this, tr("Authentication")
-        , tr("Password:"), QLineEdit::Password, {}, &ok);
-    if (!ok)
-        return false;
+    AuthDialog authDialog(this);
 
-    if (newPassword.size() < 3) {
-        QMessageBox::warning(this, tr("Invalid password"), tr("The password should contain at least 3 characters"));
-        return false;
-    }
+    authDialog.exec();
 
     return true;
 }
@@ -678,8 +671,16 @@ void MainWindow::clearUILockPassword()
 
 void MainWindow::on_actionAuth_triggered()
 {
+    QString privateKey = BitTorrent::Session::instance()->userDecryptedPrivateKeyString();
+    QString certificate = BitTorrent::Session::instance()->userDecryptedCertificateString();
+
+    // if (privateKey){
+    //     if(!defineUserPanel())
+    //         return;
+    // }
     if (!defineUIAuth())
         return;
+    
 }
 
 void MainWindow::on_actionLock_triggered()
