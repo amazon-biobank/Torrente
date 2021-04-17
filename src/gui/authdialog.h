@@ -46,19 +46,16 @@ class AuthDialog final : public QDialog
 public:
     explicit AuthDialog(QWidget *parent);
     ~AuthDialog();
-
-    static QString getText(QWidget *parent, const QString &title, const QString &label,
-                           QLineEdit::EchoMode mode = QLineEdit::Normal, const QString &text = {},
-                            bool *ok = nullptr, bool excludeExtension = false, Qt::InputMethodHints inputMethodHints = Qt::ImhNone);
-
 protected:
     void showEvent(QShowEvent *e) override;
 
 private slots:
     void onImportButtonClicked();
+    void setCredentials();
 
 private:
     Ui::AuthDialog *m_ui;
+    QString certificatePath;
 };
 
 #endif // AUTHDIALOG_H
