@@ -435,8 +435,8 @@ Session::Session(QObject *parent)
     , m_peerTurnover(BITTORRENT_SESSION_KEY("PeerTurnover"), 4)
     , m_peerTurnoverCutoff(BITTORRENT_SESSION_KEY("PeerTurnoverCutOff"), 90)
     , m_peerTurnoverInterval(BITTORRENT_SESSION_KEY("PeerTurnoverInterval"), 300)
-    , m_userEncryptedPublicKeyString(BITTORRENT_KEY("UserEncryptedPublicKeyString"), QString::fromStdString(""))
-    , m_userEncryptedPrivateKeyString(BITTORRENT_KEY("UserEncryptedPrivateKeyString"), QString::fromStdString(""))
+    , m_userDecryptedCertificateString(BITTORRENT_KEY("UserDecryptedCertificateString"), QString::fromStdString(""))
+    , m_userDecryptedPrivateKeyString(BITTORRENT_KEY("UserDecryptedPrivateKeyString"), QString::fromStdString(""))
     , m_bannedIPs("State/BannedIPs"
                   , QStringList()
                   , [](const QStringList &value)
@@ -935,31 +935,31 @@ void Session::setTrackerEnabled(const bool enabled)
     enableTracker(enabled);
 }
 
-QString Session::userEncryptedPublicKeyString() const
+QString Session::userDecryptedCertificateString() const
 {
-    return m_userEncryptedPublicKeyString;
+    return m_userDecryptedCertificateString;
 }
 
-void Session::setUserEncryptedPublicKeyString(const QString val)
+void Session::setUserDecryptedCertificateString(const QString val)
 {
-    if (val == m_userEncryptedPublicKeyString)
+    if (val == m_userDecryptedCertificateString)
         return;
 
-    m_userEncryptedPublicKeyString = val;
+    m_userDecryptedCertificateString = val;
     configureDeferred();
 }
 
-QString Session::userEncryptedPrivateKeyString() const
+QString Session::userDecryptedPrivateKeyString() const
 {
-    return m_userEncryptedPrivateKeyString;
+    return m_userDecryptedPrivateKeyString;
 }
 
-void Session::setUserEncryptedPrivateKeyString(const QString val)
+void Session::setUserDecryptedPrivateKeyString(const QString val)
 {
-    if (val == m_userEncryptedPrivateKeyString)
+    if (val == m_userDecryptedPrivateKeyString)
         return;
 
-    m_userEncryptedPrivateKeyString = val;
+    m_userDecryptedPrivateKeyString = val;
     configureDeferred();
 }
 
