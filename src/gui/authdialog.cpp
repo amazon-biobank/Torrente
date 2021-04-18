@@ -29,10 +29,10 @@
 #include <QFileDialog>
 #include <QMessageBox>
 
-// #include <jsoncpp/json/value.h>
-// #include <jsoncpp/json/json.h>
+#include <jsoncpp/json/value.h>
+#include <jsoncpp/json/json.h>
 #include "base/bittorrent/session.h"
-// #include "Lyra2FileEncryptor.h"
+#include "Lyra2FileEncryptor.h"
 
 #include "authdialog.h"
 
@@ -45,7 +45,6 @@ AuthDialog::AuthDialog(QWidget *parent)
 {
     m_ui->setupUi(this);
     
-    // m_ui->lineEdit->setText("text");
     m_ui->lineEdit->setEchoMode(QLineEdit::Password);
 
     m_ui->loginButton->setText(tr("Login"));
@@ -76,26 +75,30 @@ void AuthDialog::setCredentials()
     QString password = this->m_ui->lineEdit->text();
 
     std::string certificatePathStd = this->certificatePath.toUtf8().constData();
-    const char* certificatePathString = certificatePathStd.c_str();
+    // const char* certificatePathString = certificatePathStd.c_str();
+    char *certificatePathString = new char[certificatePathStd.length() + 1];
+    strcpy(certificatePathString, certificatePathStd.c_str());
     
     std::string passwordStd = password.toUtf8().constData();
-    const char* passwordString = passwordStd.c_str();
+    // const char* passwordString = passwordStd.c_str();
+    char *passwordString = new char[passwordStd.length() + 1];
+    strcpy(passwordString, passwordStd.c_str());
 
-    // char* decryptedFile = getDecryptedContentFromFile(certificatePathString, passwordString);
+    char* decryptedFile = getDecryptedContentFromFile(certificatePathString, passwordString);
 
-    // Json::Value certificateJson;
-    // Json::Reader reader;
-    // Json::FastWriter fastWriter;
+    Json::Value certificateJson;
+    Json::Reader reader;
+    Json::FastWriter fastWriter;
 
     try {
-        // reader.parse(decryptedFile, certificateJson);
+        reader.parse(decryptedFile, certificateJson);
 
         // transform inputJson in char*:
-        // std::string certificateString = fastWriter.write(certificateJson["credentials"]["certificate"]);
-        // std::string privateKeyString = fastWriter.write(certificateJson["credentials"]["privateKey"]);
-        
-        BitTorrent::Session::instance()->setUserDecryptedPrivateKeyString(QString::fromUtf8(certificatePathString));
-        BitTorrent::Session::instance()->setUserDecryptedCertificateString(QString::fromUtf8(passwordString));
+        std::string certificateString = fastWriter.write(certificateJson["credentials"]["certificate"]);
+        std::string privateKeyString = fastWriter.write(certificateJson["credentials"]["privateKey"]);
+
+        BitTorrent::Session::instance()->setUserDecryptedPrivateKeyString(QString::fromUtf8(certificateString.c_str()));
+        BitTorrent::Session::instance()->setUserDecryptedCertificateString(QString::fromUtf8(privateKeyString.c_str()));
         
         this->close();
         // throw exception; // Throw an exception when a problem arise
