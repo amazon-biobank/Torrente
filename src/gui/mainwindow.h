@@ -116,6 +116,7 @@ private slots:
     void tabChanged(int newTab);
     bool defineUILockPassword();
     bool defineUIAuth();
+    bool defineUIUserPanel();
     void clearUILockPassword();
     bool unlockUI();
     void notifyOfUpdate(const QString &);
@@ -179,6 +180,7 @@ private slots:
     void on_actionExit_triggered();
     void on_actionLock_triggered();
     void on_actionAuth_triggered();
+    void on_actionBalance_triggered();
     // Check for unpaused downloading or seeding torrents and prevent system suspend/sleep according to preferences
     void updatePowerManagementState();
 #if defined(Q_OS_WIN) || defined(Q_OS_MACOS)
@@ -218,6 +220,8 @@ private:
     void displaySearchTab(bool enable);
     void createTorrentTriggered(const QString &path = {});
     void showStatusBar(bool show);
+
+    void refreshAuthenticationState();
 
     Ui::MainWindow *m_ui;
 
