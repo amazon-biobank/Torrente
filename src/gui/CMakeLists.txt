@@ -2,6 +2,7 @@ add_library(qbt_gui STATIC
     # headers
     aboutdialog.h
     authdialog.h
+    balancedialog.h
     addnewtorrentdialog.h
     advancedsettings.h
     autoexpandabledialog.h
@@ -83,6 +84,7 @@ add_library(qbt_gui STATIC
     # sources
     aboutdialog.cpp
     authdialog.cpp
+    balancedialog.cpp
     addnewtorrentdialog.cpp
     advancedsettings.cpp
     autoexpandabledialog.cpp
@@ -164,6 +166,7 @@ add_library(qbt_gui STATIC
     # forms
     aboutdialog.ui
     authdialog.ui
+    balancedialog.ui
     addnewtorrentdialog.ui
     autoexpandabledialog.ui
     banlistoptionsdialog.ui
