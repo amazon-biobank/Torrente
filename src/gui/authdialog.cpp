@@ -27,6 +27,7 @@
  */
 
 #include <QFileDialog>
+#include <QApplication>
 #include <QMessageBox>
 
 #include <jsoncpp/json/value.h>
@@ -38,6 +39,10 @@
 
 #include "ui_authdialog.h"
 #include "utils.h"
+
+#include <iostream>
+
+#define INVALID_CREDENTIALS_EXCEPTION 1
 
 AuthDialog::AuthDialog(QWidget *parent)
     : QDialog(parent)
@@ -70,8 +75,17 @@ void AuthDialog::onImportButtonClicked()
     AuthDialog::certificatePath = fileName;
 }
 
+void AuthDialog::toggleWidgetsEnable(){
+    m_ui->loginButton->setEnabled(!m_ui->loginButton->isEnabled());
+    m_ui->certificateButton->setEnabled(!m_ui->certificateButton->isEnabled());
+    m_ui->lineEdit->setEnabled(!m_ui->lineEdit->isEnabled());
+}
+
 void AuthDialog::setCredentials()
 {
+    QApplication::setOverrideCursor(Qt::WaitCursor);
+    this->toggleWidgetsEnable();
+
     QString password = this->m_ui->lineEdit->text();
 
     std::string certificatePathStd = this->certificatePath.toUtf8().constData();
@@ -97,14 +111,21 @@ void AuthDialog::setCredentials()
         std::string certificateString = fastWriter.write(certificateJson["credentials"]["certificate"]);
         std::string privateKeyString = fastWriter.write(certificateJson["credentials"]["privateKey"]);
 
-        BitTorrent::Session::instance()->setUserDecryptedPrivateKeyString(QString::fromUtf8(certificateString.c_str()));
-        BitTorrent::Session::instance()->setUserDecryptedCertificateString(QString::fromUtf8(privateKeyString.c_str()));
+        if(certificateString.compare("null\n") == 0){
+            throw INVALID_CREDENTIALS_EXCEPTION;
+        }
+
+        BitTorrent::Session::instance()->setUserDecryptedPrivateKeyString(QString::fromUtf8(privateKeyString.c_str()));
+        BitTorrent::Session::instance()->setUserDecryptedCertificateString(QString::fromUtf8(certificateString.c_str()));
         
+        QApplication::restoreOverrideCursor();
+        this->toggleWidgetsEnable();
         this->close();
-        // throw exception; // Throw an exception when a problem arise
     }
     catch (int i) {
         // Senha incorreta!
+        QApplication::restoreOverrideCursor();
+        this->toggleWidgetsEnable();
         QMessageBox fileDecryptionErrorDialogBox;
         fileDecryptionErrorDialogBox.setText("Incorrect password");
         fileDecryptionErrorDialogBox.exec();

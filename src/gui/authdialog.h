@@ -56,6 +56,7 @@ private slots:
 private:
     Ui::AuthDialog *m_ui;
     QString certificatePath;
+    void toggleWidgetsEnable();
 };
 
 #endif // AUTHDIALOG_H
