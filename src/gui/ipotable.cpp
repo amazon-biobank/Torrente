@@ -36,6 +36,8 @@ IPOTable::IPOTable(QWidget *parent)
     : m_ui(new Ui::IPOTable)
 {
     m_ui->setupUi(this);
+    QHeaderView *horizontalHeader = this->horizontalHeader();
+    horizontalHeader->setSectionResizeMode(QHeaderView::Stretch);
 }
 
 IPOTable::~IPOTable()
