@@ -56,6 +56,7 @@ class StatusBar;
 class TorrentCreatorDialog;
 class TransferListFiltersWidget;
 class TransferListWidget;
+class IPOTable;
 
 namespace BitTorrent
 {
@@ -172,8 +173,6 @@ private slots:
     void on_actionStatistics_triggered();
     void on_actionCreateTorrent_triggered();
     void on_actionOptions_triggered();
-    void on_actionToggleIPO_triggered();
-    void on_actionToggleTorrentList_triggered();
     void on_actionSetGlobalUploadLimit_triggered();
     void on_actionSetGlobalDownloadLimit_triggered();
     void on_actionDocumentation_triggered() const;
@@ -255,6 +254,8 @@ private:
     QAction *m_queueSeparator;
     QAction *m_queueSeparatorMenu;
     QSplitter *m_splitter;
+    QSplitter *m_ipoSplitter;
+    IPOTable *m_ipotable;
     QPointer<SearchWidget> m_searchWidget;
     QPointer<RSSWidget> m_rssWidget;
     QPointer<ExecutionLogWidget> m_executionLog;

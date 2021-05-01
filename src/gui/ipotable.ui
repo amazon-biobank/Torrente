@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>IPOTable</class>
+ <widget class="QTableWidget" name="IPOTable">
+   <property name="geometry">
+    <rect>
+     <x>0</x>
+     <y>10</y>
+     <width>811</width>
+     <height>601</height>
+    </rect>
+   </property>
+   <property name="sizePolicy">
+    <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
+     <horstretch>0</horstretch>
+     <verstretch>0</verstretch>
+    </sizepolicy>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">QTableWidget{
+
+}</string>
+   </property>
+   <column>
+    <property name="text">
+     <string>Name</string>
+    </property>
+   </column>
+   <column>
+    <property name="text">
+     <string>Species</string>
+    </property>
+   </column>
+   <column>
+    <property name="text">
+     <string>Collector</string>
+    </property>
+   </column>
+   <column>
+    <property name="text">
+     <string>Available</string>
+    </property>
+   </column>
+   <column>
+    <property name="text">
+     <string>Check Metadata</string>
+    </property>
+   </column>
+   <column>
+    <property name="text">
+     <string>Download</string>
+    </property>
+   </column>
+  </widget>
+ <resources/>
+ <connections/>
+</ui>

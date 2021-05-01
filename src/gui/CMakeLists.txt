@@ -37,6 +37,7 @@ downloadfromurldialog.h
 executionlogwidget.h
 fspathedit.h
 hidabletabwidget.h
+ipotable.h
 ipsubnetwhitelistoptionsdialog.h
 lineedit.h
 log/logfiltermodel.h
@@ -94,6 +95,7 @@ downloadfromurldialog.cpp
 executionlogwidget.cpp
 fspathedit.cpp
 hidabletabwidget.cpp
+ipotable.cpp
 ipsubnetwhitelistoptionsdialog.cpp
 lineedit.cpp
 log/logfiltermodel.cpp
@@ -144,6 +146,7 @@ cookiesdialog.ui
 deletionconfirmationdialog.ui
 downloadfromurldialog.ui
 executionlogwidget.ui
+ipotable.ui
 ipsubnetwhitelistoptionsdialog.ui
 mainwindow.ui
 optionsdialog.ui
