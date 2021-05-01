@@ -72,6 +72,7 @@
 #include "addnewtorrentdialog.h"
 #include "autoexpandabledialog.h"
 #include "authdialog.h"
+#include "balancedialog.h"
 #include "cookiesdialog.h"
 #include "downloadfromurldialog.h"
 #include "executionlogwidget.h"
@@ -94,6 +95,8 @@
 #include "ui_mainwindow.h"
 #include "uithememanager.h"
 #include "utils.h"
+
+#include <iostream>
 
 #ifdef Q_OS_MACOS
 #include "macutilities.h"
@@ -185,6 +188,7 @@ MainWindow::MainWindow(QWidget *parent)
     m_ui->actionExit->setIcon(UIThemeManager::instance()->getIcon("application-exit"));
     m_ui->actionLock->setIcon(UIThemeManager::instance()->getIcon("object-locked"));
     m_ui->actionAuth->setIcon(UIThemeManager::instance()->getIcon("auth-button"));
+    m_ui->actionBalance->setIcon(UIThemeManager::instance()->getIcon("authenticated-button"));
     m_ui->actionOptions->setIcon(UIThemeManager::instance()->getIcon("configure", "preferences-system"));
     m_ui->actionPause->setIcon(UIThemeManager::instance()->getIcon("media-playback-pause"));
     m_ui->actionPauseAll->setIcon(UIThemeManager::instance()->getIcon("media-playback-pause"));
@@ -200,9 +204,15 @@ MainWindow::MainWindow(QWidget *parent)
     connect(clearUiLockPasswdAct, &QAction::triggered, this, &MainWindow::clearUILockPassword);
     m_ui->actionLock->setMenu(lockMenu);
 
-    QAction *loginUserAct = lockMenu->addAction(tr("&Set Password"));
+    QAction *loginUserAct = lockMenu->addAction(tr("&Login"));
     connect(loginUserAct, &QAction::triggered, this, &MainWindow::defineUIAuth);
     m_ui->actionAuth->setMenu(lockMenu);
+
+    QAction *balanceAct = lockMenu->addAction(tr("&Check balance"));
+    connect(balanceAct, &QAction::triggered, this, &MainWindow::defineUIUserPanel);
+    m_ui->actionBalance->setMenu(lockMenu);
+
+    this->refreshAuthenticationState();
 
     // Creating Bittorrent session
     connect(BitTorrent::Session::instance(), &BitTorrent::Session::fullDiskError, this, &MainWindow::fullDiskError);
@@ -628,16 +638,18 @@ void MainWindow::toolbarFollowSystem()
 
 bool MainWindow::defineUIAuth()
 {
-    bool ok = false;
-    const QString newPassword = AuthDialog::getText(this, tr("Authentication")
-        , tr("Password:"), QLineEdit::Password, {}, &ok);
-    if (!ok)
-        return false;
+    AuthDialog authDialog(this);
 
-    if (newPassword.size() < 3) {
-        QMessageBox::warning(this, tr("Invalid password"), tr("The password should contain at least 3 characters"));
-        return false;
-    }
+    authDialog.exec();
+
+    return true;
+}
+
+bool MainWindow::defineUIUserPanel()
+{
+    BalanceDialog balanceDialog(this);
+
+    balanceDialog.exec();
 
     return true;
 }
@@ -667,10 +679,23 @@ void MainWindow::clearUILockPassword()
         Preferences::instance()->setUILockPassword({});
 }
 
+void MainWindow::refreshAuthenticationState() {
+    bool isAuthenticated = (BitTorrent::Session::instance()->userDecryptedPrivateKeyString() != nullptr);
+
+    this->m_ui->actionAuth->setVisible(!isAuthenticated);
+    this->m_ui->actionBalance->setVisible(isAuthenticated);
+}
+
 void MainWindow::on_actionAuth_triggered()
 {
-    if (!defineUIAuth())
-        return;
+    if (defineUIAuth())
+        this->refreshAuthenticationState();
+}
+
+void MainWindow::on_actionBalance_triggered()
+{
+    if(defineUIUserPanel())
+        this->refreshAuthenticationState();
 }
 
 void MainWindow::on_actionLock_triggered()

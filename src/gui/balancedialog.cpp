@@ -26,37 +26,48 @@
  * exception statement from your version.
  */
 
-#ifndef AUTHDIALOG_H
-#define AUTHDIALOG_H
+#include <QFileDialog>
+#include <QMessageBox>
 
-#include <QDialog>
-#include <QLineEdit>
+#include "base/bittorrent/session.h"
 
-class QString;
+#include "balancedialog.h"
 
-namespace Ui
+#include "ui_balancedialog.h"
+#include "utils.h"
+
+#include <iostream>
+
+BalanceDialog::BalanceDialog(QWidget *parent)
+    : QDialog(parent)
+    , m_ui(new Ui::BalanceDialog)
 {
-    class AuthDialog;
+    m_ui->setupUi(this);
+    QString certificateString = BitTorrent::Session::instance()->userDecryptedCertificateString();
+    m_ui->publicKey->setText(this->getSimplifiedPublicKey(certificateString));
+
+    this->setWindowTitle(tr("User Balance"));
 }
 
-class AuthDialog final : public QDialog
+BalanceDialog::~BalanceDialog()
 {
-    Q_OBJECT
+    delete m_ui;
+}
 
-public:
-    explicit AuthDialog(QWidget *parent);
-    ~AuthDialog();
-protected:
-    void showEvent(QShowEvent *e) override;
+QString BalanceDialog::getSimplifiedPublicKey(QString publicKeyString){
+    publicKeyString = publicKeyString.remove("\"-----BEGIN CERTIFICATE-----\\n");
+    publicKeyString = publicKeyString.remove("\\n-----END CERTIFICATE-----\\n\"");
 
-private slots:
-    void onImportButtonClicked();
-    void setCredentials();
+    QString firstPart = publicKeyString.left(5);
+    QString lastPart = publicKeyString.right(5);
 
-private:
-    Ui::AuthDialog *m_ui;
-    QString certificatePath;
-    void toggleWidgetsEnable();
-};
+    return firstPart.append("...").append(lastPart);
+}
 
-#endif // AUTHDIALOG_H
+void BalanceDialog::flushCredentials()
+{
+    BitTorrent::Session::instance()->setUserDecryptedPrivateKeyString(nullptr);
+    BitTorrent::Session::instance()->setUserDecryptedCertificateString(nullptr);
+
+    this->close();
+}

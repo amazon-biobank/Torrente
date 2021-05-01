@@ -122,6 +122,7 @@
     <addaction name="separator"/>
     <addaction name="actionLock"/>
     <addaction name="actionAuth"/>
+    <addaction name="actionBalance"/>
    </widget>
    <addaction name="menuFile"/>
    <addaction name="menuEdit"/>
@@ -162,6 +163,7 @@
    <addaction name="actionOptions"/>
    <addaction name="actionLock"/>
    <addaction name="actionAuth"/>
+   <addaction name="actionBalance"/>
   </widget>
   <widget class="QStatusBar" name="statusBar"/>
   <action name="actionOpen">
@@ -368,6 +370,14 @@
    </property>
    <property name="iconText">
     <string>Auth</string>
+   </property>
+  </action>
+  <action name="actionBalance">
+   <property name="text">
+    <string>C&amp;heck Balance</string>
+   </property>
+   <property name="iconText">
+    <string>Balance</string>
    </property>
   </action>
   <action name="actionDonateMoney">

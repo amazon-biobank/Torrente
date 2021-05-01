@@ -27,19 +27,34 @@
  */
 
 #include <QFileDialog>
+#include <QApplication>
+#include <QMessageBox>
+
+#include <jsoncpp/json/value.h>
+#include <jsoncpp/json/json.h>
+#include "base/bittorrent/session.h"
+#include "Lyra2FileEncryptor.h"
 
 #include "authdialog.h"
 
 #include "ui_authdialog.h"
 #include "utils.h"
 
+#include <iostream>
+
+#define INVALID_CREDENTIALS_EXCEPTION 1
+
 AuthDialog::AuthDialog(QWidget *parent)
     : QDialog(parent)
     , m_ui(new Ui::AuthDialog)
 {
     m_ui->setupUi(this);
+    
+    m_ui->lineEdit->setEchoMode(QLineEdit::Password);
 
-
+    m_ui->loginButton->setText(tr("Login"));
+    m_ui->certificateButton->setText(tr("Import certificate"));
+    this->setWindowTitle(tr("Make Login"));
 }
 
 AuthDialog::~AuthDialog()
@@ -47,34 +62,6 @@ AuthDialog::~AuthDialog()
     delete m_ui;
 }
 
-QString AuthDialog::getText(QWidget *parent, const QString &title, const QString &label,
-                                      QLineEdit::EchoMode mode, const QString &text,
-                                      bool *ok, const bool excludeExtension, Qt::InputMethodHints inputMethodHints)
-{
-    AuthDialog d(parent);
-    d.setWindowTitle(title);
-    d.m_ui->lineEdit->setText(text);
-    d.m_ui->lineEdit->setEchoMode(mode);
-    d.m_ui->lineEdit->setInputMethodHints(inputMethodHints);
-
-    d.m_ui->lineEdit->selectAll();
-    if (excludeExtension) {
-        int lastDotIndex = text.lastIndexOf('.');
-        if ((lastDotIndex > 3) && (text.mid(lastDotIndex - 4, 4).toLower() == ".tar"))
-            lastDotIndex -= 4;
-        // Select file name without extension, except dot files like .gitignore
-        if (lastDotIndex > 0)
-            d.m_ui->lineEdit->setSelection(0, lastDotIndex);
-    }
-
-    bool res = d.exec();
-    if (ok)
-        *ok = res;
-
-    if (!res) return {};
-
-    return d.m_ui->lineEdit->text();
-}
 
 void AuthDialog::onImportButtonClicked()
 {
@@ -84,6 +71,65 @@ void AuthDialog::onImportButtonClicked()
         QDir::homePath(),
         tr("Key Files (*.pem *.key)")
         );
+
+    AuthDialog::certificatePath = fileName;
+}
+
+void AuthDialog::toggleWidgetsEnable(){
+    m_ui->loginButton->setEnabled(!m_ui->loginButton->isEnabled());
+    m_ui->certificateButton->setEnabled(!m_ui->certificateButton->isEnabled());
+    m_ui->lineEdit->setEnabled(!m_ui->lineEdit->isEnabled());
+}
+
+void AuthDialog::setCredentials()
+{
+    QApplication::setOverrideCursor(Qt::WaitCursor);
+    this->toggleWidgetsEnable();
+
+    QString password = this->m_ui->lineEdit->text();
+
+    std::string certificatePathStd = this->certificatePath.toUtf8().constData();
+    // const char* certificatePathString = certificatePathStd.c_str();
+    char *certificatePathString = new char[certificatePathStd.length() + 1];
+    strcpy(certificatePathString, certificatePathStd.c_str());
+    
+    std::string passwordStd = password.toUtf8().constData();
+    // const char* passwordString = passwordStd.c_str();
+    char *passwordString = new char[passwordStd.length() + 1];
+    strcpy(passwordString, passwordStd.c_str());
+
+    char* decryptedFile = getDecryptedContentFromFile(certificatePathString, passwordString);
+
+    Json::Value certificateJson;
+    Json::Reader reader;
+    Json::FastWriter fastWriter;
+
+    try {
+        reader.parse(decryptedFile, certificateJson);
+
+        // transform inputJson in char*:
+        std::string certificateString = fastWriter.write(certificateJson["credentials"]["certificate"]);
+        std::string privateKeyString = fastWriter.write(certificateJson["credentials"]["privateKey"]);
+
+        if(certificateString.compare("null\n") == 0){
+            throw INVALID_CREDENTIALS_EXCEPTION;
+        }
+
+        BitTorrent::Session::instance()->setUserDecryptedPrivateKeyString(QString::fromUtf8(privateKeyString.c_str()));
+        BitTorrent::Session::instance()->setUserDecryptedCertificateString(QString::fromUtf8(certificateString.c_str()));
+        
+        QApplication::restoreOverrideCursor();
+        this->toggleWidgetsEnable();
+        this->close();
+    }
+    catch (int i) {
+        // Senha incorreta!
+        QApplication::restoreOverrideCursor();
+        this->toggleWidgetsEnable();
+        QMessageBox fileDecryptionErrorDialogBox;
+        fileDecryptionErrorDialogBox.setText("Incorrect password");
+        fileDecryptionErrorDialogBox.exec();
+    }
 }
 
 void AuthDialog::showEvent(QShowEvent *e)

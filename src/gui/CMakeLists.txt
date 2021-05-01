@@ -4,6 +4,15 @@ set(CMAKE_AUTOUIC True)
 add_library(qbt_gui_headers INTERFACE)
 target_include_directories(qbt_gui_headers INTERFACE ${CMAKE_CURRENT_SOURCE_DIR})
 
+find_library(Lyra2FileEncryptor NAMES Lyra2FileEncryptor HINTS "/usr/local/lib/" REQUIRED)
+include_directories("/usr/local/include/")
+
+find_library(JSONCPPLIB NAMES jsoncpp 
+    PATHS   /usr/local/lib/jsoncpp
+            /usr/lib/jsoncpp
+    REQUIRED)
+include_directories("/usr/local/include/jsoncpp/json/")
+
 add_subdirectory(properties)
 add_subdirectory(powermanagement)
 add_subdirectory(rss)
@@ -16,6 +25,7 @@ addnewtorrentdialog.h
 advancedsettings.h
 autoexpandabledialog.h
 authdialog.h
+balancedialog.h
 banlistoptionsdialog.h
 categoryfiltermodel.h
 categoryfilterproxymodel.h
@@ -72,6 +82,7 @@ addnewtorrentdialog.cpp
 advancedsettings.cpp
 autoexpandabledialog.cpp
 authdialog.cpp
+balancedialog.cpp
 banlistoptionsdialog.cpp
 categoryfiltermodel.cpp
 categoryfilterproxymodel.cpp
@@ -127,6 +138,7 @@ aboutdialog.ui
 addnewtorrentdialog.ui
 autoexpandabledialog.ui
 authdialog.ui
+balancedialog.ui
 banlistoptionsdialog.ui
 cookiesdialog.ui
 deletionconfirmationdialog.ui
@@ -149,11 +161,15 @@ target_link_libraries(qbt_gui
     PRIVATE
         qbt_powermanagement qbt_rss qbt_properties qbt_searchengine
         qbt_base
+        Lyra2FileEncryptor
+        ${JSONCPPLIB}
 )
 
 target_include_directories(qbt_gui
     PRIVATE ../app
     PUBLIC ${CMAKE_CURRENT_SOURCE_DIR}
+    PUBLIC "/usr/local/include/"
+    PUBLIC "/usr/local/include/jsoncpp/"
 )
 
 if (UNIX AND Qt5DBus_FOUND)

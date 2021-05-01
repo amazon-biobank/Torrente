@@ -26,8 +26,8 @@
  * exception statement from your version.
  */
 
-#ifndef AUTHDIALOG_H
-#define AUTHDIALOG_H
+#ifndef BALANCEDIALOG_H
+#define BALANCEDIALOG_H
 
 #include <QDialog>
 #include <QLineEdit>
@@ -36,27 +36,24 @@ class QString;
 
 namespace Ui
 {
-    class AuthDialog;
+    class BalanceDialog;
 }
 
-class AuthDialog final : public QDialog
+class BalanceDialog final : public QDialog
 {
     Q_OBJECT
 
 public:
-    explicit AuthDialog(QWidget *parent);
-    ~AuthDialog();
+    explicit BalanceDialog(QWidget *parent);
+    ~BalanceDialog();
 protected:
-    void showEvent(QShowEvent *e) override;
 
 private slots:
-    void onImportButtonClicked();
-    void setCredentials();
+    void flushCredentials();
 
 private:
-    Ui::AuthDialog *m_ui;
-    QString certificatePath;
-    void toggleWidgetsEnable();
+    Ui::BalanceDialog *m_ui;
+    QString getSimplifiedPublicKey(QString publicKeyString);
 };
 
-#endif // AUTHDIALOG_H
+#endif // BALANCEDIALOG_H
