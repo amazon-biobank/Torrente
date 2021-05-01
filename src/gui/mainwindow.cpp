@@ -190,6 +190,8 @@ MainWindow::MainWindow(QWidget *parent)
     m_ui->actionAuth->setIcon(UIThemeManager::instance()->getIcon("auth-button"));
     m_ui->actionBalance->setIcon(UIThemeManager::instance()->getIcon("authenticated-button"));
     m_ui->actionOptions->setIcon(UIThemeManager::instance()->getIcon("configure", "preferences-system"));
+    m_ui->actionToggleIPO->setIcon(UIThemeManager::instance()->getIcon("ipo-button"));
+    m_ui->actionToggleTorrentList->setIcon(UIThemeManager::instance()->getIcon("torrent-list-button"));
     m_ui->actionPause->setIcon(UIThemeManager::instance()->getIcon("media-playback-pause"));
     m_ui->actionPauseAll->setIcon(UIThemeManager::instance()->getIcon("media-playback-pause"));
     m_ui->actionStart->setIcon(UIThemeManager::instance()->getIcon("media-playback-start"));
@@ -213,6 +215,7 @@ MainWindow::MainWindow(QWidget *parent)
     m_ui->actionBalance->setMenu(lockMenu);
 
     this->refreshAuthenticationState();
+    this->m_ui->actionToggleTorrentList->setVisible(false);
 
     // Creating Bittorrent session
     connect(BitTorrent::Session::instance(), &BitTorrent::Session::fullDiskError, this, &MainWindow::fullDiskError);
@@ -1763,6 +1766,18 @@ void MainWindow::updateAltSpeedsBtn(bool alternative)
 PropertiesWidget *MainWindow::propertiesWidget() const
 {
     return m_propertiesWidget;
+}
+
+void MainWindow::on_actionToggleIPO_triggered()
+{
+    this->m_ui->actionToggleIPO->setVisible(false);
+    this->m_ui->actionToggleTorrentList->setVisible(true);
+}
+
+void MainWindow::on_actionToggleTorrentList_triggered()
+{
+    this->m_ui->actionToggleIPO->setVisible(true);
+    this->m_ui->actionToggleTorrentList->setVisible(false);
 }
 
 // Display Program Options

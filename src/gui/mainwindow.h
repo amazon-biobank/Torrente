@@ -172,6 +172,8 @@ private slots:
     void on_actionStatistics_triggered();
     void on_actionCreateTorrent_triggered();
     void on_actionOptions_triggered();
+    void on_actionToggleIPO_triggered();
+    void on_actionToggleTorrentList_triggered();
     void on_actionSetGlobalUploadLimit_triggered();
     void on_actionSetGlobalDownloadLimit_triggered();
     void on_actionDocumentation_triggered() const;
