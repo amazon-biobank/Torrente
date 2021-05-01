@@ -18,6 +18,7 @@ add_library(qbt_gui STATIC
     fspathedit.h
     fspathedit_p.h
     hidabletabwidget.h
+    ipotable.h
     ipsubnetwhitelistoptionsdialog.h
     lineedit.h
     log/logfiltermodel.h
@@ -100,6 +101,7 @@ add_library(qbt_gui STATIC
     fspathedit.cpp
     fspathedit_p.cpp
     hidabletabwidget.cpp
+    ipotable.cpp
     ipsubnetwhitelistoptionsdialog.cpp
     lineedit.cpp
     log/logfiltermodel.cpp
@@ -174,6 +176,7 @@ add_library(qbt_gui STATIC
     deletionconfirmationdialog.ui
     downloadfromurldialog.ui
     executionlogwidget.ui
+    ipotable.ui
     ipsubnetwhitelistoptionsdialog.ui
     mainwindow.ui
     optionsdialog.ui

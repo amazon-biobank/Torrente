@@ -82,9 +82,6 @@
     <addaction name="actionManageCookies"/>
     <addaction name="actionOptions"/>
     <addaction name="separator"/>
-    <addaction name="actionToggleIPO"/>
-    <addaction name="actionToggleTorrentList"/>
-    <addaction name="separator"/>
     <addaction name="menuAutoShutdownOnDownloadsCompletion"/>
    </widget>
    <widget class="QMenu" name="menuFile">
@@ -164,9 +161,6 @@
    <addaction name="actionBottomQueuePos"/>
    <addaction name="separator"/>
    <addaction name="actionOptions"/>
-   <addaction name="separator"/>
-   <addaction name="actionToggleIPO"/>
-   <addaction name="actionToggleTorrentList"/>
    <addaction name="actionLock"/>
    <addaction name="actionAuth"/>
    <addaction name="actionBalance"/>
@@ -188,16 +182,6 @@
   <action name="actionOptions">
    <property name="text">
     <string>&amp;Options...</string>
-   </property>
-  </action>
-  <action name="actionToggleIPO">
-   <property name="text">
-    <string>&amp;Toggle IPO</string>
-   </property>
-  </action>
-  <action name="actionToggleTorrentList">
-   <property name="text">
-    <string>&amp;Toggle Torrent List</string>
    </property>
   </action>
   <action name="actionAbout">
