@@ -30,8 +30,8 @@
 #include <QApplication>
 #include <QMessageBox>
 
-#include <jsoncpp/json/value.h>
-#include <jsoncpp/json/json.h>
+#include <json/value.h>
+#include <json/json.h>
 #include "base/bittorrent/session.h"
 #include "Lyra2FileEncryptor.h"
 
@@ -41,6 +41,7 @@
 #include "utils.h"
 
 #include <iostream>
+#include <string>
 
 #define INVALID_CREDENTIALS_EXCEPTION 1
 
@@ -127,7 +128,7 @@ void AuthDialog::setCredentials()
         QApplication::restoreOverrideCursor();
         this->toggleWidgetsEnable();
         QMessageBox fileDecryptionErrorDialogBox;
-        fileDecryptionErrorDialogBox.setText("Incorrect password");
+        fileDecryptionErrorDialogBox.setText("wrong password");
         fileDecryptionErrorDialogBox.exec();
     }
 }

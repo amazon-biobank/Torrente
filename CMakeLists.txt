@@ -47,7 +47,7 @@ if (CMAKE_SYSTEM_NAME STREQUAL "Linux")
         endif()
     endif()
 elseif (MSVC)
-    feature_option(MSVC_RUNTIME_DYNAMIC "Use MSVC dynamic runtime library (-MD) instead of static (-MT)" ON)
+    feature_option(MSVC_RUNTIME_DYNAMIC "Use MSVC dynamic runtime library (-MD) instead of static (-MT)" ${MSVC_RUNTIME_DYNAMIC})
 endif()
 
 include(GNUInstallDirs)

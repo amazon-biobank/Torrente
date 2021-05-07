@@ -198,11 +198,16 @@ add_library(qbt_gui STATIC
 
 target_sources(qbt_gui INTERFACE about.qrc)
 
+find_library(Lyra2FileEncryptorLib Names Lyra2FileEncryptor HINTS "${VCPKG_PATH_LIB}/" REQUIRED)
+find_library(JsoncppLib Names jsoncpp HINTS "${VCPKG_PATH_LIB}/" REQUIRED)
+
 target_link_libraries(qbt_gui
     PRIVATE
         qbt_base
     PUBLIC
         Qt5::Gui Qt5::Widgets
+        ${Lyra2FileEncryptorLib}
+        ${JsoncppLib}
 )
 
 if (DBUS)
