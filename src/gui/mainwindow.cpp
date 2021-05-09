@@ -77,6 +77,7 @@
 #include "downloadfromurldialog.h"
 #include "executionlogwidget.h"
 #include "hidabletabwidget.h"
+#include "ipotable.h"
 #include "lineedit.h"
 #include "optionsdialog.h"
 #include "peerlistwidget.h"
@@ -228,7 +229,7 @@ MainWindow::MainWindow(QWidget *parent)
     connect(m_tabs.data(), &QTabWidget::currentChanged, this, &MainWindow::tabChanged);
 
     m_splitter = new QSplitter(Qt::Horizontal, this);
-    // vSplitter->setChildrenCollapsible(false);
+    m_ipoSplitter = new QSplitter(Qt::Horizontal, this);
 
     auto *hSplitter = new QSplitter(Qt::Vertical, this);
     hSplitter->setChildrenCollapsible(false);
@@ -263,6 +264,15 @@ MainWindow::MainWindow(QWidget *parent)
         UIThemeManager::instance()->getIcon("folder-remote"),
 #endif
         tr("Transfers"));
+
+    m_ipotable = new IPOTable(this);
+    m_ipoSplitter->addWidget(m_ipotable);
+    m_tabs->addTab(m_ipoSplitter,
+#ifndef Q_OS_MACOS
+        UIThemeManager::instance()->getIcon("ipo-button"),
+#endif
+        tr("IPO"));
+    m_ipoSplitter->setVisible(false);
 
     connect(m_searchFilter, &LineEdit::textChanged, m_transferListWidget, &TransferListWidget::applyNameFilter);
     connect(hSplitter, &QSplitter::splitterMoved, this, &MainWindow::writeSettings);
