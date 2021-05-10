@@ -37,7 +37,7 @@ find_package(OpenSSL ${minOpenSSLVersion} REQUIRED)
 find_package(ZLIB ${minZlibVersion} REQUIRED)
 find_package(Qt5 ${minQtVersion} REQUIRED COMPONENTS Core Network Xml LinguistTools)
 find_package(jsoncpp REQUIRED)
-find_package(Lyra2FileEncryptor REQUIRED)
+find_package(lyra2-file-encryptor REQUIRED)
 
 set(VCPKG_PATH_LIB "${_VCPKG_INSTALLED_DIR}/lib")
 

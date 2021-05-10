@@ -201,7 +201,7 @@ add_library(qbt_gui STATIC
 
 target_sources(qbt_gui INTERFACE about.qrc)
 
-find_library(Lyra2FileEncryptorLib Names Lyra2FileEncryptor HINTS "${VCPKG_PATH_LIB}/" REQUIRED)
+find_library(Lyra2FileEncryptorLib Names lyra2-file-encryptor HINTS "${VCPKG_PATH_LIB}/" REQUIRED)
 find_library(JsoncppLib Names jsoncpp HINTS "${VCPKG_PATH_LIB}/" REQUIRED)
 
 target_link_libraries(qbt_gui
