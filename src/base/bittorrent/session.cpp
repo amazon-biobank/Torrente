@@ -1834,6 +1834,16 @@ void Session::banIP(const QString &ip)
     }
 }
 
+void Session::unbanIP(const QString& ip)
+{
+    QStringList bannedIPs = m_bannedIPs;
+    if (bannedIPs.contains(ip))
+    {
+        bannedIPs.removeAll(ip);
+        setBannedIPs(bannedIPs);
+    }
+}
+
 // Delete a torrent from the session, given its hash
 // and from the disk, if the corresponding deleteOption is chosen
 bool Session::deleteTorrent(const TorrentID &id, const DeleteOption deleteOption)

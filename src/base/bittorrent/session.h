@@ -455,6 +455,7 @@ namespace BitTorrent
         void setMaxRatioAction(MaxRatioAction act);
 
         void banIP(const QString &ip);
+        void unbanIP(const QString& ip);
 
         bool isKnownTorrent(const TorrentID &id) const;
         bool addTorrent(const QString &source, const AddTorrentParams &params = AddTorrentParams());
