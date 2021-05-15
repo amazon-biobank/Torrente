@@ -68,6 +68,7 @@ void BalanceDialog::flushCredentials()
 {
     BitTorrent::Session::instance()->setUserDecryptedPrivateKeyString(nullptr);
     BitTorrent::Session::instance()->setUserDecryptedCertificateString(nullptr);
+    BitTorrent::Session::instance()->setUserMSPIdString(nullptr);
 
     this->close();
 }

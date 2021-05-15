@@ -111,6 +111,7 @@ void AuthDialog::setCredentials()
         // transform inputJson in char*:
         std::string certificateString = fastWriter.write(certificateJson["credentials"]["certificate"]);
         std::string privateKeyString = fastWriter.write(certificateJson["credentials"]["privateKey"]);
+        std::string mspIdString = fastWriter.write(certificateJson["mspId"]);
 
         if(certificateString.compare("null\n") == 0){
             throw INVALID_CREDENTIALS_EXCEPTION;
@@ -118,6 +119,7 @@ void AuthDialog::setCredentials()
 
         BitTorrent::Session::instance()->setUserDecryptedPrivateKeyString(QString::fromUtf8(privateKeyString.c_str()));
         BitTorrent::Session::instance()->setUserDecryptedCertificateString(QString::fromUtf8(certificateString.c_str()));
+        BitTorrent::Session::instance()->setUserMSPIdString(QString::fromUtf8(mspIdString.c_str()));
         
         QApplication::restoreOverrideCursor();
         this->toggleWidgetsEnable();
