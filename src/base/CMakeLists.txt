@@ -87,6 +87,7 @@ add_library(qbt_base STATIC
     utils/random.h
     utils/string.h
     payfluxo/payfluxo.h
+    payfluxo/payfluxonotification.h
     utils/version.h
     version.h
 
@@ -162,7 +163,8 @@ add_library(qbt_base STATIC
     utils/password.cpp
     utils/random.cpp
     utils/string.cpp
-    payfluxo/payfluxo.cpp)
+    payfluxo/payfluxo.cpp
+    payfluxo/payfluxonotification.cpp)
 
 target_link_libraries(qbt_base
     PRIVATE
@@ -170,7 +172,7 @@ target_link_libraries(qbt_base
         ZLIB::ZLIB
     PUBLIC
         LibtorrentRasterbar::torrent-rasterbar
-        Qt5::Core Qt5::Network Qt5::Xml
+        Qt5::Core Qt5::Network Qt5::Xml Qt5::WebSockets
         qbt_common_cfg
 )
 
