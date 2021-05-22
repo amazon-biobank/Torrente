@@ -203,14 +203,7 @@ MainWindow::MainWindow(QWidget *parent)
     lockMenu->addAction(tr("&Set Password"), this, &MainWindow::defineUILockPassword);
     lockMenu->addAction(tr("&Clear Password"), this, &MainWindow::clearUILockPassword);
     m_ui->actionLock->setMenu(lockMenu);
-
-    QAction *loginUserAct = lockMenu->addAction(tr("&Login"));
-    connect(loginUserAct, &QAction::triggered, this, &MainWindow::defineUIAuth);
-    m_ui->actionAuth->setMenu(lockMenu);
-
-    QAction *balanceAct = lockMenu->addAction(tr("&Check balance"));
-    connect(balanceAct, &QAction::triggered, this, &MainWindow::defineUIUserPanel);
-    m_ui->actionBalance->setMenu(lockMenu);
+    
 
     this->refreshAuthenticationState();
 
