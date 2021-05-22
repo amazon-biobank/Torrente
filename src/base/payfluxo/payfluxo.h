@@ -1,0 +1,5 @@
+namespace Payfluxo {
+    class Payfluxo {
+
+    };
+}

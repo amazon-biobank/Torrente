@@ -1942,10 +1942,26 @@ void TorrentImpl::handleAppendExtensionToggled()
     manageIncompleteFiles();
 }
 
+void TorrentImpl::handleBlockFinishedAlert(const lt::block_finished_alert* p)
+{
+    //pay(ip, this->file_size, this->unique_identifier);
+}
+
+void TorrentImpl::handleBlockUploadedAlert(const lt::block_uploaded_alert* p)
+{
+    //banIP();
+}
+
 void TorrentImpl::handleAlert(const lt::alert *a)
 {
     switch (a->type())
     {
+    case lt::block_finished_alert::alert_type:
+        handleBlockFinishedAlert(static_cast<const lt::block_finished_alert*>(a));
+        break;
+    case lt::block_uploaded_alert::alert_type:
+        handleBlockUploadedAlert(static_cast<const lt::block_uploaded_alert*>(a));
+        break;
     case lt::file_renamed_alert::alert_type:
         handleFileRenamedAlert(static_cast<const lt::file_renamed_alert*>(a));
         break;

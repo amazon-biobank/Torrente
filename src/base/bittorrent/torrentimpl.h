@@ -279,6 +279,9 @@ namespace BitTorrent
         void handleTrackerReplyAlert(const lt::tracker_reply_alert *p);
         void handleTrackerWarningAlert(const lt::tracker_warning_alert *p);
 
+        void handleBlockFinishedAlert(const lt::block_finished_alert* p);
+        void handleBlockUploadedAlert(const lt::block_uploaded_alert* p);
+
         bool isMoveInProgress() const;
 
         void setAutoManaged(bool enable);

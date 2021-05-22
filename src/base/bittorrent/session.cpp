@@ -437,6 +437,7 @@ Session::Session(QObject *parent)
     , m_peerTurnoverInterval(BITTORRENT_SESSION_KEY("PeerTurnoverInterval"), 300)
     , m_userDecryptedCertificateString(BITTORRENT_KEY("UserDecryptedCertificateString"), nullptr)
     , m_userDecryptedPrivateKeyString(BITTORRENT_KEY("UserDecryptedPrivateKeyString"), nullptr)
+    , m_userMSPIdString(BITTORRENT_KEY("UserMSPIdString"), nullptr)
     , m_bannedIPs("State/BannedIPs"
                   , QStringList()
                   , [](const QStringList &value)
@@ -946,6 +947,20 @@ void Session::setUserDecryptedCertificateString(const QString val)
         return;
 
     m_userDecryptedCertificateString = val;
+    configureDeferred();
+}
+
+QString Session::userMSPIdString() const
+{
+    return m_userMSPIdString;
+}
+
+void Session::setUserMSPIdString(const QString val)
+{
+    if (val == m_userMSPIdString)
+        return;
+
+    m_userMSPIdString = val;
     configureDeferred();
 }
 
@@ -1816,6 +1831,16 @@ void Session::banIP(const QString &ip)
         bannedIPs << ip;
         bannedIPs.sort();
         m_bannedIPs = bannedIPs;
+    }
+}
+
+void Session::unbanIP(const QString& ip)
+{
+    QStringList bannedIPs = m_bannedIPs;
+    if (bannedIPs.contains(ip))
+    {
+        bannedIPs.removeAll(ip);
+        setBannedIPs(bannedIPs);
     }
 }
 
