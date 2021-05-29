@@ -137,15 +137,15 @@ Application::Application(int &argc, char **argv)
     qRegisterMetaType<Log::Msg>("Log::Msg");
     qRegisterMetaType<Log::Peer>("Log::Peer");
 
-    setApplicationName("qBittorrent");
-    setOrganizationDomain("qbittorrent.org");
+    setApplicationName("Torrente");
+    setOrganizationDomain("Biobank.org");
 #if !defined(DISABLE_GUI)
-    setDesktopFileName("org.qbittorrent.qBittorrent");
+    setDesktopFileName("org.Biobank.Torrente");
     setAttribute(Qt::AA_UseHighDpiPixmaps, true);  // opt-in to the high DPI pixmap support
     setQuitOnLastWindowClosed(false);
     QPixmapCache::setCacheLimit(PIXMAP_CACHE_SIZE);
 #endif
-
+   
     const bool portableModeEnabled = m_commandLineArgs.profileDir.isEmpty()
             && QDir(QCoreApplication::applicationDirPath()).exists(DEFAULT_PORTABLE_MODE_PROFILE_DIR);
 

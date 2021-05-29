@@ -71,6 +71,7 @@
 #include "base/utils/misc.h"
 #include "base/utils/password.h"
 #include "base/version.h"
+#include "base/payfluxo/payfluxonotification.h"
 #include "aboutdialog.h"
 #include "addnewtorrentdialog.h"
 #include "autoexpandabledialog.h"
@@ -204,13 +205,7 @@ MainWindow::MainWindow(QWidget *parent)
     lockMenu->addAction(tr("&Clear Password"), this, &MainWindow::clearUILockPassword);
     m_ui->actionLock->setMenu(lockMenu);
 
-    QAction *loginUserAct = lockMenu->addAction(tr("&Login"));
-    connect(loginUserAct, &QAction::triggered, this, &MainWindow::defineUIAuth);
-    m_ui->actionAuth->setMenu(lockMenu);
-
-    QAction *balanceAct = lockMenu->addAction(tr("&Check balance"));
-    connect(balanceAct, &QAction::triggered, this, &MainWindow::defineUIUserPanel);
-    m_ui->actionBalance->setMenu(lockMenu);
+    this->payfluxoNotification = new PayfluxoNotification(false, this);
 
     this->refreshAuthenticationState();
 
