@@ -87,7 +87,7 @@ add_library(qbt_base STATIC
     utils/random.h
     utils/string.h
     payfluxo/payfluxo.h
-    payfluxo/payfluxonotification.h
+    payfluxo/payfluxosession.h
     utils/version.h
     version.h
 
@@ -164,7 +164,7 @@ add_library(qbt_base STATIC
     utils/random.cpp
     utils/string.cpp
     payfluxo/payfluxo.cpp
-    payfluxo/payfluxonotification.cpp)
+    payfluxo/payfluxosession.cpp)
 
 target_link_libraries(qbt_base
     PRIVATE

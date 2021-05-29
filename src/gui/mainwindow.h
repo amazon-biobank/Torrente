@@ -27,7 +27,6 @@
  */
 
 #pragma once
-#include "base/payfluxo/payfluxonotification.h"
 #include <QMainWindow>
 #include <QPointer>
 
@@ -266,6 +265,4 @@ private:
 
     QTimer *m_programUpdateTimer = nullptr;
 #endif
-
-    PayfluxoNotification *payfluxoNotification;
 };

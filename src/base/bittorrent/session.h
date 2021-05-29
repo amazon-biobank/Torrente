@@ -50,6 +50,7 @@
 #include "cachestatus.h"
 #include "sessionstatus.h"
 #include "torrentinfo.h"
+#include <base/payfluxo/payfluxosession.h>
 
 class QFile;
 class QNetworkConfiguration;
@@ -210,6 +211,8 @@ namespace BitTorrent
         static void freeInstance();
         static Session *instance();
 
+        void setPayfluxoSession(PayfluxoSession* session);
+        PayfluxoSession* getPayfluxoSession();
         QString defaultSavePath() const;
         void setDefaultSavePath(QString path);
         QString tempPath() const;
@@ -798,5 +801,7 @@ namespace BitTorrent
         QList<MoveStorageJob> m_moveStorageQueue;
 
         static Session *m_instance;
+
+        PayfluxoSession *m_payfluxoSession;
     };
 }

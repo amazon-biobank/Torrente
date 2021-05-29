@@ -1115,6 +1115,7 @@ void Session::initializeNativeSession()
         | lt::alert::port_mapping_notification
         | lt::alert::status_notification
         | lt::alert::storage_notification
+        | lt::alert::block_progress_notification
         | lt::alert::tracker_notification;
     const std::string peerId = lt::generate_fingerprint(PEER_ID, QBT_VERSION_MAJOR, QBT_VERSION_MINOR, QBT_VERSION_BUGFIX, QBT_VERSION_BUILD);
 
@@ -4521,6 +4522,7 @@ void Session::handleAlert(const lt::alert *a)
         case lt::fastresume_rejected_alert::alert_type:
         case lt::torrent_checked_alert::alert_type:
         case lt::metadata_received_alert::alert_type:
+        case lt::block_finished_alert::alert_type:
             dispatchTorrentAlert(a);
             break;
         case lt::state_update_alert::alert_type:
@@ -5054,4 +5056,15 @@ void Session::handleSocks5Alert(const lt::socks5_alert *p) const
         LogMsg(tr("SOCKS5 proxy error. Message: %1").arg(QString::fromStdString(p->message()))
             , Log::WARNING);
     }
+}
+
+void Session::setPayfluxoSession(PayfluxoSession* session)
+{
+    this->m_payfluxoSession = session;
+}
+
+
+PayfluxoSession* Session::getPayfluxoSession()
+{
+    return this->m_payfluxoSession;
 }
