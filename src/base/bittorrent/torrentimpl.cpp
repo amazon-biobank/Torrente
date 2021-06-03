@@ -1944,7 +1944,12 @@ void TorrentImpl::handleAppendExtensionToggled()
 
 void TorrentImpl::handleBlockFinishedAlert(const lt::block_finished_alert* p)
 {
-    //pay(ip, this->file_size, this->unique_identifier);
+    PayfluxoSession* session = BitTorrent::Session::instance()->getPayfluxoSession();
+    session->sendBlockDownloadedMessage(
+        QString::fromStdString(p->endpoint.address().to_string()),
+        this->createMagnetURI(),
+        QString::number(this->totalSize())
+    );
 }
 
 void TorrentImpl::handleBlockUploadedAlert(const lt::block_uploaded_alert* p)
