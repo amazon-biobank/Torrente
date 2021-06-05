@@ -64,6 +64,7 @@
 #include "base/profile.h"
 #include "base/utils/fs.h"
 #include "base/utils/string.h"
+#include "base/payfluxo/payfluxosession.h"
 #include "common.h"
 #include "downloadpriority.h"
 #include "ltqhash.h"

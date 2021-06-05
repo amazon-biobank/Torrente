@@ -4523,6 +4523,7 @@ void Session::handleAlert(const lt::alert *a)
         case lt::torrent_checked_alert::alert_type:
         case lt::metadata_received_alert::alert_type:
         case lt::block_finished_alert::alert_type:
+        case lt::block_uploaded_alert::alert_type:
             dispatchTorrentAlert(a);
             break;
         case lt::state_update_alert::alert_type:
