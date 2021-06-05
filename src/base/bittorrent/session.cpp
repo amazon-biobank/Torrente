@@ -1116,7 +1116,8 @@ void Session::initializeNativeSession()
         | lt::alert::status_notification
         | lt::alert::storage_notification
         | lt::alert::block_progress_notification
-        | lt::alert::tracker_notification;
+        | lt::alert::tracker_notification
+        | lt::alert::upload_notification;
     const std::string peerId = lt::generate_fingerprint(PEER_ID, QBT_VERSION_MAJOR, QBT_VERSION_MINOR, QBT_VERSION_BUGFIX, QBT_VERSION_BUILD);
 
     lt::settings_pack pack;
