@@ -44,7 +44,7 @@ void PayfluxoSession::onTextMessageReceived(QString message)
 {
     QJsonDocument jsonResponse = QJsonDocument::fromJson(message.toUtf8());
     QJsonObject jsonObject = jsonResponse.object();
-    QString type = jsonObject["type"].toString();    
+    QString type = jsonObject["type"].toString();
     int typeComparison = QString::compare(type, "PaymentNotification", Qt::CaseSensitive);
     QJsonObject dataJson = jsonObject["data"].toObject();
 
@@ -57,14 +57,28 @@ void PayfluxoSession::onTextMessageReceived(QString message)
     
 }
 
-void PayfluxoSession::sendBlockDownloadedMessage(QString ip, QString torrentId, QString fileSize)
+void PayfluxoSession::sendBlockDownloadedMessage(QString ip, QString magneticLink, QString fileSize)
 {
     QJsonObject dataObj;
     dataObj.insert("uploaderIp", ip);
-    dataObj.insert("torrentId", torrentId);
+    dataObj.insert("magneticLink", magneticLink);
     dataObj.insert("fileSize", fileSize);
     QJsonObject messageObj;
     messageObj.insert("type", QString("DownloadedBlock"));
+    messageObj.insert("data", dataObj);
+    QJsonDocument messageDoc(messageObj);
+    QByteArray ba = messageDoc.toJson();
+    this->sendMessage(QString(ba));
+}
+
+void PayfluxoSession::sendAuthenticatedMessage(QString certificate, QString privateKey, QString orgMSP)
+{
+    QJsonObject dataObj;
+    dataObj.insert("certificate", certificate);
+    dataObj.insert("privateKey", privateKey);
+    dataObj.insert("orgMSP", orgMSP);
+    QJsonObject messageObj;
+    messageObj.insert("type", QString("Authenticated"));
     messageObj.insert("data", dataObj);
     QJsonDocument messageDoc(messageObj);
     QByteArray ba = messageDoc.toJson();

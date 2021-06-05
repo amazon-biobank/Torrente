@@ -1954,7 +1954,8 @@ void TorrentImpl::handleBlockFinishedAlert(const lt::block_finished_alert* p)
 
 void TorrentImpl::handleBlockUploadedAlert(const lt::block_uploaded_alert* p)
 {
-    //banIP();
+    QString ipToBan = QString::fromStdString(p->endpoint.address().to_string());
+    BitTorrent::Session::instance()->banIP(ipToBan);
 }
 
 void TorrentImpl::handleAlert(const lt::alert *a)
