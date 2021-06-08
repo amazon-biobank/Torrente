@@ -1955,8 +1955,16 @@ void TorrentImpl::handleBlockFinishedAlert(const lt::block_finished_alert* p)
 
 void TorrentImpl::handleBlockUploadedAlert(const lt::block_uploaded_alert* p)
 {
-    QString ipToBan = QString::fromStdString(p->endpoint.address().to_string());
-    BitTorrent::Session::instance()->banIP(ipToBan);
+    QString downloaderIp = QString::fromStdString(p->endpoint.address().to_string());
+
+    BitTorrent::Session::instance()->increaseIpPaymentPendent(downloaderIp);
+}
+
+void TorrentImpl::handleIncomingRequestAlert(const lt::incoming_request_alert* p){
+    QString requesterIp = QString::fromStdString(p->endpoint.address().to_string());
+
+    if (BitTorrent::Session::instance()->ipExceededPendentPayment(requesterIp))
+        BitTorrent::Session::instance()->banIP(requesterIp);
 }
 
 void TorrentImpl::handleAlert(const lt::alert *a)
@@ -1968,6 +1976,9 @@ void TorrentImpl::handleAlert(const lt::alert *a)
         break;
     case lt::block_uploaded_alert::alert_type:
         handleBlockUploadedAlert(static_cast<const lt::block_uploaded_alert*>(a));
+        break;
+    case lt::incoming_request_alert::alert_type:
+        handleIncomingRequestAlert(static_cast<const lt::incoming_request_alert*>(a));
         break;
     case lt::file_renamed_alert::alert_type:
         handleFileRenamedAlert(static_cast<const lt::file_renamed_alert*>(a));

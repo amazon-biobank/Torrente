@@ -281,6 +281,7 @@ namespace BitTorrent
 
         void handleBlockFinishedAlert(const lt::block_finished_alert* p);
         void handleBlockUploadedAlert(const lt::block_uploaded_alert* p);
+        void handleIncomingRequestAlert(const lt::incoming_request_alert* p);
 
         bool isMoveInProgress() const;
 

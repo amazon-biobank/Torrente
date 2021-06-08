@@ -37,7 +37,9 @@ void PayfluxoSession::closed() {
 
 void PayfluxoSession::handlePaymentNotification(QString ip)
 {
-    BitTorrent::Session::instance()->unbanIP(ip);
+    BitTorrent::Session::instance()->decreaseIpPaymentPendent(ip);
+    if (!BitTorrent::Session::instance()->ipExceededPendentPayment(ip))
+        BitTorrent::Session::instance()->unbanIP(ip);
 }
 
 void PayfluxoSession::onTextMessageReceived(QString message)
