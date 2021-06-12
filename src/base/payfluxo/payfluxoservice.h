@@ -3,7 +3,7 @@
 
 #include <QWebSocket>
 
-class PayfluxoSession : public QObject {
+class PayfluxoService : public QObject {
 
 private:
     bool m_debug;
@@ -11,7 +11,7 @@ private:
     void sendMessage(QString message);
 
 public:
-    explicit PayfluxoSession(bool debug, QObject* parent);
+    explicit PayfluxoService(bool debug, QObject* parent);
     void onConnected();
     void closed();
     void handlePaymentNotification(QString ip);
