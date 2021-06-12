@@ -435,9 +435,6 @@ Session::Session(QObject *parent)
     , m_peerTurnover(BITTORRENT_SESSION_KEY("PeerTurnover"), 4)
     , m_peerTurnoverCutoff(BITTORRENT_SESSION_KEY("PeerTurnoverCutOff"), 90)
     , m_peerTurnoverInterval(BITTORRENT_SESSION_KEY("PeerTurnoverInterval"), 300)
-    , m_userDecryptedCertificateString(BITTORRENT_KEY("UserDecryptedCertificateString"), nullptr)
-    , m_userDecryptedPrivateKeyString(BITTORRENT_KEY("UserDecryptedPrivateKeyString"), nullptr)
-    , m_userMSPIdString(BITTORRENT_KEY("UserMSPIdString"), nullptr)
     , m_bannedIPs("State/BannedIPs"
                   , QStringList()
                   , [](const QStringList &value)
@@ -934,48 +931,6 @@ void Session::setTrackerEnabled(const bool enabled)
     // call enableTracker() unconditionally, otherwise port change won't trigger
     // tracker restart
     enableTracker(enabled);
-}
-
-QString Session::userDecryptedCertificateString() const
-{
-    return m_userDecryptedCertificateString;
-}
-
-void Session::setUserDecryptedCertificateString(const QString val)
-{
-    if (val == m_userDecryptedCertificateString)
-        return;
-
-    m_userDecryptedCertificateString = val;
-    configureDeferred();
-}
-
-QString Session::userMSPIdString() const
-{
-    return m_userMSPIdString;
-}
-
-void Session::setUserMSPIdString(const QString val)
-{
-    if (val == m_userMSPIdString)
-        return;
-
-    m_userMSPIdString = val;
-    configureDeferred();
-}
-
-QString Session::userDecryptedPrivateKeyString() const
-{
-    return m_userDecryptedPrivateKeyString;
-}
-
-void Session::setUserDecryptedPrivateKeyString(const QString val)
-{
-    if (val == m_userDecryptedPrivateKeyString)
-        return;
-
-    m_userDecryptedPrivateKeyString = val;
-    configureDeferred();
 }
 
 qreal Session::globalMaxRatio() const
@@ -5060,38 +5015,4 @@ void Session::handleSocks5Alert(const lt::socks5_alert *p) const
         LogMsg(tr("SOCKS5 proxy error. Message: %1").arg(QString::fromStdString(p->message()))
             , Log::WARNING);
     }
-}
-
-void Session::setPayfluxoSession(PayfluxoSession* session)
-{
-    this->m_payfluxoSession = session;
-}
-
-
-PayfluxoSession* Session::getPayfluxoSession()
-{
-    return this->m_payfluxoSession;
-}
-
-void Session::increaseIpPaymentPendent(QString ip){
-    if (this->m_ipPaymentPendencies.contains(ip))
-        this->m_ipPaymentPendencies[ip] = 0;
-
-    this->m_ipPaymentPendencies[ip] += 1;
-}
-
-void Session::decreaseIpPaymentPendent(QString ip){
-    this->m_ipPaymentPendencies[ip] -= 1;
-}
-
-void Session::clearIpPaymentPendency(QString ip){
-    this->m_ipPaymentPendencies.remove(ip);
-}
-
-bool Session::ipExceededPendentPayment(QString ip){
-    return this->m_ipPaymentPendencies[ip] >= 10;
-}
-
-int Session::getIpPendentPayment(QString ip){
-    return this->m_ipPaymentPendencies[ip];
 }
