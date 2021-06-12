@@ -1116,7 +1116,9 @@ void Session::initializeNativeSession()
         | lt::alert::status_notification
         | lt::alert::storage_notification
         | lt::alert::block_progress_notification
-        | lt::alert::tracker_notification;
+        | lt::alert::tracker_notification
+        | lt::alert::incoming_request_notification
+        | lt::alert::upload_notification;
     const std::string peerId = lt::generate_fingerprint(PEER_ID, QBT_VERSION_MAJOR, QBT_VERSION_MINOR, QBT_VERSION_BUGFIX, QBT_VERSION_BUILD);
 
     lt::settings_pack pack;
@@ -4523,6 +4525,8 @@ void Session::handleAlert(const lt::alert *a)
         case lt::torrent_checked_alert::alert_type:
         case lt::metadata_received_alert::alert_type:
         case lt::block_finished_alert::alert_type:
+        case lt::block_uploaded_alert::alert_type:
+        case lt::incoming_request_alert::alert_type:
             dispatchTorrentAlert(a);
             break;
         case lt::state_update_alert::alert_type:
@@ -5067,4 +5071,27 @@ void Session::setPayfluxoSession(PayfluxoSession* session)
 PayfluxoSession* Session::getPayfluxoSession()
 {
     return this->m_payfluxoSession;
+}
+
+void Session::increaseIpPaymentPendent(QString ip){
+    if (this->m_ipPaymentPendencies.contains(ip))
+        this->m_ipPaymentPendencies[ip] = 0;
+
+    this->m_ipPaymentPendencies[ip] += 1;
+}
+
+void Session::decreaseIpPaymentPendent(QString ip){
+    this->m_ipPaymentPendencies[ip] -= 1;
+}
+
+void Session::clearIpPaymentPendency(QString ip){
+    this->m_ipPaymentPendencies.remove(ip);
+}
+
+bool Session::ipExceededPendentPayment(QString ip){
+    return this->m_ipPaymentPendencies[ip] >= 10;
+}
+
+int Session::getIpPendentPayment(QString ip){
+    return this->m_ipPaymentPendencies[ip];
 }

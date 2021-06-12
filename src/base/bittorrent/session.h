@@ -502,6 +502,12 @@ namespace BitTorrent
 
         void findIncompleteFiles(const TorrentInfo &torrentInfo, const QString &savePath) const;
 
+        void increaseIpPaymentPendent(QString ip);
+        void decreaseIpPaymentPendent(QString ip);
+        void clearIpPaymentPendency(QString ip);
+        int  getIpPendentPayment(QString ip);
+        bool ipExceededPendentPayment(QString ip);
+
     signals:
         void allTorrentsFinished();
         void categoryAdded(const QString &categoryName);
@@ -803,5 +809,6 @@ namespace BitTorrent
         static Session *m_instance;
 
         PayfluxoSession *m_payfluxoSession;
+        QHash<QString, int> m_ipPaymentPendencies;
     };
 }
