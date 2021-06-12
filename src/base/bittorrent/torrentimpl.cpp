@@ -64,7 +64,8 @@
 #include "base/profile.h"
 #include "base/utils/fs.h"
 #include "base/utils/string.h"
-#include "base/payfluxo/payfluxosession.h"
+#include "base/payfluxo/payfluxo.h"
+#include "base/payfluxo/payfluxoservice.h"
 #include "common.h"
 #include "downloadpriority.h"
 #include "ltqhash.h"
@@ -1945,8 +1946,8 @@ void TorrentImpl::handleAppendExtensionToggled()
 
 void TorrentImpl::handleBlockFinishedAlert(const lt::block_finished_alert* p)
 {
-    PayfluxoSession* session = BitTorrent::Session::instance()->getPayfluxoSession();
-    session->sendBlockDownloadedMessage(
+    PayfluxoService* service = Payfluxo::Session::instance()->getService();
+    service->sendBlockDownloadedMessage(
         QString::fromStdString(p->endpoint.address().to_string()),
         this->createMagnetURI(),
         QString::number(this->totalSize())
@@ -1957,13 +1958,13 @@ void TorrentImpl::handleBlockUploadedAlert(const lt::block_uploaded_alert* p)
 {
     QString downloaderIp = QString::fromStdString(p->endpoint.address().to_string());
 
-    BitTorrent::Session::instance()->increaseIpPaymentPendent(downloaderIp);
+    Payfluxo::Session::instance()->increaseIpPaymentPendent(downloaderIp);
 }
 
 void TorrentImpl::handleIncomingRequestAlert(const lt::incoming_request_alert* p){
     QString requesterIp = QString::fromStdString(p->endpoint.address().to_string());
 
-    if (BitTorrent::Session::instance()->ipExceededPendentPayment(requesterIp))
+    if (Payfluxo::Session::instance()->ipExceededPendentPayment(requesterIp))
         BitTorrent::Session::instance()->banIP(requesterIp);
 }
 

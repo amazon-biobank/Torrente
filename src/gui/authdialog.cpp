@@ -30,13 +30,8 @@
 #include <QApplication>
 #include <QMessageBox>
 
-#include <QJsonDocument>
-#include <QJsonObject>
-#include <QJsonValue>
-
 #include "base/bittorrent/session.h"
-#include "base/payfluxo/payfluxosession.h"
-#include "Lyra2FileEncryptor.h"
+#include "base/payfluxo/payfluxo.h"
 
 #include "authdialog.h"
 
@@ -92,39 +87,12 @@ void AuthDialog::setCredentials()
 
     QString password = this->m_ui->lineEdit->text();
 
-    std::string certificatePathStd = this->certificatePath.toUtf8().constData();
-    // const char* certificatePathString = certificatePathStd.c_str();
-    char *certificatePathString = new char[certificatePathStd.length() + 1];
-    strcpy(certificatePathString, certificatePathStd.c_str());
-    
-    std::string passwordStd = password.toUtf8().constData();
-    // const char* passwordString = passwordStd.c_str();
-    char *passwordString = new char[passwordStd.length() + 1];
-    strcpy(passwordString, passwordStd.c_str());
-
-    char* decryptedFile = getDecryptedContentFromFile(certificatePathString, passwordString);
-
     try {
-        QJsonDocument jsonResponse = QJsonDocument::fromJson(decryptedFile);
+        bool authResult = Payfluxo::Session::instance()->authenticate(password, this->certificatePath);
 
-        if (jsonResponse.isNull()) {
+        if (authResult) {
             throw INVALID_CREDENTIALS_EXCEPTION;
         }
-
-        QJsonObject jsonObject = jsonResponse.object();
-        QJsonObject credentialsJson = jsonObject["credentials"].toObject();
-
-        QString certificateString = credentialsJson["certificate"].toString();
-        QString privateKeyString = credentialsJson["privateKey"].toString();
-        QString mspIdString = jsonObject["mspId"].toString();
-
-        BitTorrent::Session::instance()->setUserDecryptedCertificateString(certificateString);
-        BitTorrent::Session::instance()->setUserDecryptedPrivateKeyString(privateKeyString);
-        BitTorrent::Session::instance()->setUserMSPIdString(mspIdString);
-
-        PayfluxoSession *payfluxoSession = BitTorrent::Session::instance()->getPayfluxoSession();
-
-        payfluxoSession->sendAuthenticatedMessage(certificateString, privateKeyString, mspIdString);
         
         QApplication::restoreOverrideCursor();
         this->toggleWidgetsEnable();
