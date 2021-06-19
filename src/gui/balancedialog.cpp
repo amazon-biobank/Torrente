@@ -29,7 +29,7 @@
 #include <QFileDialog>
 #include <QMessageBox>
 
-#include "base/bittorrent/session.h"
+#include "base/payfluxo/payfluxo.h"
 
 #include "balancedialog.h"
 
@@ -43,7 +43,7 @@ BalanceDialog::BalanceDialog(QWidget *parent)
     , m_ui(new Ui::BalanceDialog)
 {
     m_ui->setupUi(this);
-    QString certificateString = BitTorrent::Session::instance()->userDecryptedCertificateString();
+    QString certificateString = Payfluxo::Session::instance()->getCertificate();
     m_ui->publicKey->setText(this->getSimplifiedPublicKey(certificateString));
 
     this->setWindowTitle(tr("User Balance"));
@@ -66,9 +66,7 @@ QString BalanceDialog::getSimplifiedPublicKey(QString publicKeyString){
 
 void BalanceDialog::flushCredentials()
 {
-    BitTorrent::Session::instance()->setUserDecryptedPrivateKeyString(nullptr);
-    BitTorrent::Session::instance()->setUserDecryptedCertificateString(nullptr);
-    BitTorrent::Session::instance()->setUserMSPIdString(nullptr);
+    Payfluxo::Session::instance()->logout();
 
     this->close();
 }

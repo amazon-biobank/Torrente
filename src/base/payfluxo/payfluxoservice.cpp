@@ -1,4 +1,5 @@
-#include "payfluxosession.h"
+#include "payfluxoservice.h"
+#include "payfluxo.h"
 #include "base/bittorrent/session.h"
 
 #include <QWebSocket>
@@ -9,7 +10,7 @@
 #include <QJsonValue>
 
 
-PayfluxoSession::PayfluxoSession( bool debug, QObject* parent)
+PayfluxoService::PayfluxoService( bool debug, QObject* parent)
     : QObject(parent)
     , m_debug(debug)
 {
@@ -17,40 +18,41 @@ PayfluxoSession::PayfluxoSession( bool debug, QObject* parent)
 
     if (m_debug)
         qDebug() << "WebSocket server:" << url;
-    connect(&m_webSocket, &QWebSocket::connected, this, &PayfluxoSession::onConnected);
-    connect(&m_webSocket, &QWebSocket::disconnected, this, &PayfluxoSession::closed);
+    connect(&m_webSocket, &QWebSocket::connected, this, &PayfluxoService::onConnected);
+    connect(&m_webSocket, &QWebSocket::disconnected, this, &PayfluxoService::closed);
     m_webSocket.open(url);
 }
 
-void PayfluxoSession::onConnected()
+void PayfluxoService::onConnected()
 {
     if (m_debug)
         qDebug() << "WebSocket connected";
     connect(&m_webSocket, &QWebSocket::textMessageReceived,
-        this, &PayfluxoSession::onTextMessageReceived);
+        this, &PayfluxoService::onTextMessageReceived);
     
 }
 
-void PayfluxoSession::closed() {
+void PayfluxoService::closed() {
 
 }
 
-void PayfluxoSession::handlePaymentNotification(QString ip)
+void PayfluxoService::handlePaymentNotification(QString ip)
 {
-    BitTorrent::Session::instance()->decreaseIpPaymentPendent(ip);
-    if (!BitTorrent::Session::instance()->ipExceededPendentPayment(ip))
+    Payfluxo::Session::instance()->decreaseIpPaymentPendent(ip);
+
+    if (Payfluxo::Session::instance()->getIpPendentPayment(ip) < 1)
         BitTorrent::Session::instance()->unbanIP(ip);
 }
 
-void PayfluxoSession::onTextMessageReceived(QString message)
+void PayfluxoService::onTextMessageReceived(QString message)
 {
     QJsonDocument jsonResponse = QJsonDocument::fromJson(message.toUtf8());
     QJsonObject jsonObject = jsonResponse.object();
     QString type = jsonObject["type"].toString();
-    int typeComparison = QString::compare(type, "PaymentNotification", Qt::CaseSensitive);
+
     QJsonObject dataJson = jsonObject["data"].toObject();
 
-    if (typeComparison == 0) {
+    if (QString::compare(type, "PaymentNotification", Qt::CaseSensitive) == 0) {
         this->handlePaymentNotification(dataJson["ip"].toString());
     }
     
@@ -59,7 +61,7 @@ void PayfluxoSession::onTextMessageReceived(QString message)
     
 }
 
-void PayfluxoSession::sendBlockDownloadedMessage(QString ip, QString magneticLink, QString fileSize)
+void PayfluxoService::sendBlockDownloadedMessage(QString ip, QString magneticLink, QString fileSize)
 {
     QJsonObject dataObj;
     dataObj.insert("uploaderIp", ip);
@@ -73,7 +75,7 @@ void PayfluxoSession::sendBlockDownloadedMessage(QString ip, QString magneticLin
     this->sendMessage(QString(ba));
 }
 
-void PayfluxoSession::sendAuthenticatedMessage(QString certificate, QString privateKey, QString orgMSP)
+void PayfluxoService::sendAuthenticatedMessage(QString certificate, QString privateKey, QString orgMSP)
 {
     QJsonObject dataObj;
     dataObj.insert("certificate", certificate);
@@ -87,7 +89,7 @@ void PayfluxoSession::sendAuthenticatedMessage(QString certificate, QString priv
     this->sendMessage(QString(ba));
 }
 
-void PayfluxoSession::sendMessage(QString message)
+void PayfluxoService::sendMessage(QString message)
 {
     m_webSocket.sendTextMessage(message);
 }

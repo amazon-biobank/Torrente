@@ -50,7 +50,6 @@
 #include "cachestatus.h"
 #include "sessionstatus.h"
 #include "torrentinfo.h"
-#include <base/payfluxo/payfluxosession.h>
 
 class QFile;
 class QNetworkConfiguration;
@@ -211,8 +210,6 @@ namespace BitTorrent
         static void freeInstance();
         static Session *instance();
 
-        void setPayfluxoSession(PayfluxoSession* session);
-        PayfluxoSession* getPayfluxoSession();
         QString defaultSavePath() const;
         void setDefaultSavePath(QString path);
         QString tempPath() const;
@@ -502,12 +499,6 @@ namespace BitTorrent
 
         void findIncompleteFiles(const TorrentInfo &torrentInfo, const QString &savePath) const;
 
-        void increaseIpPaymentPendent(QString ip);
-        void decreaseIpPaymentPendent(QString ip);
-        void clearIpPaymentPendency(QString ip);
-        int  getIpPendentPayment(QString ip);
-        bool ipExceededPendentPayment(QString ip);
-
     signals:
         void allTorrentsFinished();
         void categoryAdded(const QString &categoryName);
@@ -750,9 +741,6 @@ namespace BitTorrent
         CachedSettingValue<int> m_peerTurnover;
         CachedSettingValue<int> m_peerTurnoverCutoff;
         CachedSettingValue<int> m_peerTurnoverInterval;
-        CachedSettingValue<QString> m_userDecryptedCertificateString;
-        CachedSettingValue<QString> m_userDecryptedPrivateKeyString;
-        CachedSettingValue<QString> m_userMSPIdString;
         CachedSettingValue<QStringList> m_bannedIPs;
 #if defined(Q_OS_WIN)
         CachedSettingValue<OSMemoryPriority> m_OSMemoryPriority;
@@ -807,8 +795,5 @@ namespace BitTorrent
         QList<MoveStorageJob> m_moveStorageQueue;
 
         static Session *m_instance;
-
-        PayfluxoSession *m_payfluxoSession;
-        QHash<QString, int> m_ipPaymentPendencies;
     };
 }

@@ -59,6 +59,7 @@
 #include "base/bittorrent/session.h"
 #include "base/bittorrent/sessionstatus.h"
 #include "base/bittorrent/torrent.h"
+#include "base/payfluxo/payfluxo.h"
 #include "base/global.h"
 #include "base/logger.h"
 #include "base/net/downloadmanager.h"
@@ -71,7 +72,7 @@
 #include "base/utils/misc.h"
 #include "base/utils/password.h"
 #include "base/version.h"
-#include "base/payfluxo/payfluxosession.h"
+#include "base/payfluxo/payfluxoservice.h"
 #include "aboutdialog.h"
 #include "addnewtorrentdialog.h"
 #include "autoexpandabledialog.h"
@@ -205,7 +206,7 @@ MainWindow::MainWindow(QWidget *parent)
     lockMenu->addAction(tr("&Clear Password"), this, &MainWindow::clearUILockPassword);
     m_ui->actionLock->setMenu(lockMenu);
 
-    BitTorrent::Session::instance()->setPayfluxoSession(new PayfluxoSession(false, this));
+    Payfluxo::Session::instance()->initInstance(new PayfluxoService(false, this));
 
     this->refreshAuthenticationState();
 
@@ -694,7 +695,7 @@ void MainWindow::clearUILockPassword()
 }
 
 void MainWindow::refreshAuthenticationState() {
-    bool isAuthenticated = (BitTorrent::Session::instance()->userDecryptedPrivateKeyString() != nullptr);
+    bool isAuthenticated = Payfluxo::Session::instance()->isAuthenticated();
 
     this->m_ui->actionAuth->setVisible(!isAuthenticated);
     this->m_ui->actionBalance->setVisible(isAuthenticated);

@@ -1,0 +1,113 @@
+#include "payfluxo.h"
+#include "Lyra2FileEncryptor.h"
+
+#include <QJsonDocument>
+#include <QJsonObject>
+#include <QJsonValue>
+
+using namespace Payfluxo;
+
+#define PENDENCE_TOLERANCE 8
+
+Session::Session() {
+    m_authenticated = false;
+
+    m_userDecryptedCertificateString = QString("");
+    m_userDecryptedPrivateKeyString = QString("");
+    m_userMSPIdString = QString("");
+
+}
+
+void Session::initInstance(PayfluxoService* service) {
+    if (!m_instance)
+        m_instance = new Session;
+    m_instance->m_payfluxoService = service;
+}
+
+void Session::deleteInstance() {
+    delete m_instance;
+    m_instance = nullptr;
+}
+
+Session* Session::instance() {
+    return m_instance;
+}
+
+bool Session::authenticate(QString password, QString certificatePath) {
+    std::string certificatePathStd = certificatePath.toUtf8().constData();
+    char* certificatePathString = new char[certificatePathStd.length() + 1];
+    strcpy(certificatePathString, certificatePathStd.c_str());
+
+    std::string passwordStd = password.toUtf8().constData();
+    char* passwordString = new char[passwordStd.length() + 1];
+    strcpy(passwordString, passwordStd.c_str());
+
+    char* decryptedFile = getDecryptedContentFromFile(certificatePathString, passwordString);
+
+    QJsonDocument jsonResponse = QJsonDocument::fromJson(decryptedFile);
+
+    if (jsonResponse.isNull()) {
+        return true;
+    }
+
+    QJsonObject jsonObject = jsonResponse.object();
+    QJsonObject credentialsJson = jsonObject["credentials"].toObject();
+
+    QString certificateString = credentialsJson["certificate"].toString();
+    QString privateKeyString = credentialsJson["privateKey"].toString();
+    QString mspIdString = jsonObject["mspId"].toString();
+
+    m_userDecryptedCertificateString = certificateString;
+    m_userDecryptedPrivateKeyString = privateKeyString;
+    m_userMSPIdString = mspIdString;
+
+    m_authenticated = true;
+    m_payfluxoService->sendAuthenticatedMessage(certificateString, privateKeyString, mspIdString);
+
+    return false;
+}
+
+void Session::logout() {
+    m_userDecryptedCertificateString = nullptr;
+    m_userDecryptedPrivateKeyString = nullptr;
+    m_userMSPIdString = nullptr;
+
+    m_authenticated = false;
+}
+
+bool Session::isAuthenticated() {
+    return m_authenticated;
+}
+
+PayfluxoService* Session::getService() {
+    return m_payfluxoService;
+}
+
+void Session::increaseIpPaymentPendent(QString ip) {
+    if (this->m_ipPaymentPendencies.contains(ip))
+        this->m_ipPaymentPendencies[ip] = 0;
+
+    this->m_ipPaymentPendencies[ip] += 1;
+}
+
+void Session::decreaseIpPaymentPendent(QString ip) {
+    this->m_ipPaymentPendencies[ip] -= 1;
+}
+
+void Session::clearIpPaymentPendency(QString ip) {
+    this->m_ipPaymentPendencies.remove(ip);
+}
+
+bool Session::ipExceededPendentPayment(QString ip) {
+    return this->m_ipPaymentPendencies[ip] >= PENDENCE_TOLERANCE;
+}
+
+int Session::getIpPendentPayment(QString ip) {
+    return this->m_ipPaymentPendencies[ip];
+}
+
+QString Session::getCertificate() {
+    return m_userDecryptedCertificateString;
+}
+
+Session* Session::m_instance = nullptr;
