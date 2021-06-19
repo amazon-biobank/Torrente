@@ -38,9 +38,12 @@ void PayfluxoService::closed() {
 
 void PayfluxoService::handlePaymentNotification(QString ip)
 {
-    Payfluxo::Session::instance()->decreaseIpPaymentPendent(ip);
+    Payfluxo::Session* session = Payfluxo::Session::instance();
 
-    if (Payfluxo::Session::instance()->getIpPendentPayment(ip) < 1)
+    session->decreaseIpPaymentPendent(ip);
+    session->setRedeemableCoins(session->getRedeemableCoins() + 1);
+
+    if (session->getIpPendentPayment(ip) < 1)
         BitTorrent::Session::instance()->unbanIP(ip);
 }
 

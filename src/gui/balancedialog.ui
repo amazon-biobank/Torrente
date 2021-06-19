@@ -6,19 +6,19 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>500</width>
+    <width>510</width>
     <height>400</height>
    </rect>
   </property>
   <property name="minimumSize">
    <size>
-    <width>500</width>
+    <width>510</width>
     <height>400</height>
    </size>
   </property>
   <property name="maximumSize">
    <size>
-    <width>500</width>
+    <width>510</width>
     <height>400</height>
    </size>
   </property>
@@ -47,7 +47,7 @@
     <rect>
      <x>0</x>
      <y>10</y>
-     <width>501</width>
+     <width>510</width>
      <height>51</height>
     </rect>
    </property>
@@ -540,7 +540,7 @@ text-align: bottom
     <item>
      <layout class="QVBoxLayout" name="verticalLayout_5">
       <item>
-       <widget class="QLabel" name="paywordBalance">
+       <widget class="QLabel" name="toRedeemBalance">
         <property name="maximumSize">
          <size>
           <width>80</width>
@@ -552,7 +552,7 @@ text-align: bottom
 };</string>
         </property>
         <property name="text">
-         <string>Payword</string>
+         <string>To redeem</string>
         </property>
         <property name="alignment">
          <set>Qt::AlignCenter</set>
@@ -573,7 +573,7 @@ text-align: bottom
        </spacer>
       </item>
       <item>
-       <widget class="QLabel" name="paywordBalance_value">
+       <widget class="QLabel" name="RedeemBalance_value">
         <property name="maximumSize">
          <size>
           <width>80</width>
@@ -610,10 +610,10 @@ text-align: bottom
        </spacer>
       </item>
       <item>
-       <widget class="QToolButton" name="IPOButton">
+       <widget class="QToolButton" name="RedeemButton">
         <property name="maximumSize">
          <size>
-          <width>90</width>
+          <width>110</width>
           <height>65</height>
          </size>
         </property>
@@ -715,9 +715,9 @@ text-align: bottom
    </hints>
   </connection>
   <connection>
-   <sender>IPOButton</sender>
+   <sender>RedeemButton</sender>
    <signal>clicked()</signal>
-   <receiver>IPOButton</receiver>
+   <receiver>RedeemButton</receiver>
    <slot>click()</slot>
    <hints>
     <hint type="sourcelabel">
