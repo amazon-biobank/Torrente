@@ -281,7 +281,7 @@
 };</string>
         </property>
         <property name="text">
-         <string>Committed</string>
+         <string>Frozen</string>
         </property>
         <property name="alignment">
          <set>Qt::AlignCenter</set>
@@ -375,7 +375,7 @@ text-align: bottom
  }</string>
         </property>
         <property name="text">
-         <string>Comprar</string>
+         <string>Buy</string>
         </property>
         <property name="icon">
          <iconset>
@@ -504,7 +504,7 @@ text-align: bottom
  }</string>
         </property>
         <property name="text">
-         <string>Vender</string>
+         <string>Sell</string>
         </property>
         <property name="icon">
          <iconset>
@@ -552,7 +552,7 @@ text-align: bottom
 };</string>
         </property>
         <property name="text">
-         <string>To redeem</string>
+         <string>To Redeem</string>
         </property>
         <property name="alignment">
          <set>Qt::AlignCenter</set>
@@ -631,7 +631,7 @@ text-align: bottom
  }</string>
         </property>
         <property name="text">
-         <string>Resgatar</string>
+         <string>Redeem</string>
         </property>
         <property name="icon">
          <iconset>
