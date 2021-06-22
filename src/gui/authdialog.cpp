@@ -65,7 +65,7 @@ AuthDialog::~AuthDialog()
 void AuthDialog::onImportButtonClicked()
 {
     QString fileName = QFileDialog::getOpenFileName(
-        this, 
+        this,
         tr("Open key"),
         QDir::homePath(),
         tr("Key Files (*.pem *.key)")
