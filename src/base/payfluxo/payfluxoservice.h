@@ -19,4 +19,4 @@ public:
     void sendBlockDownloadedMessage(QString ip, QString torrentId, QString fileSize);
     void sendAuthenticatedMessage(QString certificate, QString privateKey, QString orgMSP);
 };
-#endif 
+#endif
