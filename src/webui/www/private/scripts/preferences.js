@@ -28,11 +28,11 @@
 
 'use strict';
 
-if (window.qBittorrent === undefined) {
-    window.qBittorrent = {};
+if (window.Torrente === undefined) {
+    window.Torrente = {};
 }
 
-window.qBittorrent.LocalPreferences = (function() {
+window.Torrente.LocalPreferences = (function() {
     const exports = function() {
         return {
             LocalPreferencesClass: LocalPreferencesClass

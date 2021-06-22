@@ -1,0 +1,3 @@
+IDI_ICON1 ICON DISCARDABLE "icons/torrente.ico"
+IDI_ICON2 ICON DISCARDABLE "icons/torrente_file.ico"
+1 24 DISCARDABLE "torrente.exe.manifest"

@@ -230,7 +230,7 @@ void Utils::Gui::openFolderSelect(const QString &absolutePath)
     }
     else
     {
-        // "caja" manager can't pinpoint the file, see: https://github.com/qbittorrent/qBittorrent/issues/5003
+        // "caja" manager can't pinpoint the file, see: https://github.com/torrente/Torrente/issues/5003
         openPath(path.left(path.lastIndexOf('/')));
     }
 #else

@@ -92,7 +92,7 @@
 <context>
     <name>HttpServer</name>
     <message>
-        <source>Exit qBittorrent</source>
+        <source>Exit Torrente</source>
         <translation type="unfinished" />
     </message>
     <message>
@@ -140,11 +140,11 @@
         <translation type="unfinished" />
     </message>
     <message>
-        <source>Unable to save program preferences, qBittorrent is probably unreachable.</source>
+        <source>Unable to save program preferences, Torrente is probably unreachable.</source>
         <translation type="unfinished" />
     </message>
     <message>
-        <source>IRC: #qbittorrent on Freenode</source>
+        <source>IRC: #torrente on Freenode</source>
         <translation type="unfinished" />
     </message>
     <message>
@@ -168,7 +168,7 @@
         <translation type="unfinished" />
     </message>
     <message>
-        <source>Unable to log in, qBittorrent is probably unreachable.</source>
+        <source>Unable to log in, Torrente is probably unreachable.</source>
         <translation type="unfinished" />
     </message>
     <message>
@@ -301,7 +301,7 @@
         <translation type="unfinished" />
     </message>
     <message>
-        <source>qBittorrent client is not reachable</source>
+        <source>Torrente client is not reachable</source>
         <translation type="unfinished" />
     </message>
     <message>
@@ -341,7 +341,7 @@
         <translation type="unfinished" />
     </message>
     <message>
-        <source>qBittorrent has been shutdown</source>
+        <source>Torrente has been shutdown</source>
         <translation type="unfinished" />
     </message>
     <message>
@@ -476,12 +476,12 @@
         <translation type="unfinished" />
     </message>
     <message>
-        <source>Are you sure you want to quit qBittorrent?</source>
+        <source>Are you sure you want to quit Torrente?</source>
         <translation type="unfinished" />
     </message>
     <message>
-        <source>[D: %1, U: %2] qBittorrent %3</source>
-        <comment>D = Download; U = Upload; %3 is qBittorrent version</comment>
+        <source>[D: %1, U: %2] Torrente %3</source>
+        <comment>D = Download; U = Upload; %3 is Torrente version</comment>
         <translation type="unfinished" />
     </message>
     <message>
@@ -1186,7 +1186,7 @@
         <translation type="unfinished" />
     </message>
     <message>
-        <source>qBittorrent Section</source>
+        <source>Torrente Section</source>
         <translation type="unfinished" />
     </message>
     <message>
@@ -2517,7 +2517,7 @@
         <translation type="unfinished" />
     </message>
     <message>
-        <source>Deletion confirmation - qBittorrent</source>
+        <source>Deletion confirmation - Torrente</source>
         <translation type="unfinished" />
     </message>
 </context>
@@ -2906,7 +2906,7 @@
         <translation type="unfinished" />
     </message>
     <message>
-        <source>About qBittorrent</source>
+        <source>About Torrente</source>
         <translation type="unfinished" />
     </message>
     <message>
@@ -2918,7 +2918,7 @@
         <translation type="unfinished" />
     </message>
     <message>
-        <source>qBittorrent was built with the following libraries:</source>
+        <source>Torrente was built with the following libraries:</source>
         <translation type="unfinished" />
     </message>
     <message>

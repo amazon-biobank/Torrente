@@ -1,6 +1,6 @@
 /*
  * Bittorrent Client using Qt and libtorrent.
- * Copyright (C) 2009  Christophe Dumez <chris@qbittorrent.org>
+ * Copyright (C) 2009  Christophe Dumez <chris@torrente.org>
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -28,11 +28,11 @@
 
 'use strict';
 
-if (window.qBittorrent === undefined) {
-    window.qBittorrent = {};
+if (window.Torrente === undefined) {
+    window.Torrente = {};
 }
 
-window.qBittorrent.ContextMenu = (function() {
+window.Torrente.ContextMenu = (function() {
     const exports = function() {
         return {
             ContextMenu: ContextMenu,
@@ -449,7 +449,7 @@ window.qBittorrent.ContextMenu = (function() {
             Object.each(sortedCategories, function(categoryName) {
                 const categoryHash = genHash(categoryName);
                 const el = new Element('li', {
-                    html: '<a href="javascript:torrentSetCategoryFN(\'' + categoryHash + '\');"><img src="icons/inode-directory.svg"/> ' + window.qBittorrent.Misc.escapeHtml(categoryName) + '</a>'
+                    html: '<a href="javascript:torrentSetCategoryFN(\'' + categoryHash + '\');"><img src="icons/inode-directory.svg"/> ' + window.Torrente.Misc.escapeHtml(categoryName) + '</a>'
                 });
                 if (first) {
                     el.addClass('separator');
@@ -487,7 +487,7 @@ window.qBittorrent.ContextMenu = (function() {
                 const tagHash = genHash(tagName);
                 const el = new Element('li', {
                     html: '<a href="#Tag/' + tagHash + '" onclick="event.preventDefault(); torrentSetTagsFN(\'' + tagHash + '\', !event.currentTarget.getElement(\'input[type=checkbox]\').checked);">'
-                        + '<input type="checkbox" onclick="this.checked = !this.checked;"> ' + window.qBittorrent.Misc.escapeHtml(tagName)
+                        + '<input type="checkbox" onclick="this.checked = !this.checked;"> ' + window.Torrente.Misc.escapeHtml(tagName)
                         + '</a>'
                 });
                 if (i === 0)
@@ -544,7 +544,7 @@ window.qBittorrent.ContextMenu = (function() {
     const RssFeedContextMenu = new Class({
         Extends: ContextMenu,
         updateMenuItems: function() {
-            let selectedRows = window.qBittorrent.Rss.rssFeedTable.selectedRowsIds();
+            let selectedRows = window.Torrente.Rss.rssFeedTable.selectedRowsIds();
             this.menu.getElement('a[href$=newSubscription]').parentNode.addClass('separator');
             switch (selectedRows.length) {
                 case 0:
@@ -572,7 +572,7 @@ window.qBittorrent.ContextMenu = (function() {
                         this.hideItem('updateAll');
                         this.hideItem('copyFeedURL');
                     }
-                    else if (window.qBittorrent.Rss.rssFeedTable.rows[selectedRows[0]].full_data.dataUid === '') {
+                    else if (window.Torrente.Rss.rssFeedTable.rows[selectedRows[0]].full_data.dataUid === '') {
                         // menu when single folder selected
                         this.showItem('update');
                         this.showItem('markRead');
@@ -641,7 +641,7 @@ window.qBittorrent.ContextMenu = (function() {
             });
         },
         updateMenuItems: function() {
-            let selectedRows = window.qBittorrent.RssDownloader.rssDownloaderRulesTable.selectedRowsIds();
+            let selectedRows = window.Torrente.RssDownloader.rssDownloaderRulesTable.selectedRowsIds();
             this.showItem('addRule');
             switch (selectedRows.length) {
                 case 0:

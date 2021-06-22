@@ -3,7 +3,7 @@
 # Author:
 #  Fabien Devaux <fab AT gnux DOT info>
 # Contributors:
-#  Christophe Dumez <chris@qbittorrent.org> (qbittorrent integration)
+#  Christophe Dumez <chris@torrente.org> (torrente integration)
 #  Thanks to gab #gcu @ irc.freenode.net (multipage support on PirateBay)
 #  Thanks to Elias <gekko04@users.sourceforge.net> (torrentreactor and isohunt search engines)
 #

@@ -92,8 +92,8 @@
 <context>
     <name>HttpServer</name>
     <message>
-        <source>Exit qBittorrent</source>
-        <translation>Keluar qBittorrent</translation>
+        <source>Exit Torrente</source>
+        <translation>Keluar Torrente</translation>
     </message>
     <message>
         <source>Only one link per line</source>
@@ -140,12 +140,12 @@
         <translation>Jumlah maksimum batas slot unggah per torrent harus lebih besar dari 0 atau nonaktif.</translation>
     </message>
     <message>
-        <source>Unable to save program preferences, qBittorrent is probably unreachable.</source>
-        <translation>Tidak bisa menyimpan preferensi program, qBittorrent mungkin tidak terjangkau.</translation>
+        <source>Unable to save program preferences, Torrente is probably unreachable.</source>
+        <translation>Tidak bisa menyimpan preferensi program, Torrente mungkin tidak terjangkau.</translation>
     </message>
     <message>
-        <source>IRC: #qbittorrent on Freenode</source>
-        <translation>IRC: #qbittorrent di Freenode</translation>
+        <source>IRC: #torrente on Freenode</source>
+        <translation>IRC: #torrente di Freenode</translation>
     </message>
     <message>
         <source>Unknown</source>
@@ -168,8 +168,8 @@
         <translation>Port yang digunakan untuk Web UI harus antara 1 dan 65535.</translation>
     </message>
     <message>
-        <source>Unable to log in, qBittorrent is probably unreachable.</source>
-        <translation>Tidak bisa masuk, qBittorrent mungkin tidak terjangkau.</translation>
+        <source>Unable to log in, Torrente is probably unreachable.</source>
+        <translation>Tidak bisa masuk, Torrente mungkin tidak terjangkau.</translation>
     </message>
     <message>
         <source>Invalid Username or Password.</source>
@@ -301,8 +301,8 @@
         <translation>Simpan</translation>
     </message>
     <message>
-        <source>qBittorrent client is not reachable</source>
-        <translation>Klien qBittorrent tidak terjangkau</translation>
+        <source>Torrente client is not reachable</source>
+        <translation>Klien Torrente tidak terjangkau</translation>
     </message>
     <message>
         <source>Global number of upload slots limit must be greater than 0 or disabled.</source>
@@ -341,7 +341,7 @@
         <translation type="unfinished" />
     </message>
     <message>
-        <source>qBittorrent has been shutdown</source>
+        <source>Torrente has been shutdown</source>
         <translation type="unfinished" />
     </message>
     <message>
@@ -476,13 +476,13 @@
         <translation>Batas Kecepatan Unduh Global</translation>
     </message>
     <message>
-        <source>Are you sure you want to quit qBittorrent?</source>
+        <source>Are you sure you want to quit Torrente?</source>
         <translation type="unfinished" />
     </message>
     <message>
-        <source>[D: %1, U: %2] qBittorrent %3</source>
-        <comment>D = Download; U = Upload; %3 is qBittorrent version</comment>
-        <translation>[D: %1, U: %2] qBittorrent %3</translation>
+        <source>[D: %1, U: %2] Torrente %3</source>
+        <comment>D = Download; U = Upload; %3 is Torrente version</comment>
+        <translation>[D: %1, U: %2] Torrente %3</translation>
     </message>
     <message>
         <source>Alternative speed limits</source>
@@ -1186,7 +1186,7 @@
         <translation type="unfinished" />
     </message>
     <message>
-        <source>qBittorrent Section</source>
+        <source>Torrente Section</source>
         <translation type="unfinished" />
     </message>
     <message>
@@ -2517,7 +2517,7 @@
         <translation>Juga hapus berkas pada diska</translation>
     </message>
     <message>
-        <source>Deletion confirmation - qBittorrent</source>
+        <source>Deletion confirmation - Torrente</source>
         <translation type="unfinished" />
     </message>
 </context>
@@ -2906,7 +2906,7 @@
         <translation type="unfinished" />
     </message>
     <message>
-        <source>About qBittorrent</source>
+        <source>About Torrente</source>
         <translation type="unfinished" />
     </message>
     <message>
@@ -2918,7 +2918,7 @@
         <translation type="unfinished" />
     </message>
     <message>
-        <source>qBittorrent was built with the following libraries:</source>
+        <source>Torrente was built with the following libraries:</source>
         <translation type="unfinished" />
     </message>
     <message>

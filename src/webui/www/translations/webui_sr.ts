@@ -92,7 +92,7 @@
 <context>
     <name>HttpServer</name>
     <message>
-        <source>Exit qBittorrent</source>
+        <source>Exit Torrente</source>
         <translation type="unfinished" />
     </message>
     <message>
@@ -140,11 +140,11 @@
         <translation>Максимални број слотова за слање Торента при лимитирању мора бити већи од 0 или онемогућен.</translation>
     </message>
     <message>
-        <source>Unable to save program preferences, qBittorrent is probably unreachable.</source>
-        <translation>Не могу да сачувам програмска подешавања, qBittorrent је вероватно недоступан.</translation>
+        <source>Unable to save program preferences, Torrente is probably unreachable.</source>
+        <translation>Не могу да сачувам програмска подешавања, Torrente је вероватно недоступан.</translation>
     </message>
     <message>
-        <source>IRC: #qbittorrent on Freenode</source>
+        <source>IRC: #torrente on Freenode</source>
         <translation type="unfinished" />
     </message>
     <message>
@@ -168,7 +168,7 @@
         <translation type="unfinished" />
     </message>
     <message>
-        <source>Unable to log in, qBittorrent is probably unreachable.</source>
+        <source>Unable to log in, Torrente is probably unreachable.</source>
         <translation type="unfinished" />
     </message>
     <message>
@@ -301,8 +301,8 @@
         <translation>Сачувај</translation>
     </message>
     <message>
-        <source>qBittorrent client is not reachable</source>
-        <translation>qBittorrent клијент није доступан</translation>
+        <source>Torrente client is not reachable</source>
+        <translation>Torrente клијент није доступан</translation>
     </message>
     <message>
         <source>Global number of upload slots limit must be greater than 0 or disabled.</source>
@@ -341,7 +341,7 @@
         <translation type="unfinished" />
     </message>
     <message>
-        <source>qBittorrent has been shutdown</source>
+        <source>Torrente has been shutdown</source>
         <translation type="unfinished" />
     </message>
     <message>
@@ -476,12 +476,12 @@
         <translation>Општи лимит брзине преузимања</translation>
     </message>
     <message>
-        <source>Are you sure you want to quit qBittorrent?</source>
+        <source>Are you sure you want to quit Torrente?</source>
         <translation type="unfinished" />
     </message>
     <message>
-        <source>[D: %1, U: %2] qBittorrent %3</source>
-        <comment>D = Download; U = Upload; %3 is qBittorrent version</comment>
+        <source>[D: %1, U: %2] Torrente %3</source>
+        <comment>D = Download; U = Upload; %3 is Torrente version</comment>
         <translation type="unfinished" />
     </message>
     <message>
@@ -1186,7 +1186,7 @@
         <translation type="unfinished" />
     </message>
     <message>
-        <source>qBittorrent Section</source>
+        <source>Torrente Section</source>
         <translation type="unfinished" />
     </message>
     <message>
@@ -2517,8 +2517,8 @@
 <context>
     <name>confirmDeletionDlg</name>
     <message>
-        <source>Deletion confirmation - qBittorrent</source>
-        <translation>Потврда брисања - qBittorrent</translation>
+        <source>Deletion confirmation - Torrente</source>
+        <translation>Потврда брисања - Torrente</translation>
     </message>
     <message>
         <source>Deletion confirmation</source>
@@ -2914,7 +2914,7 @@
         <translation type="unfinished" />
     </message>
     <message>
-        <source>About qBittorrent</source>
+        <source>About Torrente</source>
         <translation type="unfinished" />
     </message>
     <message>
@@ -2926,7 +2926,7 @@
         <translation type="unfinished" />
     </message>
     <message>
-        <source>qBittorrent was built with the following libraries:</source>
+        <source>Torrente was built with the following libraries:</source>
         <translation type="unfinished" />
     </message>
     <message>

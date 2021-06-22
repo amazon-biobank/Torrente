@@ -28,11 +28,11 @@
 
 'use strict';
 
-if (window.qBittorrent === undefined) {
-    window.qBittorrent = {};
+if (window.Torrente === undefined) {
+    window.Torrente = {};
 }
 
-window.qBittorrent.Misc = (function() {
+window.Torrente.Misc = (function() {
     const exports = function() {
         return {
             friendlyUnit: friendlyUnit,

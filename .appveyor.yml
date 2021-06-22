@@ -10,7 +10,7 @@ branches:
     - coverity_scan
 
 environment:
-  REPO_DIR: &REPO_DIR c:\qbittorrent
+  REPO_DIR: &REPO_DIR c:\torrente
   CACHE_DIR: &CACHE_DIR c:\qbt_cache
 
   QBT_VER_URL: https://builds.shiki.hu/appveyor/version
@@ -53,7 +53,7 @@ build_script:
   - cd "%REPO_DIR%"
   # scan only as lupdate is prone to hang
   - lupdate -extensions c,cpp,h,hpp,ui .
-  - qmake qbittorrent.pro && cd src && qmake src.pro
+  - qmake torrente.pro && cd src && qmake src.pro
   - jom -j2 -f Makefile.Release
 
 test: off

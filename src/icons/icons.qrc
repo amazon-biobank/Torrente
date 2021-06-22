@@ -330,12 +330,12 @@
         <file>preferences-other.svg</file>
         <file>preferences-system-network.svg</file>
         <file>preferences-web-browser-cookies.svg</file>
-        <file>qbittorrent-tray-dark.svg</file>
-        <file>qbittorrent-tray-light.svg</file>
-        <file>qbittorrent-tray-with-font.svg</file>
-        <file>qbittorrent-tray.svg</file>
-        <file>qbittorrent.ico</file>
-        <file>qbittorrent_file.ico</file>
+        <file>torrente-tray-dark.svg</file>
+        <file>torrente-tray-light.svg</file>
+        <file>torrente-tray-with-font.svg</file>
+        <file>torrente-tray.svg</file>
+        <file>torrente.ico</file>
+        <file>torrente_file.ico</file>
         <file>queued.svg</file>
         <file>ratio.svg</file>
         <file>resumed.svg</file>

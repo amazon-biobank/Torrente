@@ -92,7 +92,7 @@
 <context>
     <name>HttpServer</name>
     <message>
-        <source>Exit qBittorrent</source>
+        <source>Exit Torrente</source>
         <translation>إغلاق كيوبت‎تورنت</translation>
     </message>
     <message>
@@ -140,12 +140,12 @@
         <translation>أقصى عدد من مقاطع الرفع لكل تورنت يجب أن يكون أكبر من 0 أو معطل.</translation>
     </message>
     <message>
-        <source>Unable to save program preferences, qBittorrent is probably unreachable.</source>
+        <source>Unable to save program preferences, Torrente is probably unreachable.</source>
         <translation>لا يمكن حفظ تفضيلات البرنامج, والسبب على الأرجح هو عدم إمكانية الوصول إلى كيوبت‎تورنت.</translation>
     </message>
     <message>
-        <source>IRC: #qbittorrent on Freenode</source>
-        <translation>IRC: #qbittorrent على Freenode</translation>
+        <source>IRC: #torrente on Freenode</source>
+        <translation>IRC: #torrente على Freenode</translation>
     </message>
     <message>
         <source>Unknown</source>
@@ -168,7 +168,7 @@
         <translation>يجب أن يكون المنفذ المستخدم لواجهة الوِب الرسومية بين 1 و 65535.</translation>
     </message>
     <message>
-        <source>Unable to log in, qBittorrent is probably unreachable.</source>
+        <source>Unable to log in, Torrente is probably unreachable.</source>
         <translation>لا يمكن الولوج، والسبب على الأرجح هو عدم إمكانية الوصول إلى كيوبت‎تورنت.</translation>
     </message>
     <message>
@@ -301,7 +301,7 @@
         <translation>حفظ</translation>
     </message>
     <message>
-        <source>qBittorrent client is not reachable</source>
+        <source>Torrente client is not reachable</source>
         <translation>تعذّر الوصول إلى عميل كيوبت‎تورنت</translation>
     </message>
     <message>
@@ -341,7 +341,7 @@
         <translation>يجب أن يكون حد معدل التنزيل أكبر من 0.</translation>
     </message>
     <message>
-        <source>qBittorrent has been shutdown</source>
+        <source>Torrente has been shutdown</source>
         <translation>تم إغلاق كيوبت‎تورنت</translation>
     </message>
     <message>
@@ -476,12 +476,12 @@
         <translation>حدود سرعة التنزيل العامة</translation>
     </message>
     <message>
-        <source>Are you sure you want to quit qBittorrent?</source>
+        <source>Are you sure you want to quit Torrente?</source>
         <translation>هل أنت متأكد من رغبتك في إغلاق كيوبت‎تورنت؟</translation>
     </message>
     <message>
-        <source>[D: %1, U: %2] qBittorrent %3</source>
-        <comment>D = Download; U = Upload; %3 is qBittorrent version</comment>
+        <source>[D: %1, U: %2] Torrente %3</source>
+        <comment>D = Download; U = Upload; %3 is Torrente version</comment>
         <translation>[تنزيل: %1, رفع: %2] كيوبت‎تورنت %3</translation>
     </message>
     <message>
@@ -1186,7 +1186,7 @@
         <translation>إزالة التورنت وملفاته</translation>
     </message>
     <message>
-        <source>qBittorrent Section</source>
+        <source>Torrente Section</source>
         <translation>قسم كيوبت‎تورنت</translation>
     </message>
     <message>
@@ -2521,7 +2521,7 @@
         <translation>حذف الملفات من القرص الصلب أيضا</translation>
     </message>
     <message>
-        <source>Deletion confirmation - qBittorrent</source>
+        <source>Deletion confirmation - Torrente</source>
         <translation>تأكيد الحذف - كيوبت‎تورنت</translation>
     </message>
 </context>
@@ -2910,7 +2910,7 @@
         <translation>‫الاسم:</translation>
     </message>
     <message>
-        <source>About qBittorrent</source>
+        <source>About Torrente</source>
         <translation>عن كيوبت‎تورنت</translation>
     </message>
     <message>
@@ -2922,7 +2922,7 @@
         <translation>المترجمون</translation>
     </message>
     <message>
-        <source>qBittorrent was built with the following libraries:</source>
+        <source>Torrente was built with the following libraries:</source>
         <translation>تم بناء كيوبت‎تورنت باستخدام المكتبات التالية:</translation>
     </message>
     <message>

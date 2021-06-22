@@ -34,5 +34,5 @@ qt_translations.files += \
     $$QT_LANG_PATH/qt_zh_CN.qm
 QMAKE_BUNDLE_DATA += qt_translations
 
-ICON = $$DIST_PATH/qbittorrent_mac.icns
+ICON = $$DIST_PATH/torrente_mac.icns
 QMAKE_INFO_PLIST = $$DIST_PATH/Info.plist

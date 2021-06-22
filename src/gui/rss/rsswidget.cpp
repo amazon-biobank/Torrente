@@ -1,8 +1,8 @@
 /*
  * Bittorrent Client using Qt and libtorrent.
  * Copyright (C) 2017  Vladimir Golovnev <glassez@yandex.ru>
- * Copyright (C) 2006  Christophe Dumez <chris@qbittorrent.org>
- * Copyright (C) 2006  Arnaud Demaiziere <arnaud@qbittorrent.org>
+ * Copyright (C) 2006  Christophe Dumez <chris@torrente.org>
+ * Copyright (C) 2006  Arnaud Demaiziere <arnaud@torrente.org>
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -249,7 +249,7 @@ void RSSWidget::askNewFolder()
     QString error;
     const QString newFolderPath = RSS::Item::joinPath(rssDestFolder->path(), newName);
     if (!RSS::Session::instance()->addFolder(newFolderPath, &error))
-        QMessageBox::warning(this, "qBittorrent", error, QMessageBox::Ok);
+        QMessageBox::warning(this, "Torrente", error, QMessageBox::Ok);
 
     // Expand destination folder to display new feed
     if (destItem && (destItem != m_feedListWidget->stickyUnreadItem()))
@@ -291,7 +291,7 @@ void RSSWidget::on_newFeedButton_clicked()
     // NOTE: We still add feed using legacy way (with URL as feed name)
     const QString newFeedPath = RSS::Item::joinPath(rssDestFolder->path(), newURL);
     if (!RSS::Session::instance()->addFeed(newURL, newFeedPath, &error))
-        QMessageBox::warning(this, "qBittorrent", error, QMessageBox::Ok);
+        QMessageBox::warning(this, "Torrente", error, QMessageBox::Ok);
 
     // Expand destination folder to display new feed
     if (destItem && (destItem != m_feedListWidget->stickyUnreadItem()))

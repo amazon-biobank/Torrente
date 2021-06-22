@@ -11,17 +11,17 @@ if (SYSTEMD)
         endif()
     endif()
     set(EXPAND_BINDIR ${CMAKE_INSTALL_FULL_BINDIR})
-    configure_file(systemd/qbittorrent-nox@.service.in ${CMAKE_CURRENT_BINARY_DIR}/qbittorrent-nox@.service @ONLY)
-    install(FILES "${CMAKE_CURRENT_BINARY_DIR}/qbittorrent-nox@.service"
+    configure_file(systemd/torrente-nox@.service.in ${CMAKE_CURRENT_BINARY_DIR}/torrente-nox@.service @ONLY)
+    install(FILES "${CMAKE_CURRENT_BINARY_DIR}/torrente-nox@.service"
         DESTINATION ${SYSTEMD_SERVICES_INSTALL_DIR}
         COMPONENT data
     )
 endif()
 
 if (GUI)
-    list(APPEND MAN_FILES ${PROJECT_SOURCE_DIR}/doc/qbittorrent.1)
+    list(APPEND MAN_FILES ${PROJECT_SOURCE_DIR}/doc/torrente.1)
 else()
-    list(APPEND MAN_FILES ${PROJECT_SOURCE_DIR}/doc/qbittorrent-nox.1)
+    list(APPEND MAN_FILES ${PROJECT_SOURCE_DIR}/doc/torrente-nox.1)
 endif()
 
 install(FILES ${MAN_FILES}
@@ -36,20 +36,20 @@ if (GUI)
         FILES_MATCHING PATTERN "*.png"
     )
 
-    install(FILES org.qbittorrent.qBittorrent.desktop
+    install(FILES org.torrente.torrente.desktop
         DESTINATION ${CMAKE_INSTALL_DATAROOTDIR}/applications/
         COMPONENT data
     )
 
-    install(FILES org.qbittorrent.qBittorrent.appdata.xml
+    install(FILES org.torrente.torrente.appdata.xml
         DESTINATION ${CMAKE_INSTALL_DATAROOTDIR}/metainfo/
         COMPONENT data
     )
 
     install(FILES
-        ${PROJECT_SOURCE_DIR}/src/icons/qbittorrent-tray.svg
-        ${PROJECT_SOURCE_DIR}/src/icons/qbittorrent-tray-dark.svg
-        ${PROJECT_SOURCE_DIR}/src/icons/qbittorrent-tray-light.svg
+        ${PROJECT_SOURCE_DIR}/src/icons/torrente-tray.svg
+        ${PROJECT_SOURCE_DIR}/src/icons/torrente-tray-dark.svg
+        ${PROJECT_SOURCE_DIR}/src/icons/torrente-tray-light.svg
         DESTINATION ${CMAKE_INSTALL_DATAROOTDIR}/icons/hicolor/scalable/status
         COMPONENT data
     )

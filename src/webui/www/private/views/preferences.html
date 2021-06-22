@@ -89,7 +89,7 @@
             </tr>
             <tr>
                 <td>
-                    <input type="checkbox" id="temppath_checkbox" onclick="qBittorrent.Preferences.updateTempDirEnabled();" />
+                    <input type="checkbox" id="temppath_checkbox" onclick="Torrente.Preferences.updateTempDirEnabled();" />
                     <label for="temppath_checkbox">QBT_TR(Keep incomplete torrents in:)QBT_TR[CONTEXT=OptionsDialog]</label>
                 </td>
                 <td>
@@ -98,7 +98,7 @@
             </tr>
             <tr>
                 <td>
-                    <input type="checkbox" id="exportdir_checkbox" onclick="qBittorrent.Preferences.updateExportDirEnabled();" />
+                    <input type="checkbox" id="exportdir_checkbox" onclick="Torrente.Preferences.updateExportDirEnabled();" />
                     <label for="exportdir_checkbox">QBT_TR(Copy .torrent files to:)QBT_TR[CONTEXT=OptionsDialog]</label>
                 </td>
                 <td>
@@ -107,7 +107,7 @@
             </tr>
             <tr>
                 <td>
-                    <input type="checkbox" id="exportdirfin_checkbox" onclick="qBittorrent.Preferences.updateExportDirFinEnabled();" />
+                    <input type="checkbox" id="exportdirfin_checkbox" onclick="Torrente.Preferences.updateExportDirFinEnabled();" />
                     <label for="exportdirfin_checkbox">QBT_TR(Copy .torrent files for finished downloads to:)QBT_TR[CONTEXT=OptionsDialog]</label>
                 </td>
                 <td>
@@ -132,13 +132,13 @@
                     <td style="padding-top:4px;"><input type="text" id="new_watch_folder_txt" autocorrect="off" autocapitalize="none" /></td>
                     <td style="padding-top:4px;">
                         <div class="select-watched-folder-editable">
-                            <select id="new_watch_folder_select" onchange="qBittorrent.Preferences.changeWatchFolderSelect(this)">
+                            <select id="new_watch_folder_select" onchange="Torrente.Preferences.changeWatchFolderSelect(this)">
                                 <option value="watch_folder">QBT_TR(Monitored folder)QBT_TR[CONTEXT=ScanFoldersModel]</option>
                                 <option selected value="default_folder">QBT_TR(Default save location)QBT_TR[CONTEXT=ScanFoldersModel]</option>
                                 <option value="other">QBT_TR(Other...)QBT_TR[CONTEXT=HttpServer]</option>
                             </select>
                             <input id="new_watch_folder_other_txt" type="text" value="QBT_TR(Monitored folder)QBT_TR[CONTEXT=ScanFoldersModel]" hidden />
-                            <img src="icons/list-add.svg" alt="Add" style="padding-left:170px;width:16px;cursor:pointer;" onclick="qBittorrent.Preferences.addWatchFolder();" />
+                            <img src="icons/list-add.svg" alt="Add" style="padding-left:170px;width:16px;cursor:pointer;" onclick="Torrente.Preferences.addWatchFolder();" />
                         </div>
                     </td>
                 </tr>
@@ -148,7 +148,7 @@
 
     <fieldset class="settings">
         <legend>
-            <input type="checkbox" id="mail_notification_checkbox" onclick="qBittorrent.Preferences.updateMailNotification();" />
+            <input type="checkbox" id="mail_notification_checkbox" onclick="Torrente.Preferences.updateMailNotification();" />
             <label for="mail_notification_checkbox">QBT_TR(Email notification upon download completion)QBT_TR[CONTEXT=OptionsDialog]</label>
         </legend>
         <table>
@@ -182,7 +182,7 @@
         </div>
         <fieldset class="settings">
             <legend>
-                <input type="checkbox" id="mail_auth_checkbox" onclick="qBittorrent.Preferences.updateMailAuthSettings();" />
+                <input type="checkbox" id="mail_auth_checkbox" onclick="Torrente.Preferences.updateMailAuthSettings();" />
                 <label for="mail_auth_checkbox">QBT_TR(Authentication)QBT_TR[CONTEXT=OptionsDialog]</label>
             </legend>
             <table>
@@ -208,7 +208,7 @@
 
     <fieldset class="settings">
         <legend>
-            <input type="checkbox" id="autorun_checkbox" onclick="qBittorrent.Preferences.updateAutoRun();" />
+            <input type="checkbox" id="autorun_checkbox" onclick="Torrente.Preferences.updateAutoRun();" />
             <label for="autorun_checkbox">QBT_TR(Run external program on torrent completion)QBT_TR[CONTEXT=OptionsDialog]</label>
         </legend>
         <div class="formRow">
@@ -246,14 +246,14 @@
         <div class="formRow">
             <label for="port_value">QBT_TR(Port used for incoming connections:)QBT_TR[CONTEXT=OptionsDialog]</label>
             <input type="text" id="port_value" style="width: 4em;" />
-            <button style="margin-left: 1em;" onclick="qBittorrent.Preferences.generateRandomPort();">Random</button>
+            <button style="margin-left: 1em;" onclick="Torrente.Preferences.generateRandomPort();">Random</button>
         </div>
         <div class="formRow">
             <input type="checkbox" id="upnp_checkbox" />
             <label for="upnp_checkbox">QBT_TR(Use UPnP / NAT-PMP port forwarding from my router)QBT_TR[CONTEXT=OptionsDialog]</label>
         </div>
         <div class="formRow">
-            <input type="checkbox" id="random_port_checkbox" onclick="qBittorrent.Preferences.updatePortValueEnabled();" />
+            <input type="checkbox" id="random_port_checkbox" onclick="Torrente.Preferences.updatePortValueEnabled();" />
             <label for="random_port_checkbox">QBT_TR(Use different port on each startup)QBT_TR[CONTEXT=OptionsDialog]</label>
         </div>
     </fieldset>
@@ -263,28 +263,28 @@
         <table>
             <tr>
                 <td>
-                    <input type="checkbox" id="max_connec_checkbox" onclick="qBittorrent.Preferences.updateMaxConnecEnabled();" />
+                    <input type="checkbox" id="max_connec_checkbox" onclick="Torrente.Preferences.updateMaxConnecEnabled();" />
                     <label for="max_connec_checkbox">QBT_TR(Global maximum number of connections:)QBT_TR[CONTEXT=OptionsDialog]</label>
                 </td>
                 <td><input type="text" id="max_connec_value" style="width: 4em;" /></td>
             </tr>
             <tr>
                 <td>
-                    <input type="checkbox" id="max_connec_per_torrent_checkbox" onclick="qBittorrent.Preferences.updateMaxConnecPerTorrentEnabled();" />
+                    <input type="checkbox" id="max_connec_per_torrent_checkbox" onclick="Torrente.Preferences.updateMaxConnecPerTorrentEnabled();" />
                     <label for="max_connec_per_torrent_checkbox">QBT_TR(Maximum number of connections per torrent:)QBT_TR[CONTEXT=OptionsDialog]</label>
                 </td>
                 <td><input type="text" id="max_connec_per_torrent_value" style="width: 4em;" /></td>
             </tr>
             <tr>
                 <td>
-                    <input type="checkbox" id="max_uploads_checkbox" onclick="qBittorrent.Preferences.updateMaxUploadsEnabled();" />
+                    <input type="checkbox" id="max_uploads_checkbox" onclick="Torrente.Preferences.updateMaxUploadsEnabled();" />
                     <label for="max_uploads_checkbox">QBT_TR(Global maximum number of upload slots:)QBT_TR[CONTEXT=OptionsDialog]</label>
                 </td>
                 <td><input type="text" id="max_uploads_value" style="width: 4em;" /></td>
             </tr>
             <tr>
                 <td>
-                    <input type="checkbox" id="max_uploads_per_torrent_checkbox" onclick="qBittorrent.Preferences.updateMaxUploadsPerTorrentEnabled();" />
+                    <input type="checkbox" id="max_uploads_per_torrent_checkbox" onclick="Torrente.Preferences.updateMaxUploadsPerTorrentEnabled();" />
                     <label for="max_uploads_per_torrent_checkbox">QBT_TR(Maximum number of upload slots per torrent:)QBT_TR[CONTEXT=OptionsDialog]</label>
                 </td>
                 <td><input type="text" id="max_uploads_per_torrent_value" style="width: 4em;" /></td>
@@ -300,7 +300,7 @@
                     <label for="peer_proxy_type_select">QBT_TR(Type:)QBT_TR[CONTEXT=OptionsDialog]</label>
                 </td>
                 <td>
-                    <select id="peer_proxy_type_select" onchange="qBittorrent.Preferences.updatePeerProxySettings();">
+                    <select id="peer_proxy_type_select" onchange="Torrente.Preferences.updatePeerProxySettings();">
                         <option value="none">QBT_TR((None))QBT_TR[CONTEXT=OptionsDialog]</option>
                         <option value="socks4">QBT_TR(SOCKS4)QBT_TR[CONTEXT=OptionsDialog]</option>
                         <option value="socks5">QBT_TR(SOCKS5)QBT_TR[CONTEXT=OptionsDialog]</option>
@@ -331,7 +331,7 @@
         </div>
         <fieldset class="settings">
             <legend>
-                <input type="checkbox" id="peer_proxy_auth_checkbox" onclick="qBittorrent.Preferences.updatePeerProxyAuthSettings();" />
+                <input type="checkbox" id="peer_proxy_auth_checkbox" onclick="Torrente.Preferences.updatePeerProxyAuthSettings();" />
                 <label for="peer_proxy_auth_checkbox">QBT_TR(Authentication)QBT_TR[CONTEXT=OptionsDialog]</label>
             </legend>
             <table>
@@ -363,7 +363,7 @@
             <label>QBT_TR(IP Filtering)QBT_TR[CONTEXT=OptionsDialog]</label>
         </legend>
         <div class="formRow">
-            <input type="checkbox" id="ipfilter_text_checkbox" onclick="qBittorrent.Preferences.updateFilterSettings();" />
+            <input type="checkbox" id="ipfilter_text_checkbox" onclick="Torrente.Preferences.updateFilterSettings();" />
             <label for="ipfilter_text_checkbox">QBT_TR(Filter path (.dat, .p2p, .p2b):)QBT_TR[CONTEXT=OptionsDialog]</label>
             <input type="text" id="ipfilter_text" />
         </div>
@@ -418,7 +418,7 @@
 
         <fieldset class="settings">
             <legend>
-                <input type="checkbox" id="limit_sheduling_checkbox" onclick="qBittorrent.Preferences.updateSchedulingEnabled();" />
+                <input type="checkbox" id="limit_sheduling_checkbox" onclick="Torrente.Preferences.updateSchedulingEnabled();" />
                 <label for="limit_sheduling_checkbox">QBT_TR(Schedule the use of alternative rate limits)QBT_TR[CONTEXT=OptionsDialog]</label>
             </legend>
             <div class="formRow">
@@ -486,13 +486,13 @@
         </div>
         <div class="formRow">
             <input type="checkbox" id="anonymous_mode_checkbox" />
-            <label for="anonymous_mode_checkbox">QBT_TR(Enable anonymous mode)QBT_TR[CONTEXT=OptionsDialog] (<a target="_blank" href="https://github.com/qbittorrent/qBittorrent/wiki/Anonymous-Mode">QBT_TR(More information)QBT_TR[CONTEXT=HttpServer]</a>)</label>
+            <label for="anonymous_mode_checkbox">QBT_TR(Enable anonymous mode)QBT_TR[CONTEXT=OptionsDialog] (<a target="_blank" href="https://github.com/torrente/Torrente/wiki/Anonymous-Mode">QBT_TR(More information)QBT_TR[CONTEXT=HttpServer]</a>)</label>
         </div>
     </fieldset>
 
     <fieldset class="settings">
         <legend>
-            <input type="checkbox" id="queueing_checkbox" onclick="qBittorrent.Preferences.updateQueueingSystem();" />
+            <input type="checkbox" id="queueing_checkbox" onclick="Torrente.Preferences.updateQueueingSystem();" />
             <label for="queueing_checkbox">QBT_TR(Torrent Queueing)QBT_TR[CONTEXT=OptionsDialog]</label>
         </legend>
         <table>
@@ -523,7 +523,7 @@
         </table>
         <fieldset class="settings">
             <legend>
-                <input type="checkbox" id="dont_count_slow_torrents_checkbox" onclick="qBittorrent.Preferences.updateSlowTorrentsSettings();" />
+                <input type="checkbox" id="dont_count_slow_torrents_checkbox" onclick="Torrente.Preferences.updateSlowTorrentsSettings();" />
                 <label for="dont_count_slow_torrents_checkbox">QBT_TR(Do not count slow torrents in these limits)QBT_TR[CONTEXT=OptionsDialog]</label>
             </legend>
             <table>
@@ -560,7 +560,7 @@
         <table>
             <tr>
                 <td>
-                    <input type="checkbox" id="max_ratio_checkbox" onclick="qBittorrent.Preferences.updateMaxRatioTimeEnabled();" />
+                    <input type="checkbox" id="max_ratio_checkbox" onclick="Torrente.Preferences.updateMaxRatioTimeEnabled();" />
                     <label for="max_ratio_checkbox">QBT_TR(When ratio reaches)QBT_TR[CONTEXT=OptionsDialog]</label>
                 </td>
                 <td>
@@ -569,7 +569,7 @@
             </tr>
             <tr>
                 <td>
-                    <input type="checkbox" id="max_seeding_time_checkbox" onclick="qBittorrent.Preferences.updateMaxRatioTimeEnabled();" />
+                    <input type="checkbox" id="max_seeding_time_checkbox" onclick="Torrente.Preferences.updateMaxRatioTimeEnabled();" />
                     <label for="max_seeding_time_checkbox">QBT_TR(When seeding time reaches)QBT_TR[CONTEXT=OptionsDialog]</label>
                 </td>
                 <td>
@@ -592,7 +592,7 @@
 
     <fieldset class="settings">
         <legend>
-            <input type="checkbox" id="add_trackers_checkbox" onclick="qBittorrent.Preferences.updateAddTrackersEnabled();" />
+            <input type="checkbox" id="add_trackers_checkbox" onclick="Torrente.Preferences.updateAddTrackersEnabled();" />
             <label for="add_trackers_checkbox">QBT_TR(Automatically add these trackers to new downloads:)QBT_TR[CONTEXT=OptionsDialog]</label>
         </legend>
         <textarea id="add_trackers_textarea" rows="5" cols="70"></textarea>
@@ -632,7 +632,7 @@
             <input type="checkbox" id="enable_auto_downloading_rss_torrents_checkbox" />
             <label for="enable_auto_downloading_rss_torrents_checkbox">QBT_TR(Enable auto downloading of RSS torrents)QBT_TR[CONTEXT=OptionsDialog]</label>
         </div>
-        <button style="margin: 0 1em; width: calc(100% - 2.2em)" onclick="window.qBittorrent.Rss.openRssDownloader();">QBT_TR(Edit auto downloading rules...)QBT_TR[CONTEXT=OptionsDialog]</button>
+        <button style="margin: 0 1em; width: calc(100% - 2.2em)" onclick="window.Torrente.Rss.openRssDownloader();">QBT_TR(Edit auto downloading rules...)QBT_TR[CONTEXT=OptionsDialog]</button>
     </fieldset>
 
     <fieldset class="settings">
@@ -728,7 +728,7 @@
         </div>
         <fieldset class="settings">
             <legend>
-                <input type="checkbox" id="use_https_checkbox" onclick="qBittorrent.Preferences.updateHttpsSettings();" />
+                <input type="checkbox" id="use_https_checkbox" onclick="Torrente.Preferences.updateHttpsSettings();" />
                 <label for="use_https_checkbox">QBT_TR(Use HTTPS instead of HTTP)QBT_TR[CONTEXT=OptionsDialog]</label>
             </legend>
             <table>
@@ -777,7 +777,7 @@
                 <label for="bypass_local_auth_checkbox">QBT_TR(Bypass authentication for clients on localhost)QBT_TR[CONTEXT=OptionsDialog]</label>
             </div>
             <div class="formRow">
-                <input type="checkbox" id="bypass_auth_subnet_whitelist_checkbox" onclick="qBittorrent.Preferences.updateBypasssAuthSettings();" />
+                <input type="checkbox" id="bypass_auth_subnet_whitelist_checkbox" onclick="Torrente.Preferences.updateBypasssAuthSettings();" />
                 <label for="bypass_auth_subnet_whitelist_checkbox">QBT_TR(Bypass authentication for clients in whitelisted IP subnets)QBT_TR[CONTEXT=OptionsDialog]</label>
             </div>
             <div class="formRow" style="padding-left: 30px; padding-top: 5px;">
@@ -802,7 +802,7 @@
         </fieldset>
 
         <fieldset class="settings">
-            <legend><input type="checkbox" id="use_alt_webui_checkbox" onclick="qBittorrent.Preferences.updateAlternativeWebUISettings();" />
+            <legend><input type="checkbox" id="use_alt_webui_checkbox" onclick="Torrente.Preferences.updateAlternativeWebUISettings();" />
                 <label for="use_alt_webui_checkbox">QBT_TR(Use alternative Web UI)QBT_TR[CONTEXT=OptionsDialog]</label></legend>
             <div class="formRow">
                 <label for="webui_files_location_textarea">QBT_TR(Files location:)QBT_TR[CONTEXT=OptionsDialog]</label>
@@ -827,7 +827,7 @@
 
             <fieldset class="settings">
                 <legend>
-                    <input type="checkbox" id="host_header_validation_checkbox" onclick="qBittorrent.Preferences.updateHostHeaderValidationSettings();" />
+                    <input type="checkbox" id="host_header_validation_checkbox" onclick="Torrente.Preferences.updateHostHeaderValidationSettings();" />
                     <label for="host_header_validation_checkbox">QBT_TR(Enable Host header validation)QBT_TR[CONTEXT=OptionsDialog]</label>
                 </legend>
                 <table>
@@ -845,7 +845,7 @@
 
         <fieldset class="settings">
             <legend>
-                <input type="checkbox" id="webUIUseCustomHTTPHeadersCheckbox" onclick="qBittorrent.Preferences.updateWebUICustomHTTPHeadersSettings();" />
+                <input type="checkbox" id="webUIUseCustomHTTPHeadersCheckbox" onclick="Torrente.Preferences.updateWebUICustomHTTPHeadersSettings();" />
                 <label for="webUIUseCustomHTTPHeadersCheckbox">QBT_TR(Add custom HTTP headers)QBT_TR[CONTEXT=OptionsDialog]</label>
             </legend>
             <textarea id="webUICustomHTTPHeadersTextarea" placeholder="QBT_TR(Header: value pairs, one per line)QBT_TR[CONTEXT=OptionsDialog]" style="width: 90%;"></textarea>
@@ -854,14 +854,14 @@
 
     <fieldset class="settings">
         <legend>
-            <input type="checkbox" id="use_dyndns_checkbox" onclick="qBittorrent.Preferences.updateDynDnsSettings();" />
+            <input type="checkbox" id="use_dyndns_checkbox" onclick="Torrente.Preferences.updateDynDnsSettings();" />
             <label for="use_dyndns_checkbox">QBT_TR(Update my dynamic domain name)QBT_TR[CONTEXT=OptionsDialog]</label>
         </legend>
         <select id="dyndns_select">
             <option value="0">DynDNS</option>
             <option value="1">NO-IP</option>
         </select>
-        <input type="button" value="QBT_TR(Register)QBT_TR[CONTEXT=OptionsDialog]" onclick="qBittorrent.Preferences.registerDynDns();" />
+        <input type="button" value="QBT_TR(Register)QBT_TR[CONTEXT=OptionsDialog]" onclick="Torrente.Preferences.registerDynDns();" />
         <table style="margin-top: 10px;">
             <tr>
                 <td>
@@ -893,7 +893,7 @@
 
 <div id="AdvancedTab" class="PrefTab invisible">
     <fieldset class="settings">
-        <legend>QBT_TR(qBittorrent Section)QBT_TR[CONTEXT=OptionsDialog]&nbsp;(<a href="https://github.com/qbittorrent/qBittorrent/wiki/Explanation-of-Options-in-qBittorrent#Advanced" target="_blank">QBT_TR(Open documentation)QBT_TR[CONTEXT=HttpServer]</a>)</legend>
+        <legend>QBT_TR(Torrente Section)QBT_TR[CONTEXT=OptionsDialog]&nbsp;(<a href="https://github.com/torrente/Torrente/wiki/Explanation-of-Options-in-Torrente#Advanced" target="_blank">QBT_TR(Open documentation)QBT_TR[CONTEXT=HttpServer]</a>)</legend>
         <table>
             <tr>
                 <td>
@@ -1236,16 +1236,16 @@
     </fieldset>
 </div>
 
-<div style="text-align: center; margin-top: 1em;"><input type="button" value="QBT_TR(Save)QBT_TR[CONTEXT=HttpServer]" onclick="qBittorrent.Preferences.applyPreferences();" /></div>
+<div style="text-align: center; margin-top: 1em;"><input type="button" value="QBT_TR(Save)QBT_TR[CONTEXT=HttpServer]" onclick="Torrente.Preferences.applyPreferences();" /></div>
 
 <script>
     'use strict';
 
-    if (window.qBittorrent === undefined) {
-        window.qBittorrent = {};
+    if (window.Torrente === undefined) {
+        window.Torrente = {};
     }
 
-    window.qBittorrent.Preferences = (function() {
+    window.Torrente.Preferences = (function() {
         const exports = function() {
             return {
                 updateTempDirEnabled: updateTempDirEnabled,
@@ -1326,7 +1326,7 @@
             const myinput = "<input id='text_watch_" + pos + "' type='text' value='" + folder + "'>";
             const disableInput = (sel != "other");
             const mycb = "<div class='select-watched-folder-editable'>"
-                + "<select id ='cb_watch_" + pos + "' onchange='qBittorrent.Preferences.changeWatchFolderSelect(this)'>"
+                + "<select id ='cb_watch_" + pos + "' onchange='Torrente.Preferences.changeWatchFolderSelect(this)'>"
                 + "<option value='watch_folder'>QBT_TR(Monitored folder)QBT_TR[CONTEXT=ScanFoldersModel]</option>"
                 + "<option value='default_folder'>QBT_TR(Default save location)QBT_TR[CONTEXT=ScanFoldersModel]</option>"
                 + "<option value='other'>QBT_TR(Other...)QBT_TR[CONTEXT=HttpServer]</option>"
@@ -1560,7 +1560,7 @@
                 method: 'get',
                 noCache: true,
                 onFailure: function() {
-                    alert("Could not contact qBittorrent");
+                    alert("Could not contact Torrente");
                 },
                 onSuccess: function(ifaces) {
                     if (!ifaces) return;
@@ -1585,7 +1585,7 @@
                     'iface': iface
                 },
                 onFailure: function() {
-                    alert("Could not contact qBittorrent");
+                    alert("Could not contact Torrente");
                 },
                 onSuccess: function(addresses) {
                     if (!addresses) return;
@@ -1608,7 +1608,7 @@
                 method: 'get',
                 noCache: true,
                 onFailure: function() {
-                    alert("Could not contact qBittorrent");
+                    alert("Could not contact Torrente");
                 },
                 onSuccess: function(pref) {
                     if (pref) {
@@ -1904,7 +1904,7 @@
                         updateDynDnsSettings();
 
                         // Advanced settings
-                        // qBittorrent section
+                        // Torrente section
                         updateNetworkInterfaces(pref.current_network_interface);
                         updateInterfaceAddresses(pref.current_network_interface, pref.current_interface_address);
                         $('saveResumeDataInterval').setProperty('value', pref.save_resume_data_interval);
@@ -2292,7 +2292,7 @@
             settings.set('dyndns_password', $('dyndns_password_text').getProperty('value'));
 
             // Update advanced settings
-            // qBittorrent section
+            // Torrente section
             settings.set('current_network_interface', $('networkInterface').getProperty('value'));
             settings.set('current_interface_address', $('optionalIPAddressToBind').getProperty('value'));
             settings.set('save_resume_data_interval', $('saveResumeDataInterval').getProperty('value'));
@@ -2346,7 +2346,7 @@
                     'json': json_str,
                 },
                 onFailure: function() {
-                    alert("QBT_TR(Unable to save program preferences, qBittorrent is probably unreachable.)QBT_TR[CONTEXT=HttpServer]");
+                    alert("QBT_TR(Unable to save program preferences, Torrente is probably unreachable.)QBT_TR[CONTEXT=HttpServer]");
                     window.parent.closeWindows();
                 },
                 onSuccess: function() {

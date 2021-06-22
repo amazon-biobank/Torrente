@@ -92,8 +92,8 @@
 <context>
     <name>HttpServer</name>
     <message>
-        <source>Exit qBittorrent</source>
-        <translation>qBittorrent bezárása</translation>
+        <source>Exit Torrente</source>
+        <translation>Torrente bezárása</translation>
     </message>
     <message>
         <source>Only one link per line</source>
@@ -140,12 +140,12 @@
         <translation>Maximális feltöltési szálak korlátnak torrentenként 0-nál nagyobbnak, vagy kikapcsoltnak kell lennie.</translation>
     </message>
     <message>
-        <source>Unable to save program preferences, qBittorrent is probably unreachable.</source>
-        <translation>Nem sikerült menteni a beállításokat. A qBittorrent valószínüleg nem elérhető.</translation>
+        <source>Unable to save program preferences, Torrente is probably unreachable.</source>
+        <translation>Nem sikerült menteni a beállításokat. A Torrente valószínüleg nem elérhető.</translation>
     </message>
     <message>
-        <source>IRC: #qbittorrent on Freenode</source>
-        <translation>IRC: #qbittorrent a Freenode-on</translation>
+        <source>IRC: #torrente on Freenode</source>
+        <translation>IRC: #torrente a Freenode-on</translation>
     </message>
     <message>
         <source>Unknown</source>
@@ -168,8 +168,8 @@
         <translation>Web UI-hoz használt portnak 1024 és 65535 közé kell esnie.</translation>
     </message>
     <message>
-        <source>Unable to log in, qBittorrent is probably unreachable.</source>
-        <translation>Nem sikerült bejelentkezni, qBittorrent talán elérhetetlen.</translation>
+        <source>Unable to log in, Torrente is probably unreachable.</source>
+        <translation>Nem sikerült bejelentkezni, Torrente talán elérhetetlen.</translation>
     </message>
     <message>
         <source>Invalid Username or Password.</source>
@@ -301,7 +301,7 @@
         <translation>Mentés</translation>
     </message>
     <message>
-        <source>qBittorrent client is not reachable</source>
+        <source>Torrente client is not reachable</source>
         <translation>qBittorent kliens nem elérhető</translation>
     </message>
     <message>
@@ -341,8 +341,8 @@
         <translation>A letöltési sebességkorlátnak nagyobbnak kell lennie, mint 0.</translation>
     </message>
     <message>
-        <source>qBittorrent has been shutdown</source>
-        <translation>qBittorrent le lett állítva</translation>
+        <source>Torrente has been shutdown</source>
+        <translation>Torrente le lett állítva</translation>
     </message>
     <message>
         <source>Open documentation</source>
@@ -476,13 +476,13 @@
         <translation>Globális letöltési sebességkorlát</translation>
     </message>
     <message>
-        <source>Are you sure you want to quit qBittorrent?</source>
-        <translation>Biztosan ki akar lépni a qBittorrentből?</translation>
+        <source>Are you sure you want to quit Torrente?</source>
+        <translation>Biztosan ki akar lépni a Torrenteből?</translation>
     </message>
     <message>
-        <source>[D: %1, U: %2] qBittorrent %3</source>
-        <comment>D = Download; U = Upload; %3 is qBittorrent version</comment>
-        <translation>[L: %1/s, F: %2/s] qBittorrent %3</translation>
+        <source>[D: %1, U: %2] Torrente %3</source>
+        <comment>D = Download; U = Upload; %3 is Torrente version</comment>
+        <translation>[L: %1/s, F: %2/s] Torrente %3</translation>
     </message>
     <message>
         <source>Alternative speed limits</source>
@@ -1186,8 +1186,8 @@
         <translation>Torrent és fájljai eltávolítása</translation>
     </message>
     <message>
-        <source>qBittorrent Section</source>
-        <translation>qBittorrent beállítások</translation>
+        <source>Torrente Section</source>
+        <translation>Torrente beállítások</translation>
     </message>
     <message>
         <source>Send buffer watermark factor:</source>
@@ -2521,8 +2521,8 @@
         <translation>Fájlok törlése a merevlemezről is</translation>
     </message>
     <message>
-        <source>Deletion confirmation - qBittorrent</source>
-        <translation>Törlés megerősítése - qBittorrent</translation>
+        <source>Deletion confirmation - Torrente</source>
+        <translation>Törlés megerősítése - Torrente</translation>
     </message>
 </context>
 <context>
@@ -2910,8 +2910,8 @@
         <translation>Név:</translation>
     </message>
     <message>
-        <source>About qBittorrent</source>
-        <translation>A qBittorrent névjegye</translation>
+        <source>About Torrente</source>
+        <translation>A Torrente névjegye</translation>
     </message>
     <message>
         <source>License</source>
@@ -2922,8 +2922,8 @@
         <translation>Fordítók</translation>
     </message>
     <message>
-        <source>qBittorrent was built with the following libraries:</source>
-        <translation>A qBittorrent a következő könyvtárak felhasználásával került kiadásra:</translation>
+        <source>Torrente was built with the following libraries:</source>
+        <translation>A Torrente a következő könyvtárak felhasználásával került kiadásra:</translation>
     </message>
     <message>
         <source>Nationality:</source>

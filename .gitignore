@@ -1,12 +1,12 @@
 src/gui/geoip/GeoIP.dat
 src/gui/geoip/GeoIP.dat.gz
-src/qbittorrent
-src/qbittorrent-nox
+src/torrente
+src/torrente-nox
 src/release
 src/debug
 src/base/version.h
 CMakeLists.txt.user*
-qbittorrent.pro.user*
+torrente.pro.user*
 conf.pri
 Makefile*
 *.pyc
@@ -23,11 +23,11 @@ moc_*.h
 qrc_*.cpp
 ui_*.h
 *.moc
-src/lang/qbittorrent_*.qm
+src/lang/torrente_*.qm
 src/webui/www/translations/webui_*.qm
 .DS_Store
 .qmake.stash
-src/qbittorrent.app
+src/torrente.app
 *.dmg
 
 #Autotools junk

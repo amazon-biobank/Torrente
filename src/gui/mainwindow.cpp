@@ -1,6 +1,6 @@
 /*
  * Bittorrent Client using Qt and libtorrent.
- * Copyright (C) 2006  Christophe Dumez <chris@qbittorrent.org>
+ * Copyright (C) 2006  Christophe Dumez <chris@torrente.org>
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -162,11 +162,11 @@ MainWindow::MainWindow(QWidget *parent)
 
     Preferences *const pref = Preferences::instance();
     m_uiLocked = pref->isUILocked();
-    setWindowTitle("qBittorrent " QBT_VERSION);
+    setWindowTitle("Torrente " QBT_VERSION);
     m_displaySpeedInTitle = pref->speedInTitleBar();
     // Setting icons
 #ifndef Q_OS_MACOS
-    const QIcon appLogo(UIThemeManager::instance()->getIcon(QLatin1String("qbittorrent"), QLatin1String("qbittorrent-tray")));
+    const QIcon appLogo(UIThemeManager::instance()->getIcon(QLatin1String("torrente"), QLatin1String("torrente-tray")));
     setWindowIcon(appLogo);
 #endif // Q_OS_MACOS
 
@@ -438,7 +438,7 @@ MainWindow::MainWindow(QWidget *parent)
                 hide();
                 if (!pref->minimizeToTrayNotified())
                 {
-                    showNotificationBaloon(tr("qBittorrent is minimized to tray"), tr("This behavior can be changed in the settings. You won't be reminded again."));
+                    showNotificationBaloon(tr("Torrente is minimized to tray"), tr("This behavior can be changed in the settings. You won't be reminded again."));
                     pref->setMinimizeToTrayNotified(true);
                 }
             }
@@ -483,7 +483,7 @@ MainWindow::MainWindow(QWidget *parent)
     if (!pref->neverCheckFileAssoc() && (!Preferences::isTorrentFileAssocSet() || !Preferences::isMagnetLinkAssocSet()))
     {
         if (QMessageBox::question(this, tr("Torrent file association"),
-                                  tr("qBittorrent is not the default application to open torrent files or Magnet links.\nDo you want to associate qBittorrent to torrent files and Magnet links?"),
+                                  tr("Torrente is not the default application to open torrent files or Magnet links.\nDo you want to associate Torrente to torrent files and Magnet links?"),
                                   QMessageBox::Yes | QMessageBox::No, QMessageBox::Yes) == QMessageBox::Yes)
                                   {
             Preferences::setTorrentFileAssoc(true);
@@ -811,7 +811,7 @@ void MainWindow::updateNbTorrents()
 
 void MainWindow::on_actionDocumentation_triggered() const
 {
-    QDesktopServices::openUrl(QUrl("http://doc.qbittorrent.org"));
+    QDesktopServices::openUrl(QUrl("http://doc.torrente.org"));
 }
 
 void MainWindow::tabChanged(int newTab)
@@ -1118,7 +1118,7 @@ void MainWindow::notifyOfUpdate(const QString &)
 {
     // Show restart message
     m_statusBar->showRestartRequired();
-    Logger::instance()->addMessage(tr("qBittorrent was just updated and needs to be restarted for the changes to be effective.")
+    Logger::instance()->addMessage(tr("Torrente was just updated and needs to be restarted for the changes to be effective.")
                                    , Log::CRITICAL);
     // Delete the executable watcher
     delete m_executableWatcher;
@@ -1242,7 +1242,7 @@ void MainWindow::closeEvent(QCloseEvent *e)
         QTimer::singleShot(0, this, &QWidget::hide);
         if (!pref->closeToTrayNotified())
         {
-            showNotificationBaloon(tr("qBittorrent is closed to tray"), tr("This behavior can be changed in the settings. You won't be reminded again."));
+            showNotificationBaloon(tr("Torrente is closed to tray"), tr("This behavior can be changed in the settings. You won't be reminded again."));
             pref->setCloseToTrayNotified(true);
         }
         return;
@@ -1255,9 +1255,9 @@ void MainWindow::closeEvent(QCloseEvent *e)
         {
             if (!isVisible())
                 show();
-            QMessageBox confirmBox(QMessageBox::Question, tr("Exiting qBittorrent"),
+            QMessageBox confirmBox(QMessageBox::Question, tr("Exiting Torrente"),
                                    // Split it because the last sentence is used in the Web UI
-                                   tr("Some files are currently transferring.") + '\n' + tr("Are you sure you want to quit qBittorrent?"),
+                                   tr("Some files are currently transferring.") + '\n' + tr("Are you sure you want to quit Torrente?"),
                                    QMessageBox::NoButton, this);
             QPushButton *noBtn = confirmBox.addButton(tr("&No"), QMessageBox::NoRole);
             confirmBox.addButton(tr("&Yes"), QMessageBox::YesRole);
@@ -1342,7 +1342,7 @@ bool MainWindow::event(QEvent *e)
                     QTimer::singleShot(0, this, &QWidget::hide);
                     if (!pref->minimizeToTrayNotified())
                     {
-                        showNotificationBaloon(tr("qBittorrent is minimized to tray"), tr("This behavior can be changed in the settings. You won't be reminded again."));
+                        showNotificationBaloon(tr("Torrente is minimized to tray"), tr("This behavior can be changed in the settings. You won't be reminded again."));
                         pref->setMinimizeToTrayNotified(true);
                     }
                     return true;
@@ -1689,7 +1689,7 @@ void MainWindow::reloadSessionStats()
 
     if (m_displaySpeedInTitle)
     {
-        setWindowTitle(tr("[D: %1, U: %2] qBittorrent %3", "D = Download; U = Upload; %3 is qBittorrent version")
+        setWindowTitle(tr("[D: %1, U: %2] Torrente %3", "D = Download; U = Upload; %3 is Torrente version")
             .arg(Utils::Misc::friendlyUnit(status.payloadDownloadRate, true)
                 , Utils::Misc::friendlyUnit(status.payloadUploadRate, true)
                 , QBT_VERSION));
@@ -1722,8 +1722,8 @@ void MainWindow::showNotificationBaloon(const QString &title, const QString &msg
     // to start their daemons at the session startup and have it sit
     // idling for the whole session.
     QVariantMap hints;
-    hints["desktop-entry"] = "qBittorrent";
-    QDBusPendingReply<uint> reply = notifications.Notify("qBittorrent", 0, "qbittorrent", title,
+    hints["desktop-entry"] = "Torrente";
+    QDBusPendingReply<uint> reply = notifications.Notify("Torrente", 0, "torrente", title,
                                                          msg, QStringList(), hints, -1);
     reply.waitForFinished();
     if (!reply.isError())
@@ -1880,7 +1880,7 @@ void MainWindow::on_actionSpeedInTitleBar_triggered()
     if (m_displaySpeedInTitle)
         reloadSessionStats();
     else
-        setWindowTitle("qBittorrent " QBT_VERSION);
+        setWindowTitle("Torrente " QBT_VERSION);
 }
 
 void MainWindow::on_actionRSSReader_triggered()
@@ -1975,12 +1975,13 @@ void MainWindow::handleUpdateCheckFinished(ProgramUpdater *updater, const bool i
     };
 
     const QString newVersion = updater->getNewVersion();
-    if (!newVersion.isEmpty())
+    // TODO: Tratar condicional de atualizar a versão do Torrente
+    if (false)
     {
         const QString msg {tr("A new version is available.") + "<br/>"
             + tr("Do you want to download %1?").arg(newVersion) + "<br/><br/>"
-            + QString::fromLatin1("<a href=\"https://www.qbittorrent.org/news.php\">%1</a>").arg(tr("Open changelog..."))};
-        auto *msgBox = new QMessageBox {QMessageBox::Question, tr("qBittorrent Update Available"), msg
+            + QString::fromLatin1("<a href=\"https://www.torrente.org/news.php\">%1</a>").arg(tr("Open changelog..."))};
+        auto *msgBox = new QMessageBox {QMessageBox::Question, tr("Torrente Update Available"), msg
             , (QMessageBox::Yes | QMessageBox::No), this};
         msgBox->setAttribute(Qt::WA_DeleteOnClose);
         msgBox->setAttribute(Qt::WA_ShowWithoutActivating);
@@ -1999,7 +2000,7 @@ void MainWindow::handleUpdateCheckFinished(ProgramUpdater *updater, const bool i
     {
         if (invokedByUser)
         {
-            auto *msgBox = new QMessageBox {QMessageBox::Information, QLatin1String("qBittorrent")
+            auto *msgBox = new QMessageBox {QMessageBox::Information, QLatin1String("Torrente")
                 , tr("No updates available.\nYou are already using the latest version.")
                 , QMessageBox::Ok, this};
             msgBox->setAttribute(Qt::WA_DeleteOnClose);
@@ -2022,7 +2023,7 @@ void MainWindow::toggleAlternativeSpeeds()
 
 void MainWindow::on_actionDonateMoney_triggered()
 {
-    QDesktopServices::openUrl(QUrl("https://www.qbittorrent.org/donate"));
+    QDesktopServices::openUrl(QUrl("https://www.torrente.org/donate"));
 }
 
 void MainWindow::showConnectionSettings()
@@ -2141,11 +2142,11 @@ QIcon MainWindow::getSystrayIcon() const
     switch (style)
     {
     case TrayIcon::NORMAL:
-        return QIcon::fromTheme(QLatin1String("qbittorrent-tray"));
+        return QIcon::fromTheme(QLatin1String("torrente-tray"));
     case TrayIcon::MONO_DARK:
-        return QIcon::fromTheme(QLatin1String("qbittorrent-tray-dark"));
+        return QIcon::fromTheme(QLatin1String("torrente-tray-dark"));
     case TrayIcon::MONO_LIGHT:
-        return QIcon::fromTheme(QLatin1String("qbittorrent-tray-light"));
+        return QIcon::fromTheme(QLatin1String("torrente-tray-light"));
     default:
         break;
     }
@@ -2153,18 +2154,18 @@ QIcon MainWindow::getSystrayIcon() const
     switch (style)
     {
     case TrayIcon::NORMAL:
-        return UIThemeManager::instance()->getIcon(QLatin1String("qbittorrent-tray"));
+        return UIThemeManager::instance()->getIcon(QLatin1String("torrente-tray"));
     case TrayIcon::MONO_DARK:
-        return UIThemeManager::instance()->getIcon(QLatin1String("qbittorrent-tray-dark"));
+        return UIThemeManager::instance()->getIcon(QLatin1String("torrente-tray-dark"));
     case TrayIcon::MONO_LIGHT:
-        return UIThemeManager::instance()->getIcon(QLatin1String("qbittorrent-tray-light"));
+        return UIThemeManager::instance()->getIcon(QLatin1String("torrente-tray-light"));
     default:
         break;
     }
 #endif
 
     // As a failsafe in case the enum is invalid
-    return UIThemeManager::instance()->getIcon(QLatin1String("qbittorrent-tray"));
+    return UIThemeManager::instance()->getIcon(QLatin1String("torrente-tray"));
 }
 #endif // Q_OS_MACOS
 

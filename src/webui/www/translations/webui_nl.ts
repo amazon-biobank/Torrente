@@ -92,8 +92,8 @@
 <context>
     <name>HttpServer</name>
     <message>
-        <source>Exit qBittorrent</source>
-        <translation>qBittorrent afsluiten</translation>
+        <source>Exit Torrente</source>
+        <translation>Torrente afsluiten</translation>
     </message>
     <message>
         <source>Only one link per line</source>
@@ -140,12 +140,12 @@
         <translation>Limiet voor maximaal aantal uploadslots per torrent moet groter zijn dan 0 of uitgeschakeld.</translation>
     </message>
     <message>
-        <source>Unable to save program preferences, qBittorrent is probably unreachable.</source>
-        <translation>Onmogelijk om programmavoorkeuren op te slaan, qBittorrent is waarschijnlijk onbereikbaar.</translation>
+        <source>Unable to save program preferences, Torrente is probably unreachable.</source>
+        <translation>Onmogelijk om programmavoorkeuren op te slaan, Torrente is waarschijnlijk onbereikbaar.</translation>
     </message>
     <message>
-        <source>IRC: #qbittorrent on Freenode</source>
-        <translation>IRC: #qbittorrent op Freenode</translation>
+        <source>IRC: #torrente on Freenode</source>
+        <translation>IRC: #torrente op Freenode</translation>
     </message>
     <message>
         <source>Unknown</source>
@@ -168,8 +168,8 @@
         <translation>De poort gebruikt voor de Web-UI moet liggen tussen 1 en 65535.</translation>
     </message>
     <message>
-        <source>Unable to log in, qBittorrent is probably unreachable.</source>
-        <translation>Niet mogelijk om in te loggen, qBittorrent is waarschijnlijk onbereikbaar.</translation>
+        <source>Unable to log in, Torrente is probably unreachable.</source>
+        <translation>Niet mogelijk om in te loggen, Torrente is waarschijnlijk onbereikbaar.</translation>
     </message>
     <message>
         <source>Invalid Username or Password.</source>
@@ -301,8 +301,8 @@
         <translation>Opslaan</translation>
     </message>
     <message>
-        <source>qBittorrent client is not reachable</source>
-        <translation>qBittorrent-client is niet bereikbaar</translation>
+        <source>Torrente client is not reachable</source>
+        <translation>Torrente-client is niet bereikbaar</translation>
     </message>
     <message>
         <source>Global number of upload slots limit must be greater than 0 or disabled.</source>
@@ -341,8 +341,8 @@
         <translation>Drempel voor downloadsnelheid moet hoger zijn dan 0.</translation>
     </message>
     <message>
-        <source>qBittorrent has been shutdown</source>
-        <translation>qBittorrent werd afgesloten</translation>
+        <source>Torrente has been shutdown</source>
+        <translation>Torrente werd afgesloten</translation>
     </message>
     <message>
         <source>Open documentation</source>
@@ -476,13 +476,13 @@
         <translation>Algemene downloadsnelheidbegrenzing</translation>
     </message>
     <message>
-        <source>Are you sure you want to quit qBittorrent?</source>
-        <translation>Weet u zeker dat u qBittorrent wilt afsluiten?</translation>
+        <source>Are you sure you want to quit Torrente?</source>
+        <translation>Weet u zeker dat u Torrente wilt afsluiten?</translation>
     </message>
     <message>
-        <source>[D: %1, U: %2] qBittorrent %3</source>
-        <comment>D = Download; U = Upload; %3 is qBittorrent version</comment>
-        <translation>[D: %1, U: %2] qBittorrent %3</translation>
+        <source>[D: %1, U: %2] Torrente %3</source>
+        <comment>D = Download; U = Upload; %3 is Torrente version</comment>
+        <translation>[D: %1, U: %2] Torrente %3</translation>
     </message>
     <message>
         <source>Alternative speed limits</source>
@@ -1186,8 +1186,8 @@
         <translation>Torrent en zijn bestanden verwijderen</translation>
     </message>
     <message>
-        <source>qBittorrent Section</source>
-        <translation>qBittorrent-sectie</translation>
+        <source>Torrente Section</source>
+        <translation>Torrente-sectie</translation>
     </message>
     <message>
         <source>Send buffer watermark factor:</source>
@@ -2521,8 +2521,8 @@
         <translation>Ook bestanden op de harde schijf verwijderen</translation>
     </message>
     <message>
-        <source>Deletion confirmation - qBittorrent</source>
-        <translation>Bevestiging verwijdering - qBittorrent</translation>
+        <source>Deletion confirmation - Torrente</source>
+        <translation>Bevestiging verwijdering - Torrente</translation>
     </message>
 </context>
 <context>
@@ -2910,8 +2910,8 @@
         <translation>Naam:</translation>
     </message>
     <message>
-        <source>About qBittorrent</source>
-        <translation>Over qBittorrent</translation>
+        <source>About Torrente</source>
+        <translation>Over Torrente</translation>
     </message>
     <message>
         <source>License</source>
@@ -2922,8 +2922,8 @@
         <translation>Vertalers</translation>
     </message>
     <message>
-        <source>qBittorrent was built with the following libraries:</source>
-        <translation>qBittorrent werd gebouwd met de volgende bibliotheken:</translation>
+        <source>Torrente was built with the following libraries:</source>
+        <translation>Torrente werd gebouwd met de volgende bibliotheken:</translation>
     </message>
     <message>
         <source>Nationality:</source>

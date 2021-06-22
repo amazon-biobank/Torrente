@@ -1,4 +1,4 @@
-qBittorrent Web UI
+Torrente Web UI
 ---
 
 ### Browser compatibility

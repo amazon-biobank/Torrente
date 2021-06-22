@@ -2,23 +2,23 @@
 # -----------------------------------------------------------------------------
 # -----------------------------------------------------------------------------
 # Based on https://gist.github.com/giraldeau/546ba5512a74dfe9d8ea0862d66db412
-file(GLOB QBT_TS_FILES "${qBittorrent_SOURCE_DIR}/src/lang/*.ts")
-set_source_files_properties(${QBT_TS_FILES} PROPERTIES OUTPUT_LOCATION "${qBittorrent_BINARY_DIR}/src/lang")
+file(GLOB QBT_TS_FILES "${Torrente_SOURCE_DIR}/src/lang/*.ts")
+set_source_files_properties(${QBT_TS_FILES} PROPERTIES OUTPUT_LOCATION "${Torrente_BINARY_DIR}/src/lang")
 qt5_add_translation(QBT_QM_FILES ${QBT_TS_FILES} OPTIONS -silent)
-configure_file("${qBittorrent_SOURCE_DIR}/src/lang/lang.qrc" "${qBittorrent_BINARY_DIR}/src/lang/lang.qrc" COPYONLY)
+configure_file("${Torrente_SOURCE_DIR}/src/lang/lang.qrc" "${Torrente_BINARY_DIR}/src/lang/lang.qrc" COPYONLY)
 
 if (WEBUI)
-    file(GLOB QBT_WEBUI_TS_FILES "${qBittorrent_SOURCE_DIR}/src/webui/www/translations/*.ts")
+    file(GLOB QBT_WEBUI_TS_FILES "${Torrente_SOURCE_DIR}/src/webui/www/translations/*.ts")
     set_source_files_properties(${QBT_WEBUI_TS_FILES}
-        PROPERTIES OUTPUT_LOCATION "${qBittorrent_BINARY_DIR}/src/webui/www/translations")
+        PROPERTIES OUTPUT_LOCATION "${Torrente_BINARY_DIR}/src/webui/www/translations")
     qt5_add_translation(QBT_WEBUI_QM_FILES ${QBT_WEBUI_TS_FILES} OPTIONS -silent)
-    configure_file("${qBittorrent_SOURCE_DIR}/src/webui/www/translations/webui_translations.qrc"
-        "${qBittorrent_BINARY_DIR}/src/webui/www/translations/webui_translations.qrc" COPYONLY)
+    configure_file("${Torrente_SOURCE_DIR}/src/webui/www/translations/webui_translations.qrc"
+        "${Torrente_BINARY_DIR}/src/webui/www/translations/webui_translations.qrc" COPYONLY)
 endif()
 
-FILE(GLOB QT_TRANSLATIONS "${qBittorrent_SOURCE_DIR}/dist/qt-translations/qtbase_*.qm")
+FILE(GLOB QT_TRANSLATIONS "${Torrente_SOURCE_DIR}/dist/qt-translations/qtbase_*.qm")
 foreach(EXTRA_TRANSLATION IN ITEMS "fa" "gl" "lt" "pt" "sl" "sv" "zh_CN")
-    list(APPEND QT_TRANSLATIONS "${qBittorrent_SOURCE_DIR}/dist/qt-translations/qt_${EXTRA_TRANSLATION}.qm")
+    list(APPEND QT_TRANSLATIONS "${Torrente_SOURCE_DIR}/dist/qt-translations/qt_${EXTRA_TRANSLATION}.qm")
 endforeach()
 
 # Executable target configuration
@@ -45,10 +45,10 @@ target_sources(qbt_app PRIVATE
     upgrade.cpp
 
     # resources
-    "${qBittorrent_SOURCE_DIR}/src/icons/icons.qrc"
-    "${qBittorrent_SOURCE_DIR}/src/searchengine/searchengine.qrc"
+    "${Torrente_SOURCE_DIR}/src/icons/icons.qrc"
+    "${Torrente_SOURCE_DIR}/src/searchengine/searchengine.qrc"
     ${QBT_QM_FILES}
-    "${qBittorrent_BINARY_DIR}/src/lang/lang.qrc" # yes, it's supposed to be "*_BINARY_DIR"
+    "${Torrente_BINARY_DIR}/src/lang/lang.qrc" # yes, it's supposed to be "*_BINARY_DIR"
 )
 
 target_link_libraries(qbt_app PRIVATE
@@ -57,9 +57,9 @@ target_link_libraries(qbt_app PRIVATE
 
 set_target_properties(qbt_app PROPERTIES RUNTIME_OUTPUT_DIRECTORY "${CMAKE_BINARY_DIR}")
 if (GUI)
-    set_target_properties(qbt_app PROPERTIES OUTPUT_NAME qbittorrent)
+    set_target_properties(qbt_app PROPERTIES OUTPUT_NAME torrente)
 else()
-    set_target_properties(qbt_app PROPERTIES OUTPUT_NAME qbittorrent-nox)
+    set_target_properties(qbt_app PROPERTIES OUTPUT_NAME torrente-nox)
 endif()
 
 # Additional platform specific configuration
@@ -67,9 +67,9 @@ endif()
 # -----------------------------------------------------------------------------
 set_source_files_properties(${QT_TRANSLATIONS} PROPERTIES MACOSX_PACKAGE_LOCATION translations)
 set_source_files_properties(
-    "${qBittorrent_SOURCE_DIR}/dist/mac/qt.conf"
-    "${qBittorrent_SOURCE_DIR}/dist/mac/qBitTorrentDocument.icns"
-    "${qBittorrent_SOURCE_DIR}/dist/mac/qbittorrent_mac.icns"
+    "${Torrente_SOURCE_DIR}/dist/mac/qt.conf"
+    "${Torrente_SOURCE_DIR}/dist/mac/TorrenteDocument.icns"
+    "${Torrente_SOURCE_DIR}/dist/mac/Torrente_mac.icns"
         PROPERTIES
             MACOSX_PACKAGE_LOCATION Resources
 )
@@ -77,31 +77,31 @@ set_source_files_properties(
 if (CMAKE_SYSTEM_NAME STREQUAL "Darwin")
     # substitute @EXECUTABLE@ in dist/mac/Info.plist
     get_target_property(EXECUTABLE qbt_app OUTPUT_NAME)
-    configure_file(${qBittorrent_SOURCE_DIR}/dist/mac/Info.plist
-        ${qBittorrent_BINARY_DIR}/dist/mac/pregen.plist @ONLY)
+    configure_file(${Torrente_SOURCE_DIR}/dist/mac/Info.plist
+        ${Torrente_BINARY_DIR}/dist/mac/pregen.plist @ONLY)
     file(GENERATE
-        OUTPUT ${qBittorrent_BINARY_DIR}/dist/mac/Info.plist
-        INPUT ${qBittorrent_BINARY_DIR}/dist/mac/pregen.plist
+        OUTPUT ${Torrente_BINARY_DIR}/dist/mac/Info.plist
+        INPUT ${Torrente_BINARY_DIR}/dist/mac/pregen.plist
     )
     set_target_properties(qbt_app PROPERTIES
         MACOSX_BUNDLE ON
         MACOSX_BUNDLE_BUNDLE_NAME "${EXECUTABLE}"
-        MACOSX_BUNDLE_INFO_PLIST ${qBittorrent_BINARY_DIR}/dist/mac/Info.plist
+        MACOSX_BUNDLE_INFO_PLIST ${Torrente_BINARY_DIR}/dist/mac/Info.plist
     )
     target_sources(qbt_app PRIVATE
         ${QT_TRANSLATIONS}
-        ${qBittorrent_SOURCE_DIR}/dist/mac/qt.conf
-        ${qBittorrent_SOURCE_DIR}/dist/mac/qBitTorrentDocument.icns
-        ${qBittorrent_SOURCE_DIR}/dist/mac/qbittorrent_mac.icns
+        ${Torrente_SOURCE_DIR}/dist/mac/qt.conf
+        ${Torrente_SOURCE_DIR}/dist/mac/TorrenteDocument.icns
+        ${Torrente_SOURCE_DIR}/dist/mac/Torrente_mac.icns
     )
 elseif (CMAKE_SYSTEM_NAME STREQUAL "Windows")
     set_target_properties(qbt_app PROPERTIES WIN32_EXECUTABLE ON)
     if (MINGW)
-        target_sources(qbt_app PRIVATE ${qBittorrent_SOURCE_DIR}/src/qbittorrent_mingw.rc)
+        target_sources(qbt_app PRIVATE ${Torrente_SOURCE_DIR}/src/torrente_mingw.rc)
     else()
-        target_sources(qbt_app PRIVATE ${qBittorrent_SOURCE_DIR}/src/qbittorrent.rc)
+        target_sources(qbt_app PRIVATE ${Torrente_SOURCE_DIR}/src/torrente.rc)
     endif()
-    target_sources(qbt_app PRIVATE ${qBittorrent_SOURCE_DIR}/src/qbittorrent.exe.manifest)
+    target_sources(qbt_app PRIVATE ${Torrente_SOURCE_DIR}/src/torrente.exe.manifest)
 endif()
 
 # Additional feature dependent configuration
@@ -154,7 +154,7 @@ endif()
 if (WEBUI)
     target_sources(qbt_app PRIVATE
         ${QBT_WEBUI_QM_FILES}
-        ${qBittorrent_BINARY_DIR}/src/webui/www/translations/webui_translations.qrc # yes, it's supposed to be "*_BINARY_DIR"
+        ${Torrente_BINARY_DIR}/src/webui/www/translations/webui_translations.qrc # yes, it's supposed to be "*_BINARY_DIR"
     )
     target_link_libraries(qbt_app PRIVATE qbt_webui)
 endif()

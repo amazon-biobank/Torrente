@@ -28,11 +28,11 @@
 
 'use strict';
 
-if (window.qBittorrent === undefined) {
-    window.qBittorrent = {};
+if (window.Torrente === undefined) {
+    window.Torrente = {};
 }
 
-window.qBittorrent.PropWebseeds = (function() {
+window.Torrente.PropWebseeds = (function() {
     const exports = function() {
         return {
             updateData: updateData
@@ -117,7 +117,7 @@ window.qBittorrent.PropWebseeds = (function() {
             noCache: true,
             method: 'get',
             onFailure: function() {
-                $('error_div').set('html', 'QBT_TR(qBittorrent client is not reachable)QBT_TR[CONTEXT=HttpServer]');
+                $('error_div').set('html', 'QBT_TR(Torrente client is not reachable)QBT_TR[CONTEXT=HttpServer]');
                 clearTimeout(loadWebSeedsDataTimer);
                 loadWebSeedsDataTimer = loadWebSeedsData.delay(20000);
             },

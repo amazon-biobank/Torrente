@@ -92,8 +92,8 @@
 <context>
     <name>HttpServer</name>
     <message>
-        <source>Exit qBittorrent</source>
-        <translation>qBittorrent の終了</translation>
+        <source>Exit Torrente</source>
+        <translation>Torrente の終了</translation>
     </message>
     <message>
         <source>Only one link per line</source>
@@ -140,12 +140,12 @@
         <translation>最大アップロートスロット数は 0 より大きいか無効でなくてはなりません。</translation>
     </message>
     <message>
-        <source>Unable to save program preferences, qBittorrent is probably unreachable.</source>
-        <translation>プログラム設定の保存ができません。qBittorrent はおそらく通信可能状態にありません。</translation>
+        <source>Unable to save program preferences, Torrente is probably unreachable.</source>
+        <translation>プログラム設定の保存ができません。Torrente はおそらく通信可能状態にありません。</translation>
     </message>
     <message>
-        <source>IRC: #qbittorrent on Freenode</source>
-        <translation>IRC: Freenode 上で #qbittorrent</translation>
+        <source>IRC: #torrente on Freenode</source>
+        <translation>IRC: Freenode 上で #torrente</translation>
     </message>
     <message>
         <source>Unknown</source>
@@ -168,8 +168,8 @@
         <translation>Web UI に使用するポートは 1 から 65535 の間でなくてはなりません。</translation>
     </message>
     <message>
-        <source>Unable to log in, qBittorrent is probably unreachable.</source>
-        <translation>ログインできません。qBittorrent がおそらく通信できていません。</translation>
+        <source>Unable to log in, Torrente is probably unreachable.</source>
+        <translation>ログインできません。Torrente がおそらく通信できていません。</translation>
     </message>
     <message>
         <source>Invalid Username or Password.</source>
@@ -301,8 +301,8 @@
         <translation>保存</translation>
     </message>
     <message>
-        <source>qBittorrent client is not reachable</source>
-        <translation>qBittorrent クライアントと通信できません</translation>
+        <source>Torrente client is not reachable</source>
+        <translation>Torrente クライアントと通信できません</translation>
     </message>
     <message>
         <source>Global number of upload slots limit must be greater than 0 or disabled.</source>
@@ -341,8 +341,8 @@
         <translation>ダウンロード速度のしきい値は 0 より大きい必要があります。</translation>
     </message>
     <message>
-        <source>qBittorrent has been shutdown</source>
-        <translation>qBittorrent を終了しました</translation>
+        <source>Torrente has been shutdown</source>
+        <translation>Torrente を終了しました</translation>
     </message>
     <message>
         <source>Open documentation</source>
@@ -433,7 +433,7 @@
     </message>
     <message>
         <source>About</source>
-        <translation>qBittorrent について</translation>
+        <translation>Torrente について</translation>
     </message>
     <message>
         <source>Pause</source>
@@ -476,13 +476,13 @@
         <translation>全体のダウンロード速度上限</translation>
     </message>
     <message>
-        <source>Are you sure you want to quit qBittorrent?</source>
-        <translation>qBittorrent を終了しますか?</translation>
+        <source>Are you sure you want to quit Torrente?</source>
+        <translation>Torrente を終了しますか?</translation>
     </message>
     <message>
-        <source>[D: %1, U: %2] qBittorrent %3</source>
-        <comment>D = Download; U = Upload; %3 is qBittorrent version</comment>
-        <translation>[D: %1, U: %2] qBittorrent %3</translation>
+        <source>[D: %1, U: %2] Torrente %3</source>
+        <comment>D = Download; U = Upload; %3 is Torrente version</comment>
+        <translation>[D: %1, U: %2] Torrente %3</translation>
     </message>
     <message>
         <source>Alternative speed limits</source>
@@ -1186,8 +1186,8 @@
         <translation>トレントとそのファイルを除去</translation>
     </message>
     <message>
-        <source>qBittorrent Section</source>
-        <translation>qBittorrent 部分</translation>
+        <source>Torrente Section</source>
+        <translation>Torrente 部分</translation>
     </message>
     <message>
         <source>Send buffer watermark factor:</source>
@@ -2517,8 +2517,8 @@
         <translation>ハードディスク上のファイルも削除する</translation>
     </message>
     <message>
-        <source>Deletion confirmation - qBittorrent</source>
-        <translation>削除の確認 - qBittorrent</translation>
+        <source>Deletion confirmation - Torrente</source>
+        <translation>削除の確認 - Torrente</translation>
     </message>
 </context>
 <context>
@@ -2906,8 +2906,8 @@
         <translation>名前:</translation>
     </message>
     <message>
-        <source>About qBittorrent</source>
-        <translation>qBittorrent について</translation>
+        <source>About Torrente</source>
+        <translation>Torrente について</translation>
     </message>
     <message>
         <source>License</source>
@@ -2918,8 +2918,8 @@
         <translation>翻訳</translation>
     </message>
     <message>
-        <source>qBittorrent was built with the following libraries:</source>
-        <translation>qBittorrent を構成するライブラリ:</translation>
+        <source>Torrente was built with the following libraries:</source>
+        <translation>Torrente を構成するライブラリ:</translation>
     </message>
     <message>
         <source>Nationality:</source>

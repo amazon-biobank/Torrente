@@ -1,6 +1,6 @@
 **Please provide the following information**
 
-### qBittorrent version and Operating System
+### Torrente version and Operating System
 (type here)
 
 ### If on linux, libtorrent-rasterbar and Qt version

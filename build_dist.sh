@@ -15,5 +15,5 @@ else
 fi
 
 # pack archives
-git archive --format=tar --prefix="qbittorrent-$projectVersion/" HEAD | gzip -9 > "qbittorrent-$projectVersion.tar.gz"
-git archive --format=tar --prefix="qbittorrent-$projectVersion/" HEAD | xz -9 > "qbittorrent-$projectVersion.tar.xz"
+git archive --format=tar --prefix="torrente-$projectVersion/" HEAD | gzip -9 > "torrente-$projectVersion.tar.gz"
+git archive --format=tar --prefix="torrente-$projectVersion/" HEAD | xz -9 > "torrente-$projectVersion.tar.xz"

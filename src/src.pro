@@ -12,11 +12,11 @@ QT += network xml
 macx|*-clang*: QMAKE_CXXFLAGS_WARN_ON += -Wno-range-loop-analysis
 
 nogui {
-    TARGET = qbittorrent-nox
+    TARGET = torrente-nox
     QT -= gui
     DEFINES += DISABLE_GUI
 } else {
-    TARGET = qbittorrent
+    TARGET = torrente
     QT += xml svg widgets
 
     CONFIG(static) {
@@ -88,7 +88,7 @@ lrelease.commands = @echo "lrelease ${QMAKE_FILE_NAME}" && $$QMAKE_LRELEASE -sil
 lrelease.CONFIG += no_link target_predeps
 QMAKE_EXTRA_COMPILERS += lrelease
 
-TRANSLATIONS = $$files($$PWD/lang/qbittorrent_*.ts)
+TRANSLATIONS = $$files($$PWD/lang/torrente_*.ts)
 TS_SOURCES += $$TRANSLATIONS
 
 # Resource files

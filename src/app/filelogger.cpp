@@ -72,7 +72,7 @@ void FileLogger::changePath(const QString &newPath)
 {
     const QDir dir(newPath);
     dir.mkpath(newPath);
-    const QString tmpPath = dir.absoluteFilePath("qbittorrent.log");
+    const QString tmpPath = dir.absoluteFilePath("torrente.log");
 
     if (tmpPath != m_path)
     {
@@ -88,7 +88,7 @@ void FileLogger::deleteOld(const int age, const FileLogAgeType ageType)
 {
     const QDateTime date = QDateTime::currentDateTime();
     const QDir dir(Utils::Fs::branchPath(m_path));
-    const QFileInfoList fileList = dir.entryInfoList(QStringList("qbittorrent.log.bak*")
+    const QFileInfoList fileList = dir.entryInfoList(QStringList("torrente.log.bak*")
         , (QDir::Files | QDir::Writable), (QDir::Time | QDir::Reversed));
 
     for (const QFileInfo &file : fileList)
