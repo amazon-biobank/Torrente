@@ -145,7 +145,7 @@ Application::Application(int &argc, char **argv)
     setQuitOnLastWindowClosed(false);
     QPixmapCache::setCacheLimit(PIXMAP_CACHE_SIZE);
 #endif
-   
+
     const bool portableModeEnabled = m_commandLineArgs.profileDir.isEmpty()
             && QDir(QCoreApplication::applicationDirPath()).exists(DEFAULT_PORTABLE_MODE_PROFILE_DIR);
 

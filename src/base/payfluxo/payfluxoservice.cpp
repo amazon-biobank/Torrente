@@ -29,7 +29,6 @@ void PayfluxoService::onConnected()
         qDebug() << "WebSocket connected";
     connect(&m_webSocket, &QWebSocket::textMessageReceived,
         this, &PayfluxoService::onTextMessageReceived);
-    
 }
 
 void PayfluxoService::closed() {
@@ -58,10 +57,10 @@ void PayfluxoService::onTextMessageReceived(QString message)
     if (QString::compare(type, "PaymentNotification", Qt::CaseSensitive) == 0) {
         this->handlePaymentNotification(dataJson["ip"].toString());
     }
-    
+
     if (m_debug)
         qDebug() << "Message received:" << message;
-    
+
 }
 
 void PayfluxoService::sendBlockDownloadedMessage(QString ip, QString magneticLink, QString fileSize)
@@ -96,5 +95,3 @@ void PayfluxoService::sendMessage(QString message)
 {
     m_webSocket.sendTextMessage(message);
 }
-
-

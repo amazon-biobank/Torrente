@@ -20,4 +20,3 @@ public:
     void sendAuthenticatedMessage(QString certificate, QString privateKey, QString orgMSP);
 };
 #endif 
-
