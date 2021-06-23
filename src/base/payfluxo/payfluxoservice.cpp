@@ -8,18 +8,30 @@
 #include <QJsonDocument>
 #include <QJsonObject>
 #include <QJsonValue>
+#include <QThread>
 
+#define PAYFLUXO_SOCKET "ws://127.0.0.1:7933"
+#define RECONNECT_WAIT 100
 
-PayfluxoService::PayfluxoService( bool debug, QObject* parent)
+PayfluxoService::PayfluxoService(bool debug, QObject* parent)
     : QObject(parent)
     , m_debug(debug)
 {
-    QUrl url("ws://127.0.0.1:7933");
+    QUrl url(PAYFLUXO_SOCKET);
 
     if (m_debug)
         qDebug() << "WebSocket server:" << url;
     connect(&m_webSocket, &QWebSocket::connected, this, &PayfluxoService::onConnected);
     connect(&m_webSocket, &QWebSocket::disconnected, this, &PayfluxoService::closed);
+    connect(&m_webSocket, QOverload<QAbstractSocket::SocketError>::of(&QWebSocket::error), this, &PayfluxoService::onWebSocketError);
+
+    m_webSocket.open(url);
+}
+
+void PayfluxoService::onWebSocketError(QAbstractSocket::SocketError error) {
+    QUrl url(PAYFLUXO_SOCKET);
+    qDebug() << "Failed to connect to Payfluxo::error" << endl;
+    QThread::msleep(RECONNECT_WAIT);
     m_webSocket.open(url);
 }
 
@@ -73,8 +85,8 @@ void PayfluxoService::sendBlockDownloadedMessage(QString ip, QString magneticLin
     messageObj.insert("type", QString("DownloadedBlock"));
     messageObj.insert("data", dataObj);
     QJsonDocument messageDoc(messageObj);
-    QByteArray ba = messageDoc.toJson();
-    this->sendMessage(QString(ba));
+    QByteArray serializedMessage = messageDoc.toJson();
+    this->sendMessage(QString(serializedMessage));
 }
 
 void PayfluxoService::sendAuthenticatedMessage(QString certificate, QString privateKey, QString orgMSP)
@@ -87,8 +99,32 @@ void PayfluxoService::sendAuthenticatedMessage(QString certificate, QString priv
     messageObj.insert("type", QString("Authenticated"));
     messageObj.insert("data", dataObj);
     QJsonDocument messageDoc(messageObj);
-    QByteArray ba = messageDoc.toJson();
-    this->sendMessage(QString(ba));
+    QByteArray serializedMessage = messageDoc.toJson();
+    this->sendMessage(QString(serializedMessage));
+}
+
+void PayfluxoService::sendDeauthMessage()
+{
+    QJsonObject dataObj;
+    dataObj.insert("message", "Loging out");
+    QJsonObject messageObj;
+    messageObj.insert("type", QString("Logout"));
+    messageObj.insert("data", dataObj);
+    QJsonDocument messageDoc(messageObj);
+    QByteArray serializedMessage = messageDoc.toJson();
+    this->sendMessage(QString(serializedMessage));
+}
+
+void PayfluxoService::sendCloseMessage()
+{
+    QJsonObject dataObj;
+    dataObj.insert("message", "Closing Torrente");
+    QJsonObject messageObj;
+    messageObj.insert("type", QString("Closing"));
+    messageObj.insert("data", dataObj);
+    QJsonDocument messageDoc(messageObj);
+    QByteArray serializedMessage = messageDoc.toJson();
+    this->sendMessage(QString(serializedMessage));
 }
 
 void PayfluxoService::sendMessage(QString message)
