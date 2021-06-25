@@ -78,6 +78,12 @@ void Session::logout() {
     m_userMSPIdString = nullptr;
 
     m_authenticated = false;
+
+    m_payfluxoService->sendDeauthMessage();
+}
+
+void Session::closePayfluxo() {
+    m_payfluxoService->sendCloseMessage();
 }
 
 bool Session::isAuthenticated() {

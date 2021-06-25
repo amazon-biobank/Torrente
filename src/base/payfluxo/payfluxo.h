@@ -28,6 +28,7 @@ namespace Payfluxo {
         QString getCertificate();
 
         void logout();
+        void closePayfluxo();
 
         static Session* m_instance;
 

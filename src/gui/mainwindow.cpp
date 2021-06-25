@@ -1287,6 +1287,9 @@ void MainWindow::closeEvent(QCloseEvent *e)
         m_systrayIcon->hide();
 #endif
     // Accept exit
+    if (Payfluxo::Session::instance()->isAuthenticated())
+        Payfluxo::Session::instance()->logout();
+        Payfluxo::Session::instance()->closePayfluxo();
     e->accept();
     qApp->exit();
 }
