@@ -2,7 +2,7 @@ Var uninstallerPath
 
 Section "-hidden"
 
-    ;Search if qBittorrent is already installed.
+    ;Search if Torrente is already installed.
     FindFirst $0 $1 "$uninstallerPath\uninst.exe"
     FindClose $0
     StrCmp $1 "" done
@@ -18,7 +18,7 @@ Section "-hidden"
 SectionEnd
 
 
-Section $(inst_qbt_req) ;"qBittorrent (required)"
+Section $(inst_qbt_req) ;"Torrente (required)"
 
   SectionIn RO
 
@@ -29,8 +29,8 @@ Section $(inst_qbt_req) ;"qBittorrent (required)"
   CreateDirectory $INSTDIR\translations
 
   ; Put file there
-  File "qbittorrent.exe"
-  File "qbittorrent.pdb"
+  File "torrente.exe"
+  File "torrente.pdb"
   File "qt.conf"
   File /r "qtbase_*.qm"  ; omit translations folder path to preserve folder structure
   File /oname=translations\qt_fa.qm "translations\qt_fa.qm"
@@ -42,47 +42,47 @@ Section $(inst_qbt_req) ;"qBittorrent (required)"
   File /oname=translations\qt_zh_CN.qm "translations\qt_zh_CN.qm"
 
   ; Write the installation path into the registry
-  WriteRegStr HKLM "Software\qBittorrent" "InstallLocation" "$INSTDIR"
+  WriteRegStr HKLM "Software\Torrente" "InstallLocation" "$INSTDIR"
 
   ; Write the uninstall keys for Windows
-  WriteRegStr HKLM "Software\Microsoft\Windows\CurrentVersion\Uninstall\qBittorrent" "DisplayName" "qBittorrent ${PROG_VERSION}"
-  WriteRegStr HKLM "Software\Microsoft\Windows\CurrentVersion\Uninstall\qBittorrent" "UninstallString" '"$INSTDIR\uninst.exe"'
-  WriteRegStr HKLM "Software\Microsoft\Windows\CurrentVersion\Uninstall\qBittorrent" "DisplayIcon" '"$INSTDIR\qbittorrent.exe",0'
-  WriteRegStr HKLM "Software\Microsoft\Windows\CurrentVersion\Uninstall\qBittorrent" "Publisher" "The qBittorrent project"
-  WriteRegStr HKLM "Software\Microsoft\Windows\CurrentVersion\Uninstall\qBittorrent" "URLInfoAbout" "https://www.qbittorrent.org"
-  WriteRegStr HKLM "Software\Microsoft\Windows\CurrentVersion\Uninstall\qBittorrent" "DisplayVersion" "${PROG_VERSION}"
-  WriteRegDWORD HKLM "Software\Microsoft\Windows\CurrentVersion\Uninstall\qBittorrent" "NoModify" 1
-  WriteRegDWORD HKLM "Software\Microsoft\Windows\CurrentVersion\Uninstall\qBittorrent" "NoRepair" 1
+  WriteRegStr HKLM "Software\Microsoft\Windows\CurrentVersion\Uninstall\Torrente" "DisplayName" "Torrente ${PROG_VERSION}"
+  WriteRegStr HKLM "Software\Microsoft\Windows\CurrentVersion\Uninstall\Torrente" "UninstallString" '"$INSTDIR\uninst.exe"'
+  WriteRegStr HKLM "Software\Microsoft\Windows\CurrentVersion\Uninstall\Torrente" "DisplayIcon" '"$INSTDIR\torrente.exe",0'
+  WriteRegStr HKLM "Software\Microsoft\Windows\CurrentVersion\Uninstall\Torrente" "Publisher" "The Torrente project"
+  WriteRegStr HKLM "Software\Microsoft\Windows\CurrentVersion\Uninstall\Torrente" "URLInfoAbout" "https://www.torrente.org"
+  WriteRegStr HKLM "Software\Microsoft\Windows\CurrentVersion\Uninstall\Torrente" "DisplayVersion" "${PROG_VERSION}"
+  WriteRegDWORD HKLM "Software\Microsoft\Windows\CurrentVersion\Uninstall\Torrente" "NoModify" 1
+  WriteRegDWORD HKLM "Software\Microsoft\Windows\CurrentVersion\Uninstall\Torrente" "NoRepair" 1
   WriteUninstaller "uninst.exe"
   ${GetSize} "$INSTDIR" "/S=0K" $0 $1 $2
   IntFmt $0 "0x%08X" $0
-  WriteRegDWORD HKLM "Software\Microsoft\Windows\CurrentVersion\Uninstall\qBittorrent" "EstimatedSize" "$0"
+  WriteRegDWORD HKLM "Software\Microsoft\Windows\CurrentVersion\Uninstall\Torrente" "EstimatedSize" "$0"
 
-  ; qBittorrent ProgID
-  WriteRegStr HKLM "Software\Classes\qBittorrent" "" "qBittorrent Torrent File"
-  WriteRegStr HKLM "Software\Classes\qBittorrent" "FriendlyTypeName" "qBittorrent Torrent File"
-  WriteRegStr HKLM "Software\Classes\qBittorrent\shell" "" "open"
-  WriteRegStr HKLM "Software\Classes\qBittorrent\shell\open\command" "" '"$INSTDIR\qbittorrent.exe" "%1"'
-  WriteRegStr HKLM "Software\Classes\qBittorrent\DefaultIcon" "" '"$INSTDIR\qbittorrent.exe",1'
+  ; Torrente ProgID
+  WriteRegStr HKLM "Software\Classes\Torrente" "" "Torrente Torrent File"
+  WriteRegStr HKLM "Software\Classes\Torrente" "FriendlyTypeName" "Torrente Torrent File"
+  WriteRegStr HKLM "Software\Classes\Torrente\shell" "" "open"
+  WriteRegStr HKLM "Software\Classes\Torrente\shell\open\command" "" '"$INSTDIR\torrente.exe" "%1"'
+  WriteRegStr HKLM "Software\Classes\Torrente\DefaultIcon" "" '"$INSTDIR\torrente.exe",1'
 
 SectionEnd
 
 ; Optional section (can be disabled by the user)
 Section /o $(inst_dekstop) ;"Create Desktop Shortcut"
 
-  CreateShortCut "$DESKTOP\qBittorrent.lnk" "$INSTDIR\qbittorrent.exe"
+  CreateShortCut "$DESKTOP\Torrente.lnk" "$INSTDIR\torrente.exe"
 
 SectionEnd
 
 Section $(inst_startmenu) ;"Create Start Menu Shortcut"
 
-  CreateDirectory "$SMPROGRAMS\qBittorrent"
-  CreateShortCut "$SMPROGRAMS\qBittorrent\qBittorrent.lnk" "$INSTDIR\qbittorrent.exe"
-  CreateShortCut "$SMPROGRAMS\qBittorrent\Uninstall.lnk" "$INSTDIR\uninst.exe"
+  CreateDirectory "$SMPROGRAMS\Torrente"
+  CreateShortCut "$SMPROGRAMS\Torrente\Torrente.lnk" "$INSTDIR\torrente.exe"
+  CreateShortCut "$SMPROGRAMS\Torrente\Uninstall.lnk" "$INSTDIR\uninst.exe"
 
 SectionEnd
 
-Section /o $(inst_startup) ;"Start qBittorrent on Windows start up"
+Section /o $(inst_startup) ;"Start Torrente on Windows start up"
 
   !insertmacro UAC_AsUser_Call Function inst_startup_user ${UAC_SYNCREGISTERS}|${UAC_SYNCOUTDIR}|${UAC_SYNCINSTDIR}
 
@@ -90,15 +90,15 @@ SectionEnd
 
 Function inst_startup_user
 
-  WriteRegStr HKCU "Software\Microsoft\Windows\CurrentVersion\Run" "qBittorrent" "$INSTDIR\qbittorrent.exe"
+  WriteRegStr HKCU "Software\Microsoft\Windows\CurrentVersion\Run" "Torrente" "$INSTDIR\torrente.exe"
 
 FunctionEnd
 
-Section $(inst_torrent) ;"Open .torrent files with qBittorrent"
+Section $(inst_torrent) ;"Open .torrent files with Torrente"
 
   ReadRegStr $0 HKLM "Software\Classes\.torrent" ""
 
-  StrCmp $0 "qBittorrent" clear_errors 0
+  StrCmp $0 "Torrente" clear_errors 0
   ;Check if empty string
   StrCmp $0 "" clear_errors 0
   ;Write old value to OpenWithProgIds
@@ -107,7 +107,7 @@ Section $(inst_torrent) ;"Open .torrent files with qBittorrent"
   clear_errors:
   ClearErrors
 
-  WriteRegStr HKLM "Software\Classes\.torrent" "" "qBittorrent"
+  WriteRegStr HKLM "Software\Classes\.torrent" "" "Torrente"
   WriteRegStr HKLM "Software\Classes\.torrent" "Content Type" "application/x-bittorrent"
 
   !insertmacro UAC_AsUser_Call Function inst_torrent_user ${UAC_SYNCREGISTERS}|${UAC_SYNCOUTDIR}|${UAC_SYNCINSTDIR}
@@ -120,7 +120,7 @@ Function inst_torrent_user
 
   ReadRegStr $0 HKCU "Software\Classes\.torrent" ""
 
-  StrCmp $0 "qBittorrent" clear_errors 0
+  StrCmp $0 "Torrente" clear_errors 0
   ;Check if empty string
   StrCmp $0 "" clear_errors 0
   ;Write old value to OpenWithProgIds
@@ -129,19 +129,19 @@ Function inst_torrent_user
   clear_errors:
   ClearErrors
 
-  WriteRegStr HKCU "Software\Classes\.torrent" "" "qBittorrent"
+  WriteRegStr HKCU "Software\Classes\.torrent" "" "Torrente"
   WriteRegStr HKCU "Software\Classes\.torrent" "Content Type" "application/x-bittorrent"
 
 FunctionEnd
 
-Section $(inst_magnet) ;"Open magnet links with qBittorrent"
+Section $(inst_magnet) ;"Open magnet links with Torrente"
 
   WriteRegStr HKLM "Software\Classes\magnet" "" "URL:Magnet link"
   WriteRegStr HKLM "Software\Classes\magnet" "Content Type" "application/x-magnet"
   WriteRegStr HKLM "Software\Classes\magnet" "URL Protocol" ""
-  WriteRegStr HKLM "Software\Classes\magnet\DefaultIcon" "" '"$INSTDIR\qbittorrent.exe",1'
+  WriteRegStr HKLM "Software\Classes\magnet\DefaultIcon" "" '"$INSTDIR\torrente.exe",1'
   WriteRegStr HKLM "Software\Classes\magnet\shell" "" "open"
-  WriteRegStr HKLM "Software\Classes\magnet\shell\open\command" "" '"$INSTDIR\qbittorrent.exe" "%1"'
+  WriteRegStr HKLM "Software\Classes\magnet\shell\open\command" "" '"$INSTDIR\torrente.exe" "%1"'
 
   !insertmacro UAC_AsUser_Call Function inst_magnet_user ${UAC_SYNCREGISTERS}|${UAC_SYNCOUTDIR}|${UAC_SYNCINSTDIR}
 
@@ -154,16 +154,16 @@ Function inst_magnet_user
   WriteRegStr HKCU "Software\Classes\magnet" "" "URL:Magnet link"
   WriteRegStr HKCU "Software\Classes\magnet" "Content Type" "application/x-magnet"
   WriteRegStr HKCU "Software\Classes\magnet" "URL Protocol" ""
-  WriteRegStr HKCU "Software\Classes\magnet\DefaultIcon" "" '"$INSTDIR\qbittorrent.exe",1'
+  WriteRegStr HKCU "Software\Classes\magnet\DefaultIcon" "" '"$INSTDIR\torrente.exe",1'
   WriteRegStr HKCU "Software\Classes\magnet\shell" "" "open"
-  WriteRegStr HKCU "Software\Classes\magnet\shell\open\command" "" '"$INSTDIR\qbittorrent.exe" "%1"'
+  WriteRegStr HKCU "Software\Classes\magnet\shell\open\command" "" '"$INSTDIR\torrente.exe" "%1"'
 
 FunctionEnd
 
 Section $(inst_firewall)
 
   DetailPrint $(inst_firewallinfo)
-  nsisFirewallW::AddAuthorizedApplication "$INSTDIR\qbittorrent.exe" "qBittorrent"
+  nsisFirewallW::AddAuthorizedApplication "$INSTDIR\torrente.exe" "Torrente"
 
 SectionEnd
 
@@ -192,7 +192,7 @@ Function .onInit
     ${EndIf}
   !endif
 
-  ;Search if qBittorrent is already installed.
+  ;Search if Torrente is already installed.
   FindFirst $0 $1 "$INSTDIR\uninst.exe"
   FindClose $0
   StrCmp $1 "" done
@@ -211,7 +211,7 @@ FunctionEnd
 Function check_instance
 
   check:
-  FindProcDLL::FindProc "qbittorrent.exe"
+  FindProcDLL::FindProc "torrente.exe"
   StrCmp $R0 "1" 0 notfound
   MessageBox MB_RETRYCANCEL|MB_ICONEXCLAMATION $(inst_warning) IDRETRY check IDCANCEL done
 
@@ -224,7 +224,7 @@ FunctionEnd
 
 Function PageFinishRun
 
-  !insertmacro UAC_AsUser_ExecShell "" "$INSTDIR\qbittorrent.exe" "" "" ""
+  !insertmacro UAC_AsUser_ExecShell "" "$INSTDIR\torrente.exe" "" "" ""
 
 FunctionEnd
 

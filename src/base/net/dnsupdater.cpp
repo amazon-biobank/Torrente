@@ -1,6 +1,6 @@
 /*
  * Bittorrent Client using Qt and libtorrent.
- * Copyright (C) 2011  Christophe Dumez <chris@qbittorrent.org>
+ * Copyright (C) 2011  Christophe Dumez <chris@torrente.org>
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -76,7 +76,7 @@ void DNSUpdater::checkPublicIP()
     Q_ASSERT(m_state == OK);
 
     DownloadManager::instance()->download(
-                DownloadRequest("http://checkip.dyndns.org").userAgent("qBittorrent/" QBT_VERSION_2)
+                DownloadRequest("http://checkip.dyndns.org").userAgent("Torrente/" QBT_VERSION_2)
                 , this, &DNSUpdater::ipRequestFinished);
 
     m_lastIPCheckTime = QDateTime::currentDateTime();
@@ -124,7 +124,7 @@ void DNSUpdater::updateDNSService()
 
     m_lastIPCheckTime = QDateTime::currentDateTime();
     DownloadManager::instance()->download(
-                DownloadRequest(getUpdateUrl()).userAgent("qBittorrent/" QBT_VERSION_2)
+                DownloadRequest(getUpdateUrl()).userAgent("Torrente/" QBT_VERSION_2)
                 , this, &DNSUpdater::ipUpdateFinished);
 }
 
@@ -213,7 +213,7 @@ void DNSUpdater::processIPUpdateReply(const QString &reply)
 
     if (code == "badagent")
     {
-        logger->addMessage(tr("Dynamic DNS error: qBittorrent was blacklisted by the service, please report a bug at http://bugs.qbittorrent.org."),
+        logger->addMessage(tr("Dynamic DNS error: Torrente was blacklisted by the service, please report a bug at http://bugs.torrente.org."),
                            Log::CRITICAL);
         m_state = FATAL;
         return;
@@ -221,7 +221,7 @@ void DNSUpdater::processIPUpdateReply(const QString &reply)
 
     if (code == "!donator")
     {
-        logger->addMessage(tr("Dynamic DNS error: %1 was returned by the service, please report a bug at http://bugs.qbittorrent.org.").arg("!donator"),
+        logger->addMessage(tr("Dynamic DNS error: %1 was returned by the service, please report a bug at http://bugs.torrente.org.").arg("!donator"),
                            Log::CRITICAL);
         m_state = FATAL;
         return;

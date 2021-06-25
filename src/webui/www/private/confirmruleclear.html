@@ -22,10 +22,10 @@
                 new Event(e).stop();
                 let completionCount = 0;
                 rules.forEach((rule) => {
-                    window.parent.qBittorrent.RssDownloader.modifyRuleState(rule, 'previouslyMatchedEpisodes', [], () => {
+                    window.parent.Torrente.RssDownloader.modifyRuleState(rule, 'previouslyMatchedEpisodes', [], () => {
                         ++completionCount;
                         if (completionCount === rules.length) {
-                            window.parent.qBittorrent.RssDownloader.updateRulesList();
+                            window.parent.Torrente.RssDownloader.updateRulesList();
                             window.parent.MochaUI.closeWindow(window.parent.$('clearRulesPage'));
                         }
                     });

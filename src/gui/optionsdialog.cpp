@@ -1,6 +1,6 @@
 /*
  * Bittorrent Client using Qt and libtorrent.
- * Copyright (C) 2006  Christophe Dumez <chris@qbittorrent.org>
+ * Copyright (C) 2006  Christophe Dumez <chris@torrente.org>
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -220,7 +220,7 @@ OptionsDialog::OptionsDialog(QWidget *parent)
     m_ui->deleteTorrentWarningLabel->setToolTip(QLatin1String("<html><body><p>") +
         tr("By enabling these options, you can <strong>irrevocably lose</strong> your .torrent files!") +
         QLatin1String("</p><p>") +
-        tr("When these options are enabled, qBittorrent will <strong>delete</strong> .torrent files "
+        tr("When these options are enabled, Torrente will <strong>delete</strong> .torrent files "
         "after they were successfully (the first option) or not (the second option) added to its "
         "download queue. This will be applied <strong>not only</strong> to the files opened via "
         "&ldquo;Add torrent&rdquo; menu action but to those opened via <strong>file type association</strong> as well") +
@@ -248,8 +248,8 @@ OptionsDialog::OptionsDialog(QWidget *parent)
     m_ui->checkUseCustomTheme->setChecked(Preferences::instance()->useCustomUITheme());
     m_ui->customThemeFilePath->setSelectedPath(Preferences::instance()->customUIThemePath());
     m_ui->customThemeFilePath->setMode(FileSystemPathEdit::Mode::FileOpen);
-    m_ui->customThemeFilePath->setDialogCaption(tr("Select qBittorrent UI Theme file"));
-    m_ui->customThemeFilePath->setFileNameFilter(tr("qBittorrent UI Theme file (*.qbtheme)"));
+    m_ui->customThemeFilePath->setDialogCaption(tr("Select Torrente UI Theme file"));
+    m_ui->customThemeFilePath->setFileNameFilter(tr("Torrente UI Theme file (*.qbtheme)"));
 
 #if (defined(Q_OS_UNIX) && !defined(Q_OS_MACOS))
     m_ui->checkUseSystemIcon->setChecked(Preferences::instance()->useSystemIconTheme());
@@ -570,10 +570,10 @@ void OptionsDialog::initializeLanguageCombo()
 {
     // List language files
     const QDir langDir(":/lang");
-    const QStringList langFiles = langDir.entryList(QStringList("qbittorrent_*.qm"), QDir::Files);
+    const QStringList langFiles = langDir.entryList(QStringList("torrente_*.qm"), QDir::Files);
     for (const QString &langFile : langFiles)
     {
-        QString localeStr = langFile.mid(12); // remove "qbittorrent_"
+        QString localeStr = langFile.mid(12); // remove "torrente_"
         localeStr.chop(3); // Remove ".qm"
         QString languageName;
         if (localeStr.startsWith("eo", Qt::CaseInsensitive))
@@ -645,7 +645,7 @@ void OptionsDialog::saveOptions()
     if (pref->getLocale() != locale)
     {
         auto *translator = new QTranslator;
-        if (translator->load(QLatin1String(":/lang/qbittorrent_") + locale))
+        if (translator->load(QLatin1String(":/lang/torrente_") + locale))
             qDebug("%s locale recognized, using translation.", qUtf8Printable(locale));
         else
             qDebug("%s locale unrecognized, using default (en).", qUtf8Printable(locale));

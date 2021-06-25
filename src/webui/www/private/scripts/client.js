@@ -1,7 +1,7 @@
 /*
  * MIT License
- * Copyright (c) 2008 Ishan Arora <ishan@qbittorrent.org>,
- * Christophe Dumez <chris@qbittorrent.org>
+ * Copyright (c) 2008 Ishan Arora <ishan@torrente.org>,
+ * Christophe Dumez <chris@torrente.org>
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -24,7 +24,7 @@
 
 'use strict';
 
-this.torrentsTable = new window.qBittorrent.DynamicTable.TorrentsTable();
+this.torrentsTable = new window.Torrente.DynamicTable.TorrentsTable();
 
 let updatePropertiesPanel = function() {};
 
@@ -395,12 +395,12 @@ window.addEvent('load', function() {
         const create_link = function(hash, text, count) {
             const html = '<a href="#" onclick="setCategoryFilter(' + hash + ');return false;">'
                 + '<img src="icons/inode-directory.svg"/>'
-                + window.qBittorrent.Misc.escapeHtml(text) + ' (' + count + ')' + '</a>';
+                + window.Torrente.Misc.escapeHtml(text) + ' (' + count + ')' + '</a>';
             const el = new Element('li', {
                 id: hash,
                 html: html
             });
-            window.qBittorrent.Filters.categoriesFilterContextMenu.addTarget(el);
+            window.Torrente.Filters.categoriesFilterContextMenu.addTarget(el);
             return el;
         };
 
@@ -452,12 +452,12 @@ window.addEvent('load', function() {
         const createLink = function(hash, text, count) {
             const html = '<a href="#" onclick="setTagFilter(' + hash + ');return false;">'
                 + '<img src="icons/inode-directory.svg"/>'
-                + window.qBittorrent.Misc.escapeHtml(text) + ' (' + count + ')' + '</a>';
+                + window.Torrente.Misc.escapeHtml(text) + ' (' + count + ')' + '</a>';
             const el = new Element('li', {
                 id: hash,
                 html: html
             });
-            window.qBittorrent.Filters.tagsFilterContextMenu.addTarget(el);
+            window.Torrente.Filters.tagsFilterContextMenu.addTarget(el);
             return el;
         };
 
@@ -506,12 +506,12 @@ window.addEvent('load', function() {
         const createLink = function(hash, text, count) {
             const html = '<a href="#" onclick="setTrackerFilter(' + hash + ');return false;">'
                 + '<img src="icons/network-server.svg"/>'
-                + window.qBittorrent.Misc.escapeHtml(text.replace("%1", count)) + '</a>';
+                + window.Torrente.Misc.escapeHtml(text.replace("%1", count)) + '</a>';
             const el = new Element('li', {
                 id: hash,
                 html: html
             });
-            window.qBittorrent.Filters.trackersFilterContextMenu.addTarget(el);
+            window.Torrente.Filters.trackersFilterContextMenu.addTarget(el);
             return el;
         };
 
@@ -551,7 +551,7 @@ window.addEvent('load', function() {
             onFailure: function() {
                 const errorDiv = $('error_div');
                 if (errorDiv)
-                    errorDiv.set('html', 'QBT_TR(qBittorrent client is not reachable)QBT_TR[CONTEXT=HttpServer]');
+                    errorDiv.set('html', 'QBT_TR(Torrente client is not reachable)QBT_TR[CONTEXT=HttpServer]');
                 syncRequestInProgress = false;
                 syncData(2000);
             },
@@ -674,11 +674,11 @@ window.addEvent('load', function() {
                     updateFiltersList();
                     if (update_categories) {
                         updateCategoryList();
-                        window.qBittorrent.TransferList.contextMenu.updateCategoriesSubMenu(category_list);
+                        window.Torrente.TransferList.contextMenu.updateCategoriesSubMenu(category_list);
                     }
                     if (updateTags) {
                         updateTagList();
-                        window.qBittorrent.TransferList.contextMenu.updateTagsSubMenu(tagList);
+                        window.Torrente.TransferList.contextMenu.updateTagsSubMenu(tagList);
                     }
                     if (updateTrackers)
                         updateTrackerList();
@@ -708,39 +708,39 @@ window.addEvent('load', function() {
     };
 
     const processServerState = function() {
-        let transfer_info = window.qBittorrent.Misc.friendlyUnit(serverState.dl_info_speed, true);
+        let transfer_info = window.Torrente.Misc.friendlyUnit(serverState.dl_info_speed, true);
         if (serverState.dl_rate_limit > 0)
-            transfer_info += " [" + window.qBittorrent.Misc.friendlyUnit(serverState.dl_rate_limit, true) + "]";
-        transfer_info += " (" + window.qBittorrent.Misc.friendlyUnit(serverState.dl_info_data, false) + ")";
+            transfer_info += " [" + window.Torrente.Misc.friendlyUnit(serverState.dl_rate_limit, true) + "]";
+        transfer_info += " (" + window.Torrente.Misc.friendlyUnit(serverState.dl_info_data, false) + ")";
         $("DlInfos").set('html', transfer_info);
-        transfer_info = window.qBittorrent.Misc.friendlyUnit(serverState.up_info_speed, true);
+        transfer_info = window.Torrente.Misc.friendlyUnit(serverState.up_info_speed, true);
         if (serverState.up_rate_limit > 0)
-            transfer_info += " [" + window.qBittorrent.Misc.friendlyUnit(serverState.up_rate_limit, true) + "]";
-        transfer_info += " (" + window.qBittorrent.Misc.friendlyUnit(serverState.up_info_data, false) + ")";
+            transfer_info += " [" + window.Torrente.Misc.friendlyUnit(serverState.up_rate_limit, true) + "]";
+        transfer_info += " (" + window.Torrente.Misc.friendlyUnit(serverState.up_info_data, false) + ")";
         $("UpInfos").set('html', transfer_info);
         if (speedInTitle) {
-            document.title = "QBT_TR([D: %1, U: %2] qBittorrent %3)QBT_TR[CONTEXT=MainWindow]".replace("%1", window.qBittorrent.Misc.friendlyUnit(serverState.dl_info_speed, true)).replace("%2", window.qBittorrent.Misc.friendlyUnit(serverState.up_info_speed, true)).replace("%3", qbtVersion());
+            document.title = "QBT_TR([D: %1, U: %2] Torrente %3)QBT_TR[CONTEXT=MainWindow]".replace("%1", window.Torrente.Misc.friendlyUnit(serverState.dl_info_speed, true)).replace("%2", window.Torrente.Misc.friendlyUnit(serverState.up_info_speed, true)).replace("%3", qbtVersion());
             document.title += " QBT_TR(Web UI)QBT_TR[CONTEXT=OptionsDialog]";
         }
         else
-            document.title = ("qBittorrent " + qbtVersion() + " QBT_TR(Web UI)QBT_TR[CONTEXT=OptionsDialog]");
-        $('freeSpaceOnDisk').set('html', 'QBT_TR(Free space: %1)QBT_TR[CONTEXT=HttpServer]'.replace("%1", window.qBittorrent.Misc.friendlyUnit(serverState.free_space_on_disk)));
+            document.title = ("Torrente " + qbtVersion() + " QBT_TR(Web UI)QBT_TR[CONTEXT=OptionsDialog]");
+        $('freeSpaceOnDisk').set('html', 'QBT_TR(Free space: %1)QBT_TR[CONTEXT=HttpServer]'.replace("%1", window.Torrente.Misc.friendlyUnit(serverState.free_space_on_disk)));
         $('DHTNodes').set('html', 'QBT_TR(DHT: %1 nodes)QBT_TR[CONTEXT=StatusBar]'.replace("%1", serverState.dht_nodes));
 
         // Statistics dialog
         if (document.getElementById("statisticsContent")) {
-            $('AlltimeDL').set('html', window.qBittorrent.Misc.friendlyUnit(serverState.alltime_dl, false));
-            $('AlltimeUL').set('html', window.qBittorrent.Misc.friendlyUnit(serverState.alltime_ul, false));
-            $('TotalWastedSession').set('html', window.qBittorrent.Misc.friendlyUnit(serverState.total_wasted_session, false));
+            $('AlltimeDL').set('html', window.Torrente.Misc.friendlyUnit(serverState.alltime_dl, false));
+            $('AlltimeUL').set('html', window.Torrente.Misc.friendlyUnit(serverState.alltime_ul, false));
+            $('TotalWastedSession').set('html', window.Torrente.Misc.friendlyUnit(serverState.total_wasted_session, false));
             $('GlobalRatio').set('html', serverState.global_ratio);
             $('TotalPeerConnections').set('html', serverState.total_peer_connections);
             $('ReadCacheHits').set('html', serverState.read_cache_hits + "%");
-            $('TotalBuffersSize').set('html', window.qBittorrent.Misc.friendlyUnit(serverState.total_buffers_size, false));
+            $('TotalBuffersSize').set('html', window.Torrente.Misc.friendlyUnit(serverState.total_buffers_size, false));
             $('WriteCacheOverload').set('html', serverState.write_cache_overload + "%");
             $('ReadCacheOverload').set('html', serverState.read_cache_overload + "%");
             $('QueuedIOJobs').set('html', serverState.queued_io_jobs);
             $('AverageTimeInQueue').set('html', serverState.average_time_queue + " ms");
-            $('TotalQueuedSize').set('html', window.qBittorrent.Misc.friendlyUnit(serverState.total_queued_size, false));
+            $('TotalQueuedSize').set('html', window.Torrente.Misc.friendlyUnit(serverState.total_queued_size, false));
         }
 
         switch (serverState.connection_status) {
@@ -936,7 +936,7 @@ window.addEvent('load', function() {
 
     const showSearchTab = function() {
         if (!searchTabInitialized) {
-            window.qBittorrent.Search.init();
+            window.Torrente.Search.init();
             searchTabInitialized = true;
         }
 
@@ -953,11 +953,11 @@ window.addEvent('load', function() {
 
     const showRssTab = function() {
         if (!rssTabInitialized) {
-            window.qBittorrent.Rss.init();
+            window.Torrente.Rss.init();
             rssTabInitialized = true;
         }
         else {
-            window.qBittorrent.Rss.load();
+            window.Torrente.Rss.load();
         }
 
         $("rssTabColumn").removeClass("invisible");
@@ -968,7 +968,7 @@ window.addEvent('load', function() {
 
     const hideRssTab = function() {
         $("rssTabColumn").addClass("invisible");
-        window.qBittorrent.Rss.unload();
+        window.Torrente.Rss.unload();
         MochaUI.Desktop.resizePanels();
     };
 
@@ -1056,24 +1056,24 @@ window.addEvent('load', function() {
 
             updatePropertiesPanel = function() {
                 if (!$('prop_general').hasClass('invisible')) {
-                    if (window.qBittorrent.PropGeneral !== undefined)
-                        window.qBittorrent.PropGeneral.updateData();
+                    if (window.Torrente.PropGeneral !== undefined)
+                        window.Torrente.PropGeneral.updateData();
                 }
                 else if (!$('prop_trackers').hasClass('invisible')) {
-                    if (window.qBittorrent.PropTrackers !== undefined)
-                        window.qBittorrent.PropTrackers.updateData();
+                    if (window.Torrente.PropTrackers !== undefined)
+                        window.Torrente.PropTrackers.updateData();
                 }
                 else if (!$('prop_peers').hasClass('invisible')) {
-                    if (window.qBittorrent.PropPeers !== undefined)
-                        window.qBittorrent.PropPeers.updateData();
+                    if (window.Torrente.PropPeers !== undefined)
+                        window.Torrente.PropPeers.updateData();
                 }
                 else if (!$('prop_webseeds').hasClass('invisible')) {
-                    if (window.qBittorrent.PropWebseeds !== undefined)
-                        window.qBittorrent.PropWebseeds.updateData();
+                    if (window.Torrente.PropWebseeds !== undefined)
+                        window.Torrente.PropWebseeds.updateData();
                 }
                 else if (!$('prop_files').hasClass('invisible')) {
-                    if (window.qBittorrent.PropFiles !== undefined)
-                        window.qBittorrent.PropFiles.updateData();
+                    if (window.Torrente.PropFiles !== undefined)
+                        window.Torrente.PropFiles.updateData();
                 }
             };
 
@@ -1171,7 +1171,7 @@ function registerMagnetHandler() {
         + location.search + '#' + templateHashString;
 
     navigator.registerProtocolHandler('magnet', templateUrl,
-        'qBittorrent WebUI magnet handler');
+        'Torrente WebUI magnet handler');
 }
 
 function handleDownloadParam() {

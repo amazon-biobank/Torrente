@@ -78,9 +78,9 @@
     <div style="overflow: hidden; height: 70px;">
         <div style="margin: 20px 0; height: 30px;">
             <input type="text" id="searchPattern" class="searchInputField" placeholder="QBT_TR(Search)QBT_TR[CONTEXT=SearchEngineWidget]" autocorrect="off" autocapitalize="none" />
-            <select id="categorySelect" class="searchInputField" onchange="qBittorrent.Search.categorySelected()"></select>
-            <select id="pluginsSelect" class="searchInputField" onchange="qBittorrent.Search.pluginSelected()"></select>
-            <button id="startSearchButton" class="searchInputField" onclick="qBittorrent.Search.startStopSearch()">QBT_TR(Search)QBT_TR[CONTEXT=SearchEngineWidget]</button>
+            <select id="categorySelect" class="searchInputField" onchange="Torrente.Search.categorySelected()"></select>
+            <select id="pluginsSelect" class="searchInputField" onchange="Torrente.Search.pluginSelected()"></select>
+            <button id="startSearchButton" class="searchInputField" onclick="Torrente.Search.startStopSearch()">QBT_TR(Search)QBT_TR[CONTEXT=SearchEngineWidget]</button>
         </div>
     </div>
 
@@ -104,7 +104,7 @@
 
         <div style="display: inline-block; float: right;">
             <label for="searchInTorrentName" style="margin-left: 15px;">QBT_TR(Search in:)QBT_TR[CONTEXT=SearchEngineWidget]</label>
-            <select id="searchInTorrentName" onchange="qBittorrent.Search.searchInTorrentName()">
+            <select id="searchInTorrentName" onchange="Torrente.Search.searchInTorrentName()">
                 <option value="names">QBT_TR(Torrent names only)QBT_TR[CONTEXT=SearchEngineWidget]</option>
                 <option value="everywhere">QBT_TR(Everywhere)QBT_TR[CONTEXT=SearchEngineWidget]</option>
             </select>
@@ -113,13 +113,13 @@
 
             <div id="searchResultsGranularFilters">
                 <span style="margin-left: 15px;">QBT_TR(Seeds:)QBT_TR[CONTEXT=SearchEngineWidget]</span>
-                <input type="number" min="0" max="1000" id="searchMinSeedsFilter" value="0" onchange="qBittorrent.Search.searchSeedsFilterChanged()">
+                <input type="number" min="0" max="1000" id="searchMinSeedsFilter" value="0" onchange="Torrente.Search.searchSeedsFilterChanged()">
                 <span>to</span>
-                <input type="number" min="0" max="1000" id="searchMaxSeedsFilter" value="0" onchange="qBittorrent.Search.searchSeedsFilterChanged()">
+                <input type="number" min="0" max="1000" id="searchMaxSeedsFilter" value="0" onchange="Torrente.Search.searchSeedsFilterChanged()">
 
                 <span style="margin-left: 15px;">QBT_TR(Size:)QBT_TR[CONTEXT=SearchEngineWidget]</span>
-                <input type="number" min="0" max="1000" step=".01" value="0.00" id="searchMinSizeFilter" onchange="qBittorrent.Search.searchSizeFilterChanged()">
-                <select id="searchMinSizePrefix" onchange="qBittorrent.Search.searchSizeFilterPrefixChanged()">
+                <input type="number" min="0" max="1000" step=".01" value="0.00" id="searchMinSizeFilter" onchange="Torrente.Search.searchSizeFilterChanged()">
+                <select id="searchMinSizePrefix" onchange="Torrente.Search.searchSizeFilterPrefixChanged()">
                     <option value="0">QBT_TR(B)QBT_TR[CONTEXT=misc]</option>
                     <option value="1">QBT_TR(KiB)QBT_TR[CONTEXT=misc]</option>
                     <option value="2" selected>QBT_TR(MiB)QBT_TR[CONTEXT=misc]</option>
@@ -129,8 +129,8 @@
                     <option value="6">QBT_TR(EiB)QBT_TR[CONTEXT=misc]</option>
                 </select>
                 <span>to</span>
-                <input type="number" min="0" max="1000" step=".01" value="0.00" id="searchMaxSizeFilter" onchange="qBittorrent.Search.searchSizeFilterChanged()">
-                <select id="searchMaxSizePrefix" onchange="qBittorrent.Search.searchSizeFilterPrefixChanged()">
+                <input type="number" min="0" max="1000" step=".01" value="0.00" id="searchMaxSizeFilter" onchange="Torrente.Search.searchSizeFilterChanged()">
+                <select id="searchMaxSizePrefix" onchange="Torrente.Search.searchSizeFilterPrefixChanged()">
                     <option value="0">QBT_TR(B)QBT_TR[CONTEXT=misc]</option>
                     <option value="1">QBT_TR(KiB)QBT_TR[CONTEXT=misc]</option>
                     <option value="2" selected>QBT_TR(MiB)QBT_TR[CONTEXT=misc]</option>
@@ -162,7 +162,7 @@
     </div>
 
     <div style="height: 30px; padding-top: 10px;">
-        <button id="manageSearchPlugins" onclick="qBittorrent.Search.manageSearchPlugins()">QBT_TR(Search plugins...)QBT_TR[CONTEXT=SearchEngineWidget]</button>
+        <button id="manageSearchPlugins" onclick="Torrente.Search.manageSearchPlugins()">QBT_TR(Search plugins...)QBT_TR[CONTEXT=SearchEngineWidget]</button>
     </div>
 </div>
 
@@ -182,11 +182,11 @@
 <script>
     'use strict';
 
-    if (window.qBittorrent === undefined) {
-        window.qBittorrent = {};
+    if (window.Torrente === undefined) {
+        window.Torrente = {};
     }
 
-    window.qBittorrent.Search = (function() {
+    window.Torrente.Search = (function() {
         const exports = function() {
             return {
                 startStopSearch: startStopSearch,
@@ -237,7 +237,7 @@
         const init = function() {
             // load "Search in" preference from local storage
             $('searchInTorrentName').set('value', (LocalPreferences.get('search_in_filter') === "names") ? "names" : "everywhere");
-            const searchResultsTableContextMenu = new window.qBittorrent.ContextMenu.ContextMenu({
+            const searchResultsTableContextMenu = new window.Torrente.ContextMenu.ContextMenu({
                 targets: '.searchTableRow',
                 menu: 'searchResultsTableMenu',
                 actions: {
@@ -249,7 +249,7 @@
                     y: -53
                 }
             });
-            searchResultsTable = new window.qBittorrent.DynamicTable.SearchResultsTable();
+            searchResultsTable = new window.Torrente.DynamicTable.SearchResultsTable();
             searchResultsTable.setup('searchResultsTableDiv', 'searchResultsTableFixedHeaderDiv', searchResultsTableContextMenu);
             getPlugins();
 
@@ -546,7 +546,7 @@
 
                             allPlugins.each(function(plugin) {
                                 if (plugin.enabled === true)
-                                    pluginsHtml.push("<option value='" + window.qBittorrent.Misc.escapeHtml(plugin.name) + "'>" + window.qBittorrent.Misc.escapeHtml(plugin.fullName) + "</option>");
+                                    pluginsHtml.push("<option value='" + window.Torrente.Misc.escapeHtml(plugin.name) + "'>" + window.Torrente.Misc.escapeHtml(plugin.fullName) + "</option>");
                             });
 
                             if (pluginsHtml.length > 2)
@@ -560,8 +560,8 @@
                         $('pluginsSelect').setProperty('disabled', searchPluginsEmpty);
                         $('startSearchButton').setProperty('disabled', searchPluginsEmpty);
 
-                        if (window.qBittorrent.SearchPlugins !== undefined)
-                            window.qBittorrent.SearchPlugins.updateTable();
+                        if (window.Torrente.SearchPlugins !== undefined)
+                            window.Torrente.SearchPlugins.updateTable();
 
                         reselectPlugin();
                     }

@@ -374,7 +374,7 @@
                <item>
                 <widget class="QCheckBox" name="checkStartup">
                  <property name="text">
-                  <string>Start qBittorrent on Windows start up</string>
+                  <string>Start Torrente on Windows start up</string>
                  </property>
                 </widget>
                </item>
@@ -391,10 +391,10 @@
                <item>
                 <widget class="QCheckBox" name="checkStartMinimized">
                  <property name="toolTip">
-                  <string>When qBittorrent is started, the main window will be minimized</string>
+                  <string>When Torrente is started, the main window will be minimized</string>
                  </property>
                  <property name="text">
-                  <string>Start qBittorrent minimized</string>
+                  <string>Start Torrente minimized</string>
                  </property>
                 </widget>
                </item>
@@ -424,7 +424,7 @@
                <item>
                 <widget class="QGroupBox" name="checkShowSystray">
                  <property name="title">
-                  <string>Show &amp;qBittorrent in notification area</string>
+                  <string>Show &amp;Torrente in notification area</string>
                  </property>
                  <property name="checkable">
                   <bool>true</bool>
@@ -436,7 +436,7 @@
                      <string>When minimizing, the main window is closed and must be reopened from the systray icon</string>
                     </property>
                     <property name="text">
-                     <string>Minimize qBittorrent to notification area</string>
+                     <string>Minimize Torrente to notification area</string>
                     </property>
                     <property name="checked">
                      <bool>false</bool>
@@ -449,7 +449,7 @@
                      <string>The systray icon will still be visible when closing the main window</string>
                     </property>
                     <property name="text">
-                     <string extracomment="The systray icon will still be visible when closing the main window">Close qBittorrent to notification area</string>
+                     <string extracomment="The systray icon will still be visible when closing the main window">Close Torrente to notification area</string>
                     </property>
                    </widget>
                   </item>
@@ -508,14 +508,14 @@
                   <item>
                    <widget class="QCheckBox" name="checkAssociateTorrents">
                     <property name="text">
-                     <string>Use qBittorrent for .torrent files</string>
+                     <string>Use Torrente for .torrent files</string>
                     </property>
                    </widget>
                   </item>
                   <item>
                    <widget class="QCheckBox" name="checkAssociateMagnetLinks">
                     <property name="text">
-                     <string>Use qBittorrent for magnet links</string>
+                     <string>Use Torrente for magnet links</string>
                     </property>
                    </widget>
                   </item>
@@ -2332,7 +2332,7 @@ Disable encryption: Only connect to peers without protocol encryption</string>
                  <item>
                   <widget class="QLabel" name="label_anonymous">
                    <property name="text">
-                    <string>(&lt;a href=&quot;https://github.com/qbittorrent/qBittorrent/wiki/Anonymous-Mode&quot;&gt;More information&lt;/a&gt;)</string>
+                    <string>(&lt;a href=&quot;https://github.com/torrente/Torrente/wiki/Anonymous-Mode&quot;&gt;More information&lt;/a&gt;)</string>
                    </property>
                    <property name="openExternalLinks">
                     <bool>true</bool>

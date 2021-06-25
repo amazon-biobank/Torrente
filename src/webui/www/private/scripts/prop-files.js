@@ -1,6 +1,6 @@
 /*
  * Bittorrent Client using Qt and libtorrent.
- * Copyright (C) 2009  Christophe Dumez <chris@qbittorrent.org>
+ * Copyright (C) 2009  Christophe Dumez <chris@torrente.org>
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -28,11 +28,11 @@
 
 'use strict';
 
-if (window.qBittorrent === undefined) {
-    window.qBittorrent = {};
+if (window.Torrente === undefined) {
+    window.Torrente = {};
 }
 
-window.qBittorrent.PropFiles = (function() {
+window.Torrente.PropFiles = (function() {
     const exports = function() {
         return {
             normalizePriority: normalizePriority,
@@ -47,9 +47,9 @@ window.qBittorrent.PropFiles = (function() {
         };
     };
 
-    const torrentFilesTable = new window.qBittorrent.DynamicTable.TorrentFilesTable();
-    const FilePriority = window.qBittorrent.FileTree.FilePriority;
-    const TriState = window.qBittorrent.FileTree.TriState;
+    const torrentFilesTable = new window.Torrente.DynamicTable.TorrentFilesTable();
+    const FilePriority = window.Torrente.FileTree.FilePriority;
+    const TriState = window.Torrente.FileTree.TriState;
     let is_seed = true;
     let current_hash = "";
 
@@ -400,7 +400,7 @@ window.qBittorrent.PropFiles = (function() {
                 fileId: index,
                 checked: checked,
                 fileName: file.name,
-                name: window.qBittorrent.Filesystem.fileName(file.name),
+                name: window.Torrente.Filesystem.fileName(file.name),
                 size: file.size,
                 progress: progress,
                 priority: normalizePriority(file.priority),
@@ -419,10 +419,10 @@ window.qBittorrent.PropFiles = (function() {
         const selectedFiles = torrentFilesTable.selectedRowsIds();
         let rowId = 0;
 
-        const rootNode = new window.qBittorrent.FileTree.FolderNode();
+        const rootNode = new window.Torrente.FileTree.FolderNode();
 
         rows.forEach(function(row) {
-            const pathItems = row.fileName.split(window.qBittorrent.Filesystem.PathSeparator);
+            const pathItems = row.fileName.split(window.Torrente.Filesystem.PathSeparator);
 
             pathItems.pop(); // remove last item (i.e. file name)
             let parent = rootNode;
@@ -442,10 +442,10 @@ window.qBittorrent.PropFiles = (function() {
                 }
 
                 if (folderNode === null) {
-                    folderNode = new window.qBittorrent.FileTree.FolderNode();
+                    folderNode = new window.Torrente.FileTree.FolderNode();
                     folderNode.path = (parent.path === "")
                             ? folderName
-                            : [parent.path, folderName].join(window.qBittorrent.Filesystem.PathSeparator);
+                            : [parent.path, folderName].join(window.Torrente.Filesystem.PathSeparator);
                     folderNode.name = folderName;
                     folderNode.rowId = rowId;
                     folderNode.root = parent;
@@ -459,7 +459,7 @@ window.qBittorrent.PropFiles = (function() {
 
             const isChecked = row.checked ? TriState.Checked : TriState.Unchecked;
             const remaining = (row.priority === FilePriority.Ignored) ? 0 : row.remaining;
-            const childNode = new window.qBittorrent.FileTree.FileNode();
+            const childNode = new window.Torrente.FileTree.FileNode();
             childNode.name = row.name;
             childNode.path = row.fileName;
             childNode.rowId = rowId;
@@ -522,7 +522,7 @@ window.qBittorrent.PropFiles = (function() {
         setFilePriority(Object.keys(uniqueRowIds), Object.keys(uniqueFileIds), priority);
     };
 
-    const torrentFilesContextMenu = new window.qBittorrent.ContextMenu.ContextMenu({
+    const torrentFilesContextMenu = new window.Torrente.ContextMenu.ContextMenu({
         targets: '#torrentFilesTableDiv tr',
         menu: 'torrentFilesMenu',
         actions: {

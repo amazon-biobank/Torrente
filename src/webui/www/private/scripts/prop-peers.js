@@ -28,18 +28,18 @@
 
 'use strict';
 
-if (window.qBittorrent === undefined) {
-    window.qBittorrent = {};
+if (window.Torrente === undefined) {
+    window.Torrente = {};
 }
 
-window.qBittorrent.PropPeers = (function() {
+window.Torrente.PropPeers = (function() {
     const exports = function() {
         return {
             updateData: updateData
         }
     };
 
-    const torrentPeersTable = new window.qBittorrent.DynamicTable.TorrentPeersTable();
+    const torrentPeersTable = new window.Torrente.DynamicTable.TorrentPeersTable();
     let loadTorrentPeersTimer;
     let syncTorrentPeersLastResponseId = 0;
     let show_flags = true;
@@ -113,7 +113,7 @@ window.qBittorrent.PropPeers = (function() {
         loadTorrentPeersData();
     };
 
-    const torrentPeersContextMenu = new window.qBittorrent.ContextMenu.ContextMenu({
+    const torrentPeersContextMenu = new window.Torrente.ContextMenu.ContextMenu({
         targets: '#torrentPeersTableDiv',
         menu: 'torrentPeersMenu',
         actions: {

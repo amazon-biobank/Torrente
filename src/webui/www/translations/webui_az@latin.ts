@@ -92,8 +92,8 @@
 <context>
     <name>HttpServer</name>
     <message>
-        <source>Exit qBittorrent</source>
-        <translation>qBittorrent'dən çıxmaq</translation>
+        <source>Exit Torrente</source>
+        <translation>Torrente'dən çıxmaq</translation>
     </message>
     <message>
         <source>Only one link per line</source>
@@ -140,12 +140,12 @@
         <translation>Hər torrent limitinin göndərmə yuvasının sayı 0-dan böyük olmalıdır və ya söndürülməlidir.</translation>
     </message>
     <message>
-        <source>Unable to save program preferences, qBittorrent is probably unreachable.</source>
-        <translation>Proqram tərcihlərini saxlamaq olmadı. qBittorrent ola bilsin ki, əlçatmazdır.</translation>
+        <source>Unable to save program preferences, Torrente is probably unreachable.</source>
+        <translation>Proqram tərcihlərini saxlamaq olmadı. Torrente ola bilsin ki, əlçatmazdır.</translation>
     </message>
     <message>
-        <source>IRC: #qbittorrent on Freenode</source>
-        <translation>İRC: Freenode üzərindən #qbittorrent</translation>
+        <source>IRC: #torrente on Freenode</source>
+        <translation>İRC: Freenode üzərindən #torrente</translation>
     </message>
     <message>
         <source>Unknown</source>
@@ -168,8 +168,8 @@
         <translation>Veb İİ üçün istifadə olunan port 1 İlə 65535 arasında olmalıdır</translation>
     </message>
     <message>
-        <source>Unable to log in, qBittorrent is probably unreachable.</source>
-        <translation>Giriş mümkün olmadı, qBittorrent çox güman ki, əlçatmazdır.</translation>
+        <source>Unable to log in, Torrente is probably unreachable.</source>
+        <translation>Giriş mümkün olmadı, Torrente çox güman ki, əlçatmazdır.</translation>
     </message>
     <message>
         <source>Invalid Username or Password.</source>
@@ -301,8 +301,8 @@
         <translation>Saxlamaq</translation>
     </message>
     <message>
-        <source>qBittorrent client is not reachable</source>
-        <translation>qBittorrent müştərisi əlçatan deyil</translation>
+        <source>Torrente client is not reachable</source>
+        <translation>Torrente müştərisi əlçatan deyil</translation>
     </message>
     <message>
         <source>Global number of upload slots limit must be greater than 0 or disabled.</source>
@@ -341,8 +341,8 @@
         <translation>Endirmə sürəti həddi 0-dan böyük olmalıdır.</translation>
     </message>
     <message>
-        <source>qBittorrent has been shutdown</source>
-        <translation>qBittorrent söndürüldü</translation>
+        <source>Torrente has been shutdown</source>
+        <translation>Torrente söndürüldü</translation>
     </message>
     <message>
         <source>Open documentation</source>
@@ -476,13 +476,13 @@
         <translation>Ümumi yükləmə sürəti limiti</translation>
     </message>
     <message>
-        <source>Are you sure you want to quit qBittorrent?</source>
+        <source>Are you sure you want to quit Torrente?</source>
         <translation>qBittorent'dən çıxmaq istədiyinizə əminsiniz?</translation>
     </message>
     <message>
-        <source>[D: %1, U: %2] qBittorrent %3</source>
-        <comment>D = Download; U = Upload; %3 is qBittorrent version</comment>
-        <translation>[D: %1, U: %2] qBittorrent %3</translation>
+        <source>[D: %1, U: %2] Torrente %3</source>
+        <comment>D = Download; U = Upload; %3 is Torrente version</comment>
+        <translation>[D: %1, U: %2] Torrente %3</translation>
     </message>
     <message>
         <source>Alternative speed limits</source>
@@ -1186,8 +1186,8 @@
         <translation>Torrenti və fayllarını silmək</translation>
     </message>
     <message>
-        <source>qBittorrent Section</source>
-        <translation>qBittorrent Bölməsi</translation>
+        <source>Torrente Section</source>
+        <translation>Torrente Bölməsi</translation>
     </message>
     <message>
         <source>Send buffer watermark factor:</source>
@@ -2521,8 +2521,8 @@
         <translation>Həmçinin, diskdəki faylları silmək</translation>
     </message>
     <message>
-        <source>Deletion confirmation - qBittorrent</source>
-        <translation>Silinmənin təsdiqlənməsi - qBittorrent</translation>
+        <source>Deletion confirmation - Torrente</source>
+        <translation>Silinmənin təsdiqlənməsi - Torrente</translation>
     </message>
 </context>
 <context>
@@ -2910,8 +2910,8 @@
         <translation>Adı:</translation>
     </message>
     <message>
-        <source>About qBittorrent</source>
-        <translation>qBittorrent haqqında</translation>
+        <source>About Torrente</source>
+        <translation>Torrente haqqında</translation>
     </message>
     <message>
         <source>License</source>
@@ -2922,8 +2922,8 @@
         <translation>Tərcüməçilər</translation>
     </message>
     <message>
-        <source>qBittorrent was built with the following libraries:</source>
-        <translation>qBittorrent aşağıdakı kitabxanalar ilə hazılandı:</translation>
+        <source>Torrente was built with the following libraries:</source>
+        <translation>Torrente aşağıdakı kitabxanalar ilə hazılandı:</translation>
     </message>
     <message>
         <source>Nationality:</source>

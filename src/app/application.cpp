@@ -145,7 +145,7 @@ Application::Application(int &argc, char **argv)
     setQuitOnLastWindowClosed(false);
     QPixmapCache::setCacheLimit(PIXMAP_CACHE_SIZE);
 #endif
-   
+
     const bool portableModeEnabled = m_commandLineArgs.profileDir.isEmpty()
             && QDir(QCoreApplication::applicationDirPath()).exists(DEFAULT_PORTABLE_MODE_PROFILE_DIR);
 
@@ -157,7 +157,7 @@ Application::Application(int &argc, char **argv)
 #else
     const QString instanceId = profileDir + (m_commandLineArgs.configurationName.isEmpty() ? QString {} : ('/' + m_commandLineArgs.configurationName));
 #endif
-    const QString appId = QLatin1String("qBittorrent-") + Utils::Misc::getUserIDString() + '@' + instanceId;
+    const QString appId = QLatin1String("Torrente-") + Utils::Misc::getUserIDString() + '@' + instanceId;
     m_instanceManager = new ApplicationInstanceManager {appId, this};
 
     Profile::initInstance(profileDir, m_commandLineArgs.configurationName,
@@ -181,7 +181,7 @@ Application::Application(int &argc, char **argv)
     if (isFileLoggerEnabled())
         m_fileLogger = new FileLogger(fileLoggerPath(), isFileLoggerBackup(), fileLoggerMaxSize(), isFileLoggerDeleteOld(), fileLoggerAge(), static_cast<FileLogger::FileLogAgeType>(fileLoggerAgeType()));
 
-    Logger::instance()->addMessage(tr("qBittorrent %1 started", "qBittorrent v3.2.0alpha started").arg(QBT_VERSION));
+    Logger::instance()->addMessage(tr("Torrente %1 started", "Torrente v3.2.0alpha started").arg(QBT_VERSION));
     if (portableModeEnabled)
     {
         Logger::instance()->addMessage(tr("Running in portable mode. Auto detected profile folder at: %1").arg(profileDir));
@@ -432,7 +432,7 @@ void Application::runExternalProgram(const BitTorrent::Torrent *torrent) const
     // Cannot give users shell environment by default, as doing so could
     // enable command injection via torrent name and other arguments
     // (especially when some automated download mechanism has been setup).
-    // See: https://github.com/qbittorrent/qBittorrent/issues/10925
+    // See: https://github.com/torrente/Torrente/issues/10925
 #if (QT_VERSION >= QT_VERSION_CHECK(5, 15, 0))
     QStringList args = QProcess::splitCommand(program);
     if (args.isEmpty())
@@ -454,14 +454,14 @@ void Application::sendNotificationEmail(const BitTorrent::Torrent *torrent)
         + tr("Save path: %1").arg(torrent->savePath()) + "\n\n"
         + tr("The torrent was downloaded in %1.", "The torrent was downloaded in 1 hour and 20 seconds")
             .arg(Utils::Misc::userFriendlyDuration(torrent->activeTime())) + "\n\n\n"
-        + tr("Thank you for using qBittorrent.") + '\n';
+        + tr("Thank you for using Torrente.") + '\n';
 
     // Send the notification email
     const Preferences *pref = Preferences::instance();
     auto *smtp = new Net::Smtp(this);
     smtp->sendMail(pref->getMailNotificationSender(),
                      pref->getMailNotificationEmail(),
-                     tr("[qBittorrent] '%1' has finished downloading").arg(torrent->name()),
+                     tr("[Torrente] '%1' has finished downloading").arg(torrent->name()),
                      content);
 }
 
@@ -660,7 +660,7 @@ int Application::exec(const QStringList &params)
     Preferences *const pref = Preferences::instance();
     // Display some information to the user
     const QString mesg = QString::fromLatin1("\n******** %1 ********\n").arg(tr("Information"))
-        + tr("To control qBittorrent, access the Web UI at %1")
+        + tr("To control Torrente, access the Web UI at %1")
             .arg(QString("http://localhost:") + QString::number(pref->getWebUiPort())) + '\n';
     printf("%s", qUtf8Printable(mesg));
 
@@ -735,7 +735,7 @@ void Application::initializeTranslation()
 
     installTranslator(&m_qtTranslator);
 
-    if (m_translator.load(QLatin1String(":/lang/qbittorrent_") + localeStr))
+    if (m_translator.load(QLatin1String(":/lang/torrente_") + localeStr))
         qDebug("%s locale recognized, using translation.", qUtf8Printable(localeStr));
     else
         qDebug("%s locale unrecognized, using default (en).", qUtf8Printable(localeStr));

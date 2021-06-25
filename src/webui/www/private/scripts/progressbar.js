@@ -1,6 +1,6 @@
 /*
  * Bittorrent Client using Qt and libtorrent.
- * Copyright (C) 2008  Christophe Dumez <chris@qbittorrent.org>
+ * Copyright (C) 2008  Christophe Dumez <chris@torrente.org>
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -28,11 +28,11 @@
 
 'use strict';
 
-if (window.qBittorrent === undefined) {
-    window.qBittorrent = {};
+if (window.Torrente === undefined) {
+    window.Torrente = {};
 }
 
-window.qBittorrent.ProgressBar = (function() {
+window.Torrente.ProgressBar = (function() {
     const exports = function() {
         return {
             ProgressBar: ProgressBar

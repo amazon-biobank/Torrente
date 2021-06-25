@@ -36,12 +36,12 @@ cache:
 addons:
   coverity_scan:
     project:
-      name: "qbittorrent/qBittorrent"
+      name: "torrente/Torrente"
       description: "Build submitted via Travis CI"
     build_command_prepend: "./bootstrap.sh && ./configure $qmake_conf"
     build_command: "make -j2"
     branch_pattern: $coverity_branch
-    notification_email: sledgehammer999@qbittorrent.org
+    notification_email: sledgehammer999@torrente.org
   apt:
     sources:
       # sources list: https://github.com/travis-ci/apt-source-safelist/blob/master/ubuntu.json
@@ -171,7 +171,7 @@ script:
   - make install
 
 after_success:
-  - if [ "$gui" = "true" ]; then qbt_exe="qbittorrent" ; else qbt_exe="qbittorrent-nox" ; fi
+  - if [ "$gui" = "true" ]; then qbt_exe="torrente" ; else qbt_exe="torrente-nox" ; fi
   - if [ "$TRAVIS_OS_NAME" = "linux" ]; then cd "$qbt_path/bin" ; fi
   - |
     if [ "$TRAVIS_OS_NAME" = "osx" ]; then

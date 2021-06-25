@@ -92,8 +92,8 @@
 <context>
     <name>HttpServer</name>
     <message>
-        <source>Exit qBittorrent</source>
-        <translation>Ukončit qBittorrent</translation>
+        <source>Exit Torrente</source>
+        <translation>Ukončit Torrente</translation>
     </message>
     <message>
         <source>Only one link per line</source>
@@ -140,12 +140,12 @@
         <translation>Limit maximálního počtu slotů na torrent musí být větší než 0 nebo vypnut.</translation>
     </message>
     <message>
-        <source>Unable to save program preferences, qBittorrent is probably unreachable.</source>
-        <translation>Nelze uložit nastavení programu, qBittorrent klient je pravděpodobně nedostupný.</translation>
+        <source>Unable to save program preferences, Torrente is probably unreachable.</source>
+        <translation>Nelze uložit nastavení programu, Torrente klient je pravděpodobně nedostupný.</translation>
     </message>
     <message>
-        <source>IRC: #qbittorrent on Freenode</source>
-        <translation>IRC: #qbittorrent na Freenode</translation>
+        <source>IRC: #torrente on Freenode</source>
+        <translation>IRC: #torrente na Freenode</translation>
     </message>
     <message>
         <source>Unknown</source>
@@ -168,8 +168,8 @@
         <translation>Port webového rozhraní musí být mezi 1 a 65535.</translation>
     </message>
     <message>
-        <source>Unable to log in, qBittorrent is probably unreachable.</source>
-        <translation>Nelze se přihlásit, qBittorrent je pravděpodobně nedostupný</translation>
+        <source>Unable to log in, Torrente is probably unreachable.</source>
+        <translation>Nelze se přihlásit, Torrente je pravděpodobně nedostupný</translation>
     </message>
     <message>
         <source>Invalid Username or Password.</source>
@@ -301,8 +301,8 @@
         <translation>Uložit</translation>
     </message>
     <message>
-        <source>qBittorrent client is not reachable</source>
-        <translation>Klient qBittorrent není dostupný</translation>
+        <source>Torrente client is not reachable</source>
+        <translation>Klient Torrente není dostupný</translation>
     </message>
     <message>
         <source>Global number of upload slots limit must be greater than 0 or disabled.</source>
@@ -341,8 +341,8 @@
         <translation>Limit rychlosti stahování musí být větší než 0.</translation>
     </message>
     <message>
-        <source>qBittorrent has been shutdown</source>
-        <translation>qBittorrent byl ukončen</translation>
+        <source>Torrente has been shutdown</source>
+        <translation>Torrente byl ukončen</translation>
     </message>
     <message>
         <source>Open documentation</source>
@@ -476,13 +476,13 @@
         <translation>Celkový limit rychlosti stahování</translation>
     </message>
     <message>
-        <source>Are you sure you want to quit qBittorrent?</source>
-        <translation>Určitě chcete ukončit qBittorrent?</translation>
+        <source>Are you sure you want to quit Torrente?</source>
+        <translation>Určitě chcete ukončit Torrente?</translation>
     </message>
     <message>
-        <source>[D: %1, U: %2] qBittorrent %3</source>
-        <comment>D = Download; U = Upload; %3 is qBittorrent version</comment>
-        <translation>[S: %1, O: %2] qBittorrent %3</translation>
+        <source>[D: %1, U: %2] Torrente %3</source>
+        <comment>D = Download; U = Upload; %3 is Torrente version</comment>
+        <translation>[S: %1, O: %2] Torrente %3</translation>
     </message>
     <message>
         <source>Alternative speed limits</source>
@@ -1186,8 +1186,8 @@
         <translation>Odstranit torrent a jeho soubory</translation>
     </message>
     <message>
-        <source>qBittorrent Section</source>
-        <translation>Sekce qBittorrentu</translation>
+        <source>Torrente Section</source>
+        <translation>Sekce Torrenteu</translation>
     </message>
     <message>
         <source>Send buffer watermark factor:</source>
@@ -2517,8 +2517,8 @@
         <translation>Smazat soubory také z pevného disku</translation>
     </message>
     <message>
-        <source>Deletion confirmation - qBittorrent</source>
-        <translation>Potvrzení o smazání - qBittorrent</translation>
+        <source>Deletion confirmation - Torrente</source>
+        <translation>Potvrzení o smazání - Torrente</translation>
     </message>
 </context>
 <context>
@@ -2906,8 +2906,8 @@
         <translation>Jméno:</translation>
     </message>
     <message>
-        <source>About qBittorrent</source>
-        <translation>O qBittorrentu</translation>
+        <source>About Torrente</source>
+        <translation>O Torrenteu</translation>
     </message>
     <message>
         <source>License</source>
@@ -2918,8 +2918,8 @@
         <translation>Překladatelé</translation>
     </message>
     <message>
-        <source>qBittorrent was built with the following libraries:</source>
-        <translation>qBittorrent byl vytvořen s následujícími knihovnami:</translation>
+        <source>Torrente was built with the following libraries:</source>
+        <translation>Torrente byl vytvořen s následujícími knihovnami:</translation>
     </message>
     <message>
         <source>Nationality:</source>

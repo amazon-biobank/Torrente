@@ -85,11 +85,11 @@
             QBT_TR(Fetching of RSS feeds is disabled now! You can enable it in application settings.)QBT_TR[CONTEXT=RSSWidget]
         </div>
         <div id="rssButtonBar">
-            <button id="newSubscriptionButton" onclick="qBittorrent.Rss.addRSSFeed()">QBT_TR(New subscription)QBT_TR[CONTEXT=RSSWidget]</button>
-            <button id="markReadButton" onclick="qBittorrent.Rss.markSelectedAsRead()">QBT_TR(Mark items read)QBT_TR[CONTEXT=RSSWidget]</button>
-            <button id="updateAllButton" onclick="qBittorrent.Rss.refreshAllFeeds()">QBT_TR(Update all)QBT_TR[CONTEXT=RSSWidget]</button>
+            <button id="newSubscriptionButton" onclick="Torrente.Rss.addRSSFeed()">QBT_TR(New subscription)QBT_TR[CONTEXT=RSSWidget]</button>
+            <button id="markReadButton" onclick="Torrente.Rss.markSelectedAsRead()">QBT_TR(Mark items read)QBT_TR[CONTEXT=RSSWidget]</button>
+            <button id="updateAllButton" onclick="Torrente.Rss.refreshAllFeeds()">QBT_TR(Update all)QBT_TR[CONTEXT=RSSWidget]</button>
 
-            <button id="rssDownloaderButton" class="alignRight" onclick="qBittorrent.Rss.openRssDownloader()">QBT_TR(RSS Downloader...)QBT_TR[CONTEXT=RSSWidget]</button>
+            <button id="rssDownloaderButton" class="alignRight" onclick="Torrente.Rss.openRssDownloader()">QBT_TR(RSS Downloader...)QBT_TR[CONTEXT=RSSWidget]</button>
         </div>
     </div>
     <div id="rssContentView">
@@ -154,13 +154,13 @@
 <script>
     'use strict';
 
-    if (window.qBittorrent === undefined) {
-        window.qBittorrent = {};
+    if (window.Torrente === undefined) {
+        window.Torrente = {};
     }
 
     let serverSyncRssDataInterval = 1500;
 
-    window.qBittorrent.Rss = (() => {
+    window.Torrente.Rss = (() => {
         const exports = () => {
             return {
                 init: init,
@@ -181,8 +181,8 @@
         let feedData = {};
         let pathByFeedId = new Map();;
         let feedRefreshTimer;
-        let rssFeedTable = new window.qBittorrent.DynamicTable.RssFeedTable();
-        let rssArticleTable = new window.qBittorrent.DynamicTable.RssArticleTable();
+        let rssFeedTable = new window.Torrente.DynamicTable.RssFeedTable();
+        let rssArticleTable = new window.Torrente.DynamicTable.RssArticleTable();
 
         const init = () => {
             new Request.JSON({
@@ -190,7 +190,7 @@
                 method: 'get',
                 noCache: true,
                 onFailure: () => {
-                    alert('Could not contact qBittorrent');
+                    alert('Could not contact Torrente');
                 },
                 onSuccess: (pref) => {
                     if (!pref.rss_processing_enabled)
@@ -211,7 +211,7 @@
                 }
             }).send();
 
-            const rssFeedContextMenu = new window.qBittorrent.ContextMenu.RssFeedContextMenu({
+            const rssFeedContextMenu = new window.Torrente.ContextMenu.RssFeedContextMenu({
                 targets: '.rssFeedContextMenuTarget',
                 menu: 'rssFeedMenu',
                 actions: {
@@ -275,7 +275,7 @@
             rssFeedTable.setup('rssFeedTableDiv', 'rssFeedFixedHeaderDiv', rssFeedContextMenu);
 
 
-            const rssArticleContextMenu = new window.qBittorrent.ContextMenu.RssArticleContextMenu({
+            const rssArticleContextMenu = new window.Torrente.ContextMenu.RssArticleContextMenu({
                 targets: '.rssArticleElement',
                 menu: 'rssArticleMenu',
                 actions: {

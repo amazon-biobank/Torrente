@@ -2,7 +2,7 @@
  * Bittorrent Client using Qt and libtorrent.
  * Copyright (C) 2016  Eugene Shalygin <eugene.shalygin@gmail.com>
  * Copyright (C) 2014  Vladimir Golovnev <glassez@yandex.ru>
- * Copyright (C) 2006  Christophe Dumez <chris@qbittorrent.org>
+ * Copyright (C) 2006  Christophe Dumez <chris@torrente.org>
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -364,7 +364,7 @@ QStringList QBtCommandLineParameters::paramList() const
 {
     QStringList result;
     // Because we're passing a string list to the currently running
-    // qBittorrent process, we need some way of passing along the options
+    // Torrente process, we need some way of passing along the options
     // the user has specified. Here we place special strings that are
     // almost certainly not going to collide with a file path or URL
     // specified by the user, and placing them at the beginning of the
@@ -557,7 +557,7 @@ QString makeUsage(const QString &prgName)
     stream << PROFILE_OPTION.usage(QObject::tr("dir"))
            << wrapText(QObject::tr("Store configuration files in <dir>")) << '\n';
     stream << CONFIGURATION_OPTION.usage(QObject::tr("name"))
-           << wrapText(QObject::tr("Store configuration files in directories qBittorrent_<name>")) << '\n';
+           << wrapText(QObject::tr("Store configuration files in directories Torrente_<name>")) << '\n';
     stream << RELATIVE_FASTRESUME.usage()
            << wrapText(QObject::tr("Hack into libtorrent fastresume files and make file paths relative "
                                          "to the profile directory")) << '\n';

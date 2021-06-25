@@ -1,7 +1,7 @@
 /*
  * Bittorrent Client using Qt and libtorrent.
  * Copyright (C) 2014  sledgehammer999 <hammered999@gmail.com>
- * Copyright (C) 2006  Christophe Dumez <chris@qbittorrent.org>
+ * Copyright (C) 2006  Christophe Dumez <chris@torrente.org>
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -183,7 +183,7 @@ void Preferences::setHideZeroComboValues(const int n)
 }
 
 // In Mac OS X the dock is sufficient for our needs so we disable the sys tray functionality.
-// See extensive discussion in https://github.com/qbittorrent/qBittorrent/pull/3018
+// See extensive discussion in https://github.com/torrente/Torrente/pull/3018
 #ifndef Q_OS_MACOS
 bool Preferences::systrayIntegration() const
 {
@@ -311,7 +311,7 @@ void Preferences::setPreventFromSuspendWhenSeeding(const bool b)
 bool Preferences::WinStartup() const
 {
     QSettings settings("HKEY_CURRENT_USER\\Software\\Microsoft\\Windows\\CurrentVersion\\Run", QSettings::NativeFormat);
-    return settings.contains("qBittorrent");
+    return settings.contains("Torrente");
 }
 
 void Preferences::setWinStartup(const bool b)
@@ -320,11 +320,11 @@ void Preferences::setWinStartup(const bool b)
     if (b)
     {
         const QString binPath = '"' + Utils::Fs::toNativePath(qApp->applicationFilePath()) + '"';
-        settings.setValue("qBittorrent", binPath);
+        settings.setValue("Torrente", binPath);
     }
     else
     {
-        settings.remove("qBittorrent");
+        settings.remove("Torrente");
     }
 }
 #endif // Q_OS_WIN
@@ -373,7 +373,7 @@ void Preferences::setMailNotificationEnabled(const bool enabled)
 
 QString Preferences::getMailNotificationSender() const
 {
-    return value("Preferences/MailNotification/sender", "qBittorrent_notification@example.com").toString();
+    return value("Preferences/MailNotification/sender", "Torrente_notification@example.com").toString();
 }
 
 void Preferences::setMailNotificationSender(const QString &mail)
@@ -991,9 +991,9 @@ void Preferences::setNeverCheckFileAssoc(const bool check)
 bool Preferences::isTorrentFileAssocSet()
 {
     const QSettings settings("HKEY_CURRENT_USER\\Software\\Classes", QSettings::NativeFormat);
-    if (settings.value(".torrent/Default").toString() != "qBittorrent")
+    if (settings.value(".torrent/Default").toString() != "Torrente")
     {
-        qDebug(".torrent != qBittorrent");
+        qDebug(".torrent != Torrente");
         return false;
     }
 
@@ -1026,9 +1026,9 @@ void Preferences::setTorrentFileAssoc(const bool set)
     if (set)
     {
         const QString oldProgId = settings.value(".torrent/Default").toString();
-        if (!oldProgId.isEmpty() && (oldProgId != "qBittorrent"))
+        if (!oldProgId.isEmpty() && (oldProgId != "Torrente"))
             settings.setValue(".torrent/OpenWithProgids/" + oldProgId, "");
-        settings.setValue(".torrent/Default", "qBittorrent");
+        settings.setValue(".torrent/Default", "Torrente");
     }
     else if (isTorrentFileAssocSet())
     {

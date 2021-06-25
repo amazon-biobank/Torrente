@@ -32,7 +32,7 @@
                         onComplete: (response) => {
                             ++completionCount;
                             if (completionCount === rules.length) {
-                                window.parent.qBittorrent.RssDownloader.updateRulesList();
+                                window.parent.Torrente.RssDownloader.updateRulesList();
                                 window.parent.MochaUI.closeWindow(window.parent.$('removeRulePage'));
                             }
                         }

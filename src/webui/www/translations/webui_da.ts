@@ -92,8 +92,8 @@
 <context>
     <name>HttpServer</name>
     <message>
-        <source>Exit qBittorrent</source>
-        <translation>Afslut qBittorrent</translation>
+        <source>Exit Torrente</source>
+        <translation>Afslut Torrente</translation>
     </message>
     <message>
         <source>Only one link per line</source>
@@ -140,12 +140,12 @@
         <translation>Grænsen for det maksimale antal uploadpladser pr. torrent skal være større end 0 eller deaktiveret.</translation>
     </message>
     <message>
-        <source>Unable to save program preferences, qBittorrent is probably unreachable.</source>
-        <translation>Kan ikke gemme programpræferencer, qBittorrent er formodentligt ikke til at få kontakt med.</translation>
+        <source>Unable to save program preferences, Torrente is probably unreachable.</source>
+        <translation>Kan ikke gemme programpræferencer, Torrente er formodentligt ikke til at få kontakt med.</translation>
     </message>
     <message>
-        <source>IRC: #qbittorrent on Freenode</source>
-        <translation>IRC: #qbittorrent på Freenode</translation>
+        <source>IRC: #torrente on Freenode</source>
+        <translation>IRC: #torrente på Freenode</translation>
     </message>
     <message>
         <source>Unknown</source>
@@ -168,8 +168,8 @@
         <translation>Porten der bruges til webgrænsefladen skal være mellem 1 og 65535.</translation>
     </message>
     <message>
-        <source>Unable to log in, qBittorrent is probably unreachable.</source>
-        <translation>Kan ikke logge ind, qBittorrent er formodentligt ikke til at få kontakt med.</translation>
+        <source>Unable to log in, Torrente is probably unreachable.</source>
+        <translation>Kan ikke logge ind, Torrente er formodentligt ikke til at få kontakt med.</translation>
     </message>
     <message>
         <source>Invalid Username or Password.</source>
@@ -301,8 +301,8 @@
         <translation>Gem</translation>
     </message>
     <message>
-        <source>qBittorrent client is not reachable</source>
-        <translation>qBittorrent-klienten kan ikke kontaktes</translation>
+        <source>Torrente client is not reachable</source>
+        <translation>Torrente-klienten kan ikke kontaktes</translation>
     </message>
     <message>
         <source>Global number of upload slots limit must be greater than 0 or disabled.</source>
@@ -341,8 +341,8 @@
         <translation>Grænse for downloadhastighed skal være større end 0.</translation>
     </message>
     <message>
-        <source>qBittorrent has been shutdown</source>
-        <translation>qBittorrent er blevet lukket ned</translation>
+        <source>Torrente has been shutdown</source>
+        <translation>Torrente er blevet lukket ned</translation>
     </message>
     <message>
         <source>Open documentation</source>
@@ -476,13 +476,13 @@
         <translation>Global grænse for downloadhastighed</translation>
     </message>
     <message>
-        <source>Are you sure you want to quit qBittorrent?</source>
-        <translation>Er du sikker på, at du vil afslutte qBittorrent?</translation>
+        <source>Are you sure you want to quit Torrente?</source>
+        <translation>Er du sikker på, at du vil afslutte Torrente?</translation>
     </message>
     <message>
-        <source>[D: %1, U: %2] qBittorrent %3</source>
-        <comment>D = Download; U = Upload; %3 is qBittorrent version</comment>
-        <translation>[D: %1/s, U: %2/s] qBittorrent %3</translation>
+        <source>[D: %1, U: %2] Torrente %3</source>
+        <comment>D = Download; U = Upload; %3 is Torrente version</comment>
+        <translation>[D: %1/s, U: %2/s] Torrente %3</translation>
     </message>
     <message>
         <source>Alternative speed limits</source>
@@ -1186,8 +1186,8 @@
         <translation>Fjern torrenten og dens filer</translation>
     </message>
     <message>
-        <source>qBittorrent Section</source>
-        <translation>qBittorrent-sektion</translation>
+        <source>Torrente Section</source>
+        <translation>Torrente-sektion</translation>
     </message>
     <message>
         <source>Send buffer watermark factor:</source>
@@ -2517,8 +2517,8 @@
         <translation>Slet også filerne på harddisken</translation>
     </message>
     <message>
-        <source>Deletion confirmation - qBittorrent</source>
-        <translation>Bekræft sletning - qBittorrent</translation>
+        <source>Deletion confirmation - Torrente</source>
+        <translation>Bekræft sletning - Torrente</translation>
     </message>
 </context>
 <context>
@@ -2906,8 +2906,8 @@
         <translation>Navn:</translation>
     </message>
     <message>
-        <source>About qBittorrent</source>
-        <translation>Om qBittorrent</translation>
+        <source>About Torrente</source>
+        <translation>Om Torrente</translation>
     </message>
     <message>
         <source>License</source>
@@ -2918,8 +2918,8 @@
         <translation>Oversættere</translation>
     </message>
     <message>
-        <source>qBittorrent was built with the following libraries:</source>
-        <translation>qBittorrent blev bygget med følgende biblioteker:</translation>
+        <source>Torrente was built with the following libraries:</source>
+        <translation>Torrente blev bygget med følgende biblioteker:</translation>
     </message>
     <message>
         <source>Nationality:</source>

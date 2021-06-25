@@ -92,8 +92,8 @@
 <context>
     <name>HttpServer</name>
     <message>
-        <source>Exit qBittorrent</source>
-        <translation>退出 qBittorrent</translation>
+        <source>Exit Torrente</source>
+        <translation>退出 Torrente</translation>
     </message>
     <message>
         <source>Only one link per line</source>
@@ -140,12 +140,12 @@
         <translation>每个 torrent 上传窗口数上限必须大于 0 或禁用。</translation>
     </message>
     <message>
-        <source>Unable to save program preferences, qBittorrent is probably unreachable.</source>
+        <source>Unable to save program preferences, Torrente is probably unreachable.</source>
         <translation>无法保存程序偏好选项，可能是无法连接到 qBttorrent。</translation>
     </message>
     <message>
-        <source>IRC: #qbittorrent on Freenode</source>
-        <translation>IRC：#qbittorrent on Freenode</translation>
+        <source>IRC: #torrente on Freenode</source>
+        <translation>IRC：#torrente on Freenode</translation>
     </message>
     <message>
         <source>Unknown</source>
@@ -168,7 +168,7 @@
         <translation>用于 Web UI 的端口必须大于 1 且小于 65535。</translation>
     </message>
     <message>
-        <source>Unable to log in, qBittorrent is probably unreachable.</source>
+        <source>Unable to log in, Torrente is probably unreachable.</source>
         <translation>登录失败，可能是无法连接到 qBttorrent。</translation>
     </message>
     <message>
@@ -301,8 +301,8 @@
         <translation>保存</translation>
     </message>
     <message>
-        <source>qBittorrent client is not reachable</source>
-        <translation>无法访问 qBittorrent 客户端</translation>
+        <source>Torrente client is not reachable</source>
+        <translation>无法访问 Torrente 客户端</translation>
     </message>
     <message>
         <source>Global number of upload slots limit must be greater than 0 or disabled.</source>
@@ -341,8 +341,8 @@
         <translation>下载速率阈值必须大于 0。</translation>
     </message>
     <message>
-        <source>qBittorrent has been shutdown</source>
-        <translation>qBittorrent 已关闭。</translation>
+        <source>Torrente has been shutdown</source>
+        <translation>Torrente 已关闭。</translation>
     </message>
     <message>
         <source>Open documentation</source>
@@ -476,13 +476,13 @@
         <translation>全局下载速度限制</translation>
     </message>
     <message>
-        <source>Are you sure you want to quit qBittorrent?</source>
-        <translation>您确定要退出 qBittorrent 吗？</translation>
+        <source>Are you sure you want to quit Torrente?</source>
+        <translation>您确定要退出 Torrente 吗？</translation>
     </message>
     <message>
-        <source>[D: %1, U: %2] qBittorrent %3</source>
-        <comment>D = Download; U = Upload; %3 is qBittorrent version</comment>
-        <translation>[D: %1, U: %2] qBittorrent %3</translation>
+        <source>[D: %1, U: %2] Torrente %3</source>
+        <comment>D = Download; U = Upload; %3 is Torrente version</comment>
+        <translation>[D: %1, U: %2] Torrente %3</translation>
     </message>
     <message>
         <source>Alternative speed limits</source>
@@ -1186,8 +1186,8 @@
         <translation>删除 torrent 及所属文件</translation>
     </message>
     <message>
-        <source>qBittorrent Section</source>
-        <translation>qBittorrent 相关</translation>
+        <source>Torrente Section</source>
+        <translation>Torrente 相关</translation>
     </message>
     <message>
         <source>Send buffer watermark factor:</source>
@@ -2521,8 +2521,8 @@
         <translation>同时从硬盘上删除文件</translation>
     </message>
     <message>
-        <source>Deletion confirmation - qBittorrent</source>
-        <translation>确认删除 - qBittorrent</translation>
+        <source>Deletion confirmation - Torrente</source>
+        <translation>确认删除 - Torrente</translation>
     </message>
 </context>
 <context>
@@ -2910,8 +2910,8 @@
         <translation>姓名：</translation>
     </message>
     <message>
-        <source>About qBittorrent</source>
-        <translation>关于 qBittorrent</translation>
+        <source>About Torrente</source>
+        <translation>关于 Torrente</translation>
     </message>
     <message>
         <source>License</source>
@@ -2922,8 +2922,8 @@
         <translation>译者</translation>
     </message>
     <message>
-        <source>qBittorrent was built with the following libraries:</source>
-        <translation>qBittorrent 的构建使用了以下库：</translation>
+        <source>Torrente was built with the following libraries:</source>
+        <translation>Torrente 的构建使用了以下库：</translation>
     </message>
     <message>
         <source>Nationality:</source>

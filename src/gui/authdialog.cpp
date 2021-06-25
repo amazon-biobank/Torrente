@@ -48,7 +48,7 @@ AuthDialog::AuthDialog(QWidget *parent)
     , m_ui(new Ui::AuthDialog)
 {
     m_ui->setupUi(this);
-    
+
     m_ui->lineEdit->setEchoMode(QLineEdit::Password);
 
     m_ui->loginButton->setText(tr("Login"));
@@ -65,7 +65,7 @@ AuthDialog::~AuthDialog()
 void AuthDialog::onImportButtonClicked()
 {
     QString fileName = QFileDialog::getOpenFileName(
-        this, 
+        this,
         tr("Open key"),
         QDir::homePath(),
         tr("Key Files (*.pem *.key)")
@@ -93,7 +93,7 @@ void AuthDialog::setCredentials()
         if (authResult) {
             throw INVALID_CREDENTIALS_EXCEPTION;
         }
-        
+
         QApplication::restoreOverrideCursor();
         this->toggleWidgetsEnable();
         this->close();

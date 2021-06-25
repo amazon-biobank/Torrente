@@ -1,6 +1,6 @@
 /*
  * Bittorrent Client using Qt and libtorrent.
- * Copyright (C) 2016 qBittorrent project
+ * Copyright (C) 2016 Torrente project
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -59,7 +59,7 @@ namespace
 
     enum AdvSettingsRows
     {
-        // qBittorrent section
+        // Torrente section
         QBITTORRENT_HEADER,
 #if defined(Q_OS_WIN)
         OS_MEMORY_PRIORITY,
@@ -371,11 +371,11 @@ void AdvancedSettings::loadAdvancedSettings()
 
     // add section headers
     auto *labelQbtLink = new QLabel(
-        makeLink(QLatin1String("https://github.com/qbittorrent/qBittorrent/wiki/Explanation-of-Options-in-qBittorrent#Advanced")
+        makeLink(QLatin1String("https://github.com/torrente/Torrente/wiki/Explanation-of-Options-in-Torrente#Advanced")
                  , tr("Open documentation"))
         , this);
     labelQbtLink->setOpenExternalLinks(true);
-    addRow(QBITTORRENT_HEADER, QString::fromLatin1("<b>%1</b>").arg(tr("qBittorrent Section")), labelQbtLink);
+    addRow(QBITTORRENT_HEADER, QString::fromLatin1("<b>%1</b>").arg(tr("Torrente Section")), labelQbtLink);
     static_cast<QLabel *>(cellWidget(QBITTORRENT_HEADER, PROPERTY))->setAlignment(Qt::AlignCenter | Qt::AlignVCenter);
 
     auto *labelLibtorrentLink = new QLabel(

@@ -1,6 +1,6 @@
 /*
  * Bittorrent Client using Qt and libtorrent.
- * Copyright (C) 2006  Christophe Dumez <chris@qbittorrent.org>
+ * Copyright (C) 2006  Christophe Dumez <chris@torrente.org>
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -158,7 +158,7 @@ StatusBar::~StatusBar()
 void StatusBar::showRestartRequired()
 {
     // Restart required notification
-    const QString restartText = tr("qBittorrent needs to be restarted!");
+    const QString restartText = tr("Torrente needs to be restarted!");
     QLabel *restartIconLbl = new QLabel(this);
     restartIconLbl->setPixmap(style()->standardPixmap(QStyle::SP_MessageBoxWarning));
     restartIconLbl->setToolTip(restartText);
@@ -176,7 +176,7 @@ void StatusBar::updateConnectionStatus()
     if (!BitTorrent::Session::instance()->isListening())
     {
         m_connecStatusLblIcon->setIcon(UIThemeManager::instance()->getIcon(QLatin1String("disconnected")));
-        m_connecStatusLblIcon->setToolTip(QLatin1String("<b>") + tr("Connection Status:") + QLatin1String("</b><br>") + tr("Offline. This usually means that qBittorrent failed to listen on the selected port for incoming connections."));
+        m_connecStatusLblIcon->setToolTip(QLatin1String("<b>") + tr("Connection Status:") + QLatin1String("</b><br>") + tr("Offline. This usually means that Torrente failed to listen on the selected port for incoming connections."));
     }
     else
     {

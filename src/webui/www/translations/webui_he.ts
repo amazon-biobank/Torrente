@@ -92,8 +92,8 @@
 <context>
     <name>HttpServer</name>
     <message>
-        <source>Exit qBittorrent</source>
-        <translation>צא מ-qBittorrent</translation>
+        <source>Exit Torrente</source>
+        <translation>צא מ-Torrente</translation>
     </message>
     <message>
         <source>Only one link per line</source>
@@ -140,12 +140,12 @@
         <translation>מספר מרבי של מגבלת חריצי העלאה לכל טורנט חייב להיות גדול מ-0 או מושבת.</translation>
     </message>
     <message>
-        <source>Unable to save program preferences, qBittorrent is probably unreachable.</source>
-        <translation>לא ניתן לשמור את העדפות התכנית, qBittorrent כנראה בלתי נגיש.</translation>
+        <source>Unable to save program preferences, Torrente is probably unreachable.</source>
+        <translation>לא ניתן לשמור את העדפות התכנית, Torrente כנראה בלתי נגיש.</translation>
     </message>
     <message>
-        <source>IRC: #qbittorrent on Freenode</source>
-        <translation>IRC: ערוץ #qbittorrent על Freenode</translation>
+        <source>IRC: #torrente on Freenode</source>
+        <translation>IRC: ערוץ #torrente על Freenode</translation>
     </message>
     <message>
         <source>Unknown</source>
@@ -168,8 +168,8 @@
         <translation>הפתחה המשמשת לממשק משתמש הרשת חייבת להיות בין 1 ל-65535.</translation>
     </message>
     <message>
-        <source>Unable to log in, qBittorrent is probably unreachable.</source>
-        <translation>לא היה ניתן להיכנס, qBittorrent כנראה בלתי נגיש.</translation>
+        <source>Unable to log in, Torrente is probably unreachable.</source>
+        <translation>לא היה ניתן להיכנס, Torrente כנראה בלתי נגיש.</translation>
     </message>
     <message>
         <source>Invalid Username or Password.</source>
@@ -301,8 +301,8 @@
         <translation>שמירה</translation>
     </message>
     <message>
-        <source>qBittorrent client is not reachable</source>
-        <translation>לקוח qBittorrent בלתי נגיש</translation>
+        <source>Torrente client is not reachable</source>
+        <translation>לקוח Torrente בלתי נגיש</translation>
     </message>
     <message>
         <source>Global number of upload slots limit must be greater than 0 or disabled.</source>
@@ -341,8 +341,8 @@
         <translation>סף קצב הורדה חייב להיות גדול מ־0.</translation>
     </message>
     <message>
-        <source>qBittorrent has been shutdown</source>
-        <translation>qBittorrent כובה</translation>
+        <source>Torrente has been shutdown</source>
+        <translation>Torrente כובה</translation>
     </message>
     <message>
         <source>Open documentation</source>
@@ -476,13 +476,13 @@
         <translation>מגבלה כללית של מהירות הורדה</translation>
     </message>
     <message>
-        <source>Are you sure you want to quit qBittorrent?</source>
-        <translation>האם אתה בטוח שאתה רוצה לצאת מ-qBittorrent?</translation>
+        <source>Are you sure you want to quit Torrente?</source>
+        <translation>האם אתה בטוח שאתה רוצה לצאת מ-Torrente?</translation>
     </message>
     <message>
-        <source>[D: %1, U: %2] qBittorrent %3</source>
-        <comment>D = Download; U = Upload; %3 is qBittorrent version</comment>
-        <translation>[הור: %1, העל: %2] qBittorrent %3</translation>
+        <source>[D: %1, U: %2] Torrente %3</source>
+        <comment>D = Download; U = Upload; %3 is Torrente version</comment>
+        <translation>[הור: %1, העל: %2] Torrente %3</translation>
     </message>
     <message>
         <source>Alternative speed limits</source>
@@ -1186,8 +1186,8 @@
         <translation>הסר טורנט ואת קבציו</translation>
     </message>
     <message>
-        <source>qBittorrent Section</source>
-        <translation>קטע qBittorrent</translation>
+        <source>Torrente Section</source>
+        <translation>קטע Torrente</translation>
     </message>
     <message>
         <source>Send buffer watermark factor:</source>
@@ -2521,8 +2521,8 @@
         <translation>מחק את הקבצים גם מהכונן הקשיח</translation>
     </message>
     <message>
-        <source>Deletion confirmation - qBittorrent</source>
-        <translation>אישור מחיקה - qBittorrent</translation>
+        <source>Deletion confirmation - Torrente</source>
+        <translation>אישור מחיקה - Torrente</translation>
     </message>
 </context>
 <context>
@@ -2910,8 +2910,8 @@
         <translation>שם:</translation>
     </message>
     <message>
-        <source>About qBittorrent</source>
-        <translation>אודות qBittorrent</translation>
+        <source>About Torrente</source>
+        <translation>אודות Torrente</translation>
     </message>
     <message>
         <source>License</source>
@@ -2922,8 +2922,8 @@
         <translation>מתרגמים</translation>
     </message>
     <message>
-        <source>qBittorrent was built with the following libraries:</source>
-        <translation>qBittorrent נבנה עם הסיפריות הבאות:</translation>
+        <source>Torrente was built with the following libraries:</source>
+        <translation>Torrente נבנה עם הסיפריות הבאות:</translation>
     </message>
     <message>
         <source>Nationality:</source>

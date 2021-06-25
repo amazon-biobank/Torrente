@@ -2,9 +2,9 @@ cmake_minimum_required(VERSION 3.16 FATAL_ERROR) # Policies <= CMP0097 default t
 
 list(APPEND CMAKE_MODULE_PATH ${CMAKE_CURRENT_SOURCE_DIR}/cmake/Modules)
 
-project(qBittorrent
-    DESCRIPTION "The qBittorrent BitTorrent client"
-    HOMEPAGE_URL "https://www.qbittorrent.org/"
+project(Torrente
+    DESCRIPTION "The Torrente BitTorrent client"
+    HOMEPAGE_URL "https://github.com/amazon-biobank/Torrente"
     LANGUAGES CXX
 )
 
