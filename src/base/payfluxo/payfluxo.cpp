@@ -64,6 +64,11 @@ bool Session::authenticate(QString password, QString certificatePath) {
     m_authenticated = true;
     m_payfluxoService->sendAuthenticatedMessage(certificateString, privateKeyString, mspIdString);
 
+    // TODO: Recover from safe persistence
+    m_availableCoins = 0;
+    m_frozenCoins = 0;
+    m_redeemableCoins = 0;
+
     return false;
 }
 
@@ -108,6 +113,30 @@ int Session::getIpPendentPayment(QString ip) {
 
 QString Session::getCertificate() {
     return m_userDecryptedCertificateString;
+}
+
+float Session::getAvailableCoins() {
+    return m_availableCoins;
+}
+
+float Session::getFrozenCoins() {
+    return m_frozenCoins;
+}
+
+float Session::getRedeemableCoins() {
+    return m_redeemableCoins;
+}
+
+void Session::setAvailableCoins(float newAmount) {
+    m_availableCoins = newAmount;
+}
+
+void Session::setFrozenCoins(float newAmount) {
+    m_frozenCoins = newAmount;
+}
+
+void Session::setRedeemableCoins(float newAmount) {
+    m_redeemableCoins = newAmount;
 }
 
 Session* Session::m_instance = nullptr;

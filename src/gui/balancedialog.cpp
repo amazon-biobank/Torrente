@@ -28,6 +28,7 @@
 
 #include <QFileDialog>
 #include <QMessageBox>
+#include <QString>
 
 #include "base/payfluxo/payfluxo.h"
 
@@ -43,8 +44,14 @@ BalanceDialog::BalanceDialog(QWidget *parent)
     , m_ui(new Ui::BalanceDialog)
 {
     m_ui->setupUi(this);
-    QString certificateString = Payfluxo::Session::instance()->getCertificate();
+    Payfluxo::Session *payfluxoInstance = Payfluxo::Session::instance();
+
+    QString certificateString = payfluxoInstance->getCertificate();
+
+    float redeemableCoins = payfluxoInstance->getRedeemableCoins();
+
     m_ui->publicKey->setText(this->getSimplifiedPublicKey(certificateString));
+    m_ui->RedeemBalance_value->setText(QString::number(redeemableCoins));
 
     this->setWindowTitle(tr("User Balance"));
 }

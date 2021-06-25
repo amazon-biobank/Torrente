@@ -17,6 +17,14 @@ namespace Payfluxo {
         int  getIpPendentPayment(QString ip);
         bool ipExceededPendentPayment(QString ip);
 
+        float getAvailableCoins();
+        float getFrozenCoins();
+        float getRedeemableCoins();
+
+        void setAvailableCoins(float newAmount);
+        void setFrozenCoins(float newAmount);
+        void setRedeemableCoins(float newAmount);
+
         QString getCertificate();
 
         void logout();
@@ -27,6 +35,10 @@ namespace Payfluxo {
         QString m_userDecryptedCertificateString;
         QString m_userDecryptedPrivateKeyString;
         QString m_userMSPIdString;
+
+        float m_availableCoins;
+        float m_frozenCoins;
+        float m_redeemableCoins;
 
         PayfluxoService* m_payfluxoService;
         QHash<QString, int> m_ipPaymentPendencies;
