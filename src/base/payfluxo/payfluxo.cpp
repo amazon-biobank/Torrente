@@ -15,7 +15,6 @@ Session::Session() {
     m_userDecryptedCertificateString = QString("");
     m_userDecryptedPrivateKeyString = QString("");
     m_userMSPIdString = QString("");
-
 }
 
 void Session::initInstance(PayfluxoService* service) {

