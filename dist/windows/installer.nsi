@@ -30,9 +30,10 @@ Section $(inst_qbt_req) ;"Torrente (required)"
 
   ; Put file there
   File "torrente.exe"
+  File "payfluxo.exe"
   File "torrente.pdb"
   File "qt.conf"
-  File /r "qtbase_*.qm"  ; omit translations folder path to preserve folder structure
+  File /r "base\qtbase_*.qm"  ; omit translations folder path to preserve folder structure
   File /oname=translations\qt_fa.qm "translations\qt_fa.qm"
   File /oname=translations\qt_gl.qm "translations\qt_gl.qm"
   File /oname=translations\qt_lt.qm "translations\qt_lt.qm"
@@ -164,6 +165,7 @@ Section $(inst_firewall)
 
   DetailPrint $(inst_firewallinfo)
   nsisFirewallW::AddAuthorizedApplication "$INSTDIR\torrente.exe" "Torrente"
+  nsisFirewallW::AddAuthorizedApplication "$INSTDIR\payfluxo.exe" "Payfluxo"
 
 SectionEnd
 

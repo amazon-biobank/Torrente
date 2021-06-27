@@ -12,3 +12,5 @@ It aims to be a modification to be used along the Biobank project.
 More information can be found in these links:
 
 - [Windows build instructions](https://github.com/amazon-biobank/Torrente/wiki/Windows-build-instructions)
+
+- [Ubuntu build instructinos](https://github.com/amazon-biobank/Torrente/wiki/Ubuntu-Debian-build-instructions)
