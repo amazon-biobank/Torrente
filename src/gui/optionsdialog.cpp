@@ -573,7 +573,7 @@ void OptionsDialog::initializeLanguageCombo()
     const QStringList langFiles = langDir.entryList(QStringList("torrente_*.qm"), QDir::Files);
     for (const QString &langFile : langFiles)
     {
-        QString localeStr = langFile.mid(12); // remove "torrente_"
+        QString localeStr = langFile.mid(9); // remove "torrente_"
         localeStr.chop(3); // Remove ".qm"
         QString languageName;
         if (localeStr.startsWith("eo", Qt::CaseInsensitive))
