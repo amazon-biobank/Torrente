@@ -3,6 +3,7 @@ Section "un.$(remove_files)" ;"un.Remove files"
 
 ; Remove files and uninstaller
   Delete "$INSTDIR\torrente.exe"
+  Delete "$INSTDIR\payfluxo.exe"
   Delete "$INSTDIR\torrente.pdb"
   Delete "$INSTDIR\qt.conf"
   Delete "$INSTDIR\uninst.exe"
@@ -69,6 +70,7 @@ Section "un.$(remove_firewall)" ;
 
   DetailPrint $(remove_firewallinfo)
   nsisFirewallW::RemoveAuthorizedApplication "$INSTDIR\torrente.exe"
+  nsisFirewallW::RemoveAuthorizedApplication "$INSTDIR\payfluxo.exe"
 
 SectionEnd
 
