@@ -1,6 +1,7 @@
 #include "payfluxoservice.h"
 #include "payfluxo.h"
 #include "base/bittorrent/session.h"
+#include "base/bittorrent/infohash.h"
 
 #include <QWebSocket>
 #include <QUrl>
@@ -12,6 +13,9 @@
 
 #define PAYFLUXO_SOCKET "ws://127.0.0.1:7933"
 #define RECONNECT_WAIT 100
+
+#define INTENTION_DECLARATION_SUCCESS 0
+#define INTENTION_DECLARATION_NO_FUNDS 1
 
 PayfluxoService::PayfluxoService(bool debug, QObject* parent)
     : QObject(parent)
@@ -58,6 +62,23 @@ void PayfluxoService::handlePaymentNotification(QString ip)
         BitTorrent::Session::instance()->unbanIP(ip);
 }
 
+void PayfluxoService::handleIntentionDeclaredNotification(QString torrentIdString, int status)
+{
+    Payfluxo::Session* session = Payfluxo::Session::instance();
+
+    BitTorrent::TorrentID torrentId = BitTorrent::TorrentID::fromString(torrentIdString);
+    auto* const torrent = BitTorrent::Session::instance()->findTorrent(torrentId);
+
+    switch (status)
+    {
+        case INTENTION_DECLARATION_SUCCESS:
+            torrent->resume();
+            break;
+        case INTENTION_DECLARATION_NO_FUNDS:
+            break;
+    }
+}
+
 void PayfluxoService::onTextMessageReceived(QString message)
 {
     QJsonDocument jsonResponse = QJsonDocument::fromJson(message.toUtf8());
@@ -68,6 +89,13 @@ void PayfluxoService::onTextMessageReceived(QString message)
 
     if (QString::compare(type, "PaymentNotification", Qt::CaseSensitive) == 0) {
         this->handlePaymentNotification(dataJson["ip"].toString());
+    }
+
+    else if (QString::compare(type, "IntentionDeclaredNotification", Qt::CaseSensitive) == 0) {
+        this->handleIntentionDeclaredNotification(
+            dataJson["torrentId"].toString(),
+            dataJson["status"].toInt()
+        );
     }
 
     if (m_debug)
@@ -121,6 +149,20 @@ void PayfluxoService::sendCloseMessage()
     dataObj.insert("message", "Closing Torrente");
     QJsonObject messageObj;
     messageObj.insert("type", QString("Closing"));
+    messageObj.insert("data", dataObj);
+    QJsonDocument messageDoc(messageObj);
+    QByteArray serializedMessage = messageDoc.toJson();
+    this->sendMessage(QString(serializedMessage));
+}
+
+void PayfluxoService::sendDownloadIntentionMessage(QString magneticLink, int piecesNumber, QString torrentId)
+{
+    QJsonObject dataObj;
+    dataObj.insert("magneticLink", magneticLink);
+    dataObj.insert("piecesNumber", piecesNumber);
+    dataObj.insert("torrentId", torrentId);
+    QJsonObject messageObj;
+    messageObj.insert("type", QString("DownloadIntention"));
     messageObj.insert("data", dataObj);
     QJsonDocument messageDoc(messageObj);
     QByteArray serializedMessage = messageDoc.toJson();

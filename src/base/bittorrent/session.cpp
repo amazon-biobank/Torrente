@@ -85,6 +85,7 @@
 #include "base/utils/net.h"
 #include "base/utils/random.h"
 #include "base/version.h"
+#include "base/payfluxo/payfluxo.h"
 #include "bandwidthscheduler.h"
 #include "common.h"
 #include "customstorage.h"
@@ -4623,6 +4624,18 @@ void Session::createTorrent(const lt::torrent_handle &nativeHandle)
     // Send new torrent signal
     if (!params.restored)
         emit torrentAdded(torrent);
+
+    // Case authenticated, send download intention.
+    if (Payfluxo::Session::instance()->isAuthenticated())
+    {
+        Payfluxo::Session* payfluxoSession = Payfluxo::Session::instance();
+        torrent->pause();
+        payfluxoSession->declareDownloadIntention(
+            torrent->createMagnetURI(),
+            torrent->piecesCount(),
+            torrent->id().toString()
+        );
+    }
 
     // Torrent could have error just after adding to libtorrent
     if (torrent->hasError())

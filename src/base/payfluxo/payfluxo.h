@@ -17,6 +17,8 @@ namespace Payfluxo {
         int  getIpPendentPayment(QString ip);
         bool ipExceededPendentPayment(QString ip);
 
+        void declareDownloadIntention(QString magneticLink, int piecesNumber, QString torrentId);
+
         float getAvailableCoins();
         float getFrozenCoins();
         float getRedeemableCoins();
