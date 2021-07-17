@@ -50,10 +50,13 @@ protected:
 
 private slots:
     void flushCredentials();
+    void invokeRedeem();
+    void refreshWallet();
 
 private:
     Ui::BalanceDialog *m_ui;
     QString getSimplifiedPublicKey(QString publicKeyString);
+    void updateWalletUI(float newAvailable, float newFrozen, float newRedeemable);
 };
 
 #endif // BALANCEDIALOG_H

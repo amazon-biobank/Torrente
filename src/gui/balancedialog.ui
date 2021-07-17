@@ -573,7 +573,7 @@ text-align: bottom
        </spacer>
       </item>
       <item>
-       <widget class="QLabel" name="RedeemBalance_value">
+       <widget class="QLabel" name="redeemBalance_value">
         <property name="maximumSize">
          <size>
           <width>80</width>
@@ -717,8 +717,8 @@ text-align: bottom
   <connection>
    <sender>RedeemButton</sender>
    <signal>clicked()</signal>
-   <receiver>RedeemButton</receiver>
-   <slot>click()</slot>
+   <receiver>BalanceDialog</receiver>
+   <slot>invokeRedeem()</slot>
    <hints>
     <hint type="sourcelabel">
      <x>422</x>
