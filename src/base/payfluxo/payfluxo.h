@@ -1,7 +1,12 @@
+#include <QObject>
+
 #include "payfluxoservice.h"
 
 namespace Payfluxo {
-    class Session {
+    class Session : public QObject {
+        Q_OBJECT
+        Q_DISABLE_COPY(Session)
+
     public:
         static void initInstance(PayfluxoService* session);
         static void deleteInstance();
@@ -23,9 +28,13 @@ namespace Payfluxo {
         float getFrozenCoins();
         float getRedeemableCoins();
 
+        void redeemCoins();
+
         void setAvailableCoins(float newAmount);
         void setFrozenCoins(float newAmount);
         void setRedeemableCoins(float newAmount);
+
+        void updateWallet(float newAvailable, float newFrozen, float newRedeemable);
 
         QString getCertificate();
 
@@ -33,6 +42,9 @@ namespace Payfluxo {
         void closePayfluxo();
 
         static Session* m_instance;
+
+    signals:
+        void walletUpdated();
 
     private:
         QString m_userDecryptedCertificateString;

@@ -148,4 +148,16 @@ void Session::declareDownloadIntention(QString magneticLink, int piecesNumber, Q
     m_payfluxoService->sendDownloadIntentionMessage(magneticLink, piecesNumber, torrentId);
 }
 
+void Session::redeemCoins() {
+    m_payfluxoService->sendRedeemMessage();
+}
+
+void Session::updateWallet(float newAvailable, float newFrozen, float newRedeemable) {
+    this->setAvailableCoins(newAvailable);
+    this->setFrozenCoins(newFrozen);
+    this->setRedeemableCoins(newRedeemable);
+
+    emit walletUpdated();
+}
+
 Session* Session::m_instance = nullptr;
