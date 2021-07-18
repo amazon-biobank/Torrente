@@ -79,6 +79,13 @@ void PayfluxoService::handleIntentionDeclaredNotification(QString torrentIdStrin
     }
 }
 
+void PayfluxoService::handleWalletNotification(float newAvailable, float newFrozen, float newRedeemable)
+{
+    Payfluxo::Session* session = Payfluxo::Session::instance();
+
+    session->updateWallet(newAvailable, newFrozen, newRedeemable);
+}
+
 void PayfluxoService::onTextMessageReceived(QString message)
 {
     QJsonDocument jsonResponse = QJsonDocument::fromJson(message.toUtf8());
@@ -95,6 +102,15 @@ void PayfluxoService::onTextMessageReceived(QString message)
         this->handleIntentionDeclaredNotification(
             dataJson["torrentId"].toString(),
             dataJson["status"].toInt()
+        );
+    }
+
+    else if (QString::compare(type, "WalletNotification", Qt::CaseSensitive) == 0) {
+        QJsonObject walletObject = dataJson["wallet"].toObject();
+        this->handleWalletNotification(
+            walletObject["available"].toDouble(),
+            walletObject["frozen"].toDouble(),
+            walletObject["redeemable"].toDouble()
         );
     }
 
@@ -163,6 +179,30 @@ void PayfluxoService::sendDownloadIntentionMessage(QString magneticLink, int pie
     dataObj.insert("torrentId", torrentId);
     QJsonObject messageObj;
     messageObj.insert("type", QString("DownloadIntention"));
+    messageObj.insert("data", dataObj);
+    QJsonDocument messageDoc(messageObj);
+    QByteArray serializedMessage = messageDoc.toJson();
+    this->sendMessage(QString(serializedMessage));
+}
+
+void PayfluxoService::sendRedeemMessage()
+{
+    QJsonObject dataObj;
+    dataObj.insert("message", "Manual redeem request");
+    QJsonObject messageObj;
+    messageObj.insert("type", QString("RedeemValues"));
+    messageObj.insert("data", dataObj);
+    QJsonDocument messageDoc(messageObj);
+    QByteArray serializedMessage = messageDoc.toJson();
+    this->sendMessage(QString(serializedMessage));
+}
+
+void PayfluxoService::sendRefreshWalletMessage()
+{
+    QJsonObject dataObj;
+    dataObj.insert("message", "Refresh wallet content");
+    QJsonObject messageObj;
+    messageObj.insert("type", QString("RefreshWallet"));
     messageObj.insert("data", dataObj);
     QJsonDocument messageDoc(messageObj);
     QByteArray serializedMessage = messageDoc.toJson();

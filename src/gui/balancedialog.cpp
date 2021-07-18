@@ -46,14 +46,33 @@ BalanceDialog::BalanceDialog(QWidget *parent)
     m_ui->setupUi(this);
     Payfluxo::Session *payfluxoInstance = Payfluxo::Session::instance();
 
+    payfluxoInstance->getService()->sendRefreshWalletMessage();
+
     QString certificateString = payfluxoInstance->getCertificate();
 
-    float redeemableCoins = payfluxoInstance->getRedeemableCoins();
-
     m_ui->publicKey->setText(this->getSimplifiedPublicKey(certificateString));
-    m_ui->RedeemBalance_value->setText(QString::number(redeemableCoins));
+
+    this->refreshWallet();
 
     this->setWindowTitle(tr("User Balance"));
+
+    QObject::connect(payfluxoInstance, &Payfluxo::Session::walletUpdated, this, &BalanceDialog::refreshWallet);
+}
+
+void BalanceDialog::refreshWallet() {
+    Payfluxo::Session* payfluxoInstance = Payfluxo::Session::instance();
+
+    float redeemableCoins = payfluxoInstance->getRedeemableCoins();
+    float availableCoins = payfluxoInstance->getAvailableCoins();
+    float frozenCoins = payfluxoInstance->getFrozenCoins();
+
+    this->updateWalletUI(availableCoins, frozenCoins, redeemableCoins);
+}
+
+void BalanceDialog::updateWalletUI(float newAvailable, float newFrozen, float newRedeemable){
+    m_ui->redeemBalance_value->setText(QString::number(newRedeemable));
+    m_ui->globalBalance_value->setText(QString::number(newAvailable));
+    m_ui->downloadBalance_value->setText(QString::number(newFrozen));
 }
 
 BalanceDialog::~BalanceDialog()
@@ -76,4 +95,9 @@ void BalanceDialog::flushCredentials()
     Payfluxo::Session::instance()->logout();
 
     this->close();
+}
+
+void BalanceDialog::invokeRedeem()
+{
+    Payfluxo::Session::instance()->redeemCoins();
 }
