@@ -117,6 +117,7 @@ private slots:
     bool defineUILockPassword();
     bool defineUIDecrypt();
     bool defineUIAuth();
+    bool defineUIPayChoice(QVector<BitTorrent::Torrent*> notPaidTorrents);
     bool defineUIUserPanel();
     void clearUILockPassword();
     bool unlockUI();

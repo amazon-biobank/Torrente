@@ -77,6 +77,7 @@
 #include "addnewtorrentdialog.h"
 #include "autoexpandabledialog.h"
 #include "authdialog.h"
+#include "paychoicedialog.h"
 #include "balancedialog.h"
 #include "cookiesdialog.h"
 #include "decypherdialog.h"
@@ -666,6 +667,13 @@ bool MainWindow::defineUIDecrypt()
     DecypherDialog decryptDialog(this);
 
     decryptDialog.exec();
+}
+
+bool MainWindow::defineUIPayChoice(QVector<BitTorrent::Torrent*> notPaidTorrents)
+{
+    PayChoiceDialog payChoiceDialog(this, notPaidTorrents);
+
+    payChoiceDialog.exec();
 
     return true;
 }
@@ -719,14 +727,54 @@ void MainWindow::on_actionDecrypt_triggered()
 
 void MainWindow::on_actionAuth_triggered()
 {
+    bool authStateBefore = Payfluxo::Session::instance()->isAuthenticated();
     if (defineUIAuth())
+    {
+        bool authStateAfter = Payfluxo::Session::instance()->isAuthenticated();
+        // login?
+        if (authStateAfter != authStateBefore)
+        {
+            QVector<BitTorrent::Torrent*> torrents = BitTorrent::Session::instance()->torrents();
+            QVector<BitTorrent::Torrent*> notPaidTorrents;
+            for (int index = 0; index < torrents.length(); index++)
+            {
+                if (!torrents[index]->isPaidTorrent())
+                    notPaidTorrents.append(torrents[index]);
+                else
+                {
+                    Payfluxo::Session::instance()->declareDownloadIntention(
+                        torrents[index]->createMagnetURI(),
+                        torrents[index]->piecesCount(),
+                        torrents[index]->id().toString()
+                    );
+                }
+            }
+            if (!notPaidTorrents.empty())
+                defineUIPayChoice(notPaidTorrents);
+        }
         this->refreshAuthenticationState();
+    }
 }
 
 void MainWindow::on_actionBalance_triggered()
 {
+    bool authStateBefore = Payfluxo::Session::instance()->isAuthenticated();
     if(defineUIUserPanel())
+    {
+        bool authStateAfter = Payfluxo::Session::instance()->isAuthenticated();
+        // logout?
+        if (authStateAfter != authStateBefore)
+        {
+            QVector<BitTorrent::Torrent *> torrents = BitTorrent::Session::instance()->torrents();
+            for (int index = 0; index < torrents.length(); index++)
+            {
+                if (torrents[index]->isPaidTorrent())
+                    torrents[index]->pause();
+            }
+            
+        }
         this->refreshAuthenticationState();
+    }
 }
 
 void MainWindow::on_actionLock_triggered()
