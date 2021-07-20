@@ -27,6 +27,7 @@ add_library(qbt_gui STATIC
     log/logmodel.h
     mainwindow.h
     optionsdialog.h
+    paychoicedialog.h
     powermanagement/powermanagement.h
     previewlistdelegate.h
     previewselectdialog.h
@@ -111,6 +112,7 @@ add_library(qbt_gui STATIC
     log/logmodel.cpp
     mainwindow.cpp
     optionsdialog.cpp
+    paychoicedialog.cpp
     powermanagement/powermanagement.cpp
     previewlistdelegate.cpp
     previewselectdialog.cpp
@@ -183,6 +185,7 @@ add_library(qbt_gui STATIC
     ipsubnetwhitelistoptionsdialog.ui
     mainwindow.ui
     optionsdialog.ui
+    paychoicedialog.ui
     previewselectdialog.ui
     properties/peersadditiondialog.ui
     properties/propertieswidget.ui
