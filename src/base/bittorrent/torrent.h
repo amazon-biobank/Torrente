@@ -289,6 +289,9 @@ namespace BitTorrent
         virtual bool connectPeer(const PeerAddress &peerAddress) = 0;
         virtual void clearPeers() = 0;
 
+        virtual void turnTorrentPaid() = 0;
+        virtual bool isPaidTorrent() = 0;
+
         virtual QString createMagnetURI() const = 0;
 
         TorrentID id() const;
