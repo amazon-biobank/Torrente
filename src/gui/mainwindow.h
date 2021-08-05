@@ -115,6 +115,7 @@ private slots:
     void handleDownloadFromUrlFailure(const QString &, const QString &) const;
     void tabChanged(int newTab);
     bool defineUILockPassword();
+    bool defineUIDecrypt();
     bool defineUIAuth();
     bool defineUIUserPanel();
     void clearUILockPassword();
@@ -155,6 +156,7 @@ private slots:
     void on_actionSpeedInTitleBar_triggered();
     void on_actionTopToolBar_triggered();
     void on_actionShowStatusbar_triggered();
+    void on_actionDecrypt_triggered();
     void on_actionDonateMoney_triggered();
     void on_actionExecutionLogs_triggered(bool checked);
     void on_actionNormalMessages_triggered(bool checked);

@@ -120,6 +120,7 @@
     <addaction name="separator"/>
     <addaction name="actionStatistics"/>
     <addaction name="separator"/>
+    <addaction name="actionDecrypt"/>
     <addaction name="actionLock"/>
     <addaction name="actionAuth"/>
     <addaction name="actionBalance"/>
@@ -161,6 +162,7 @@
    <addaction name="actionBottomQueuePos"/>
    <addaction name="separator"/>
    <addaction name="actionOptions"/>
+   <addaction name="actionDecrypt"/>
    <addaction name="actionLock"/>
    <addaction name="actionAuth"/>
    <addaction name="actionBalance"/>
@@ -349,6 +351,14 @@
     <string notr="true">Ctrl+L</string>
    </property>
   </action>
+    <action name="actionDecrypt">
+        <property name="text">
+            <string>D&amp;ecrypt File</string>
+        </property>
+        <property name="iconText">
+            <string>Decrypt</string>
+        </property>
+    </action>
   <action name="actionAuth">
    <property name="text">
     <string>A&amp;uth User</string>
