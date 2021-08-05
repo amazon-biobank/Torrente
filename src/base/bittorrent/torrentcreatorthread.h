@@ -47,6 +47,7 @@ namespace BitTorrent
     struct TorrentCreatorParams
     {
         bool isPrivate;
+        bool isCyphered;
 #if (LIBTORRENT_VERSION_NUM >= 20000)
         TorrentFormat torrentFormat;
 #else
@@ -89,7 +90,7 @@ namespace BitTorrent
 
     private:
         void sendProgressSignal(int currentPieceIdx, int totalPieces);
-
+        void generateBiobankData(QString torrentPath, unsigned char* secretKey, unsigned char* fileTag);
         TorrentCreatorParams m_params;
     };
 }
