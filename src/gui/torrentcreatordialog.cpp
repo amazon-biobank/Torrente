@@ -201,6 +201,7 @@ void TorrentCreatorDialog::onCreateButtonClicked()
     const BitTorrent::TorrentCreatorParams params
     {
         m_ui->checkPrivate->isChecked()
+        , m_ui->checkCyphered->isChecked()
 #if (LIBTORRENT_VERSION_NUM >= 20000)
         , getTorrentFormat()
 #else
