@@ -23,7 +23,7 @@
     <item>
       <widget class="QLabel" name="choosenFileLabel">
        <property name="text">
-        <string notr="true">No file choosen</string>
+        <string notr="true">No file chosen</string>
        </property>
       </widget>
      </item>
@@ -49,7 +49,7 @@
    <item>
       <widget class="QLabel" name="keyPathLabel">
        <property name="text">
-        <string notr="true">No key choosen</string>
+        <string notr="true">No key chosen</string>
        </property>
       </widget>
      </item>

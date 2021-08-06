@@ -42,6 +42,7 @@
 #include "utils.h"
 
 #define INVALID_CREDENTIALS_EXCEPTION 1
+#define NO_FILE_SELECTED 2
 
 DecypherDialog::DecypherDialog(QWidget* parent)
     : QDialog(parent)
@@ -69,6 +70,8 @@ void DecypherDialog::onImportFileButtonClicked()
         QDir::homePath(),
         tr("Cyphered files (*.cyphered)")
     );
+    if (fileName == "")
+        fileName = "No file chosen";
     m_ui->choosenFileLabel->setText(fileName);
     DecypherDialog::filePath = fileName;
 }
@@ -81,6 +84,8 @@ void DecypherDialog::onImportKeyButtonClicked()
         QDir::homePath(),
         tr("Key Files (*.biobank)")
     );
+    if (fileName == "")
+        fileName = "No file chosen";
     m_ui->keyPathLabel->setText(fileName);
     DecypherDialog::keyPath = fileName;
 }
@@ -97,6 +102,8 @@ void DecypherDialog::onDecypherButtonClicked()
     this->toggleWidgetsEnable();
 
     try {
+        if (keyPath == "" || filePath == "")
+            throw NO_FILE_SELECTED;
         QString jsonKey;
         QFile jsonKeyFile;
         jsonKeyFile.setFileName(keyPath);
@@ -113,6 +120,10 @@ void DecypherDialog::onDecypherButtonClicked()
 
         QApplication::restoreOverrideCursor();
         this->toggleWidgetsEnable();
+        QApplication::restoreOverrideCursor();
+        QMessageBox fileDecryptionSuccessDialogBox;
+        fileDecryptionSuccessDialogBox.setText("Decryption succeded");
+        fileDecryptionSuccessDialogBox.exec();
         this->close();
     }
     catch (int i) {
@@ -120,7 +131,7 @@ void DecypherDialog::onDecypherButtonClicked()
         QApplication::restoreOverrideCursor();
         this->toggleWidgetsEnable();
         QMessageBox fileDecryptionErrorDialogBox;
-        fileDecryptionErrorDialogBox.setText("wrong password");
+        fileDecryptionErrorDialogBox.setText("No files selected");
         fileDecryptionErrorDialogBox.exec();
     }
 }
