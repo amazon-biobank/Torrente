@@ -256,11 +256,13 @@ void TorrentCreatorThread::generateBiobankData(QString outputPath, unsigned char
     const char* chars = "0123456789ABCDEF";
     QString hexKey = "";
     QString fileTagString = "";
-    for (int i = 0; i < KEY_SIZE; i++)
+    for (int i = 0; i < KEY_SIZE * 2; i++)
     {
         hexKey.append(chars[secretKey[i] / KEY_SIZE]);
         hexKey.append(chars[secretKey[i] % KEY_SIZE]);
-
+    }
+    for (int i = 0; i < KEY_SIZE; i++)
+    {
         fileTagString.append(chars[fileTag[i] / KEY_SIZE]);
         fileTagString.append(chars[fileTag[i] % KEY_SIZE]);
     }
