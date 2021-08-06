@@ -13,5 +13,6 @@ namespace Encryption {
 
     private:
         static void initEncryption();
+        static unsigned char ASCIItoHex(char character);
     };
 }
