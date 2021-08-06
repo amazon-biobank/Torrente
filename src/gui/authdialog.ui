@@ -20,6 +20,17 @@
    <string>AuthDialog</string>
   </property>
   <layout class="QVBoxLayout" name="verticalLayout">
+      <item>
+          <widget class="QLabel" name="keyPathLabel">
+              <property name="text">
+                  <size>
+                      <width>250</width>
+                      <height>40</height>
+                  </size>
+                  <string notr="true">No key chosen</string>
+              </property>
+          </widget>
+      </item>
    <item alignment="Qt::AlignHCenter">
     <widget class="QPushButton" name="certificateButton">
      <property name="minimumSize">
