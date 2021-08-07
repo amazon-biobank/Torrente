@@ -110,27 +110,28 @@ void TorrentCreatorThread::run()
 
     try
     {
-        if (m_params.isCyphered) {
-            // 1. Generate random key;
-            unsigned char* randomKey = (unsigned char*)malloc((KEY_SIZE * 2 + 1) * sizeof(unsigned char));
-            Encryption::Encryption::generateRandomKey(randomKey);
-            // 2. Create a cyphered copy of the input files and rename it <name>.cyphered;
-            QString cypheredPath = m_params.inputPath + ".cyphered";
-            //QString cypheredPath = m_params.inputPath;
-            // Declare file tag
-            unsigned char* fileTag = (unsigned char*) malloc ((KEY_SIZE + 1) * sizeof(unsigned char));
-            Encryption::Encryption::encryptFile(m_params.inputPath, randomKey, cypheredPath, fileTag);
-            //Encryption::Encryption::encryptFile(m_params.inputPath, randomKey, cypheredPath);
-            // 3. Change m_params.inputPath value;
-            m_params.inputPath = cypheredPath;
-            generateBiobankData(m_params.inputPath + ".biobank", randomKey, fileTag);
-        }
         const QString parentPath = Utils::Fs::branchPath(m_params.inputPath) + '/';
 
         // Adding files to the torrent
         lt::file_storage fs;
         if (QFileInfo(m_params.inputPath).isFile())
         {
+            // Cypher if is file only;
+            if (m_params.isCyphered) {
+                // 1. Generate random key;
+                unsigned char* randomKey = (unsigned char*)malloc((KEY_SIZE * 2 + 1) * sizeof(unsigned char));
+                Encryption::Encryption::generateRandomKey(randomKey);
+                // 2. Create a cyphered copy of the input files and rename it <name>.cyphered;
+                QString cypheredPath = m_params.inputPath + ".cyphered";
+                //QString cypheredPath = m_params.inputPath;
+                // Declare file tag
+                unsigned char* fileTag = (unsigned char*)malloc((KEY_SIZE + 1) * sizeof(unsigned char));
+                Encryption::Encryption::encryptFile(m_params.inputPath, randomKey, cypheredPath, fileTag);
+                //Encryption::Encryption::encryptFile(m_params.inputPath, randomKey, cypheredPath);
+                // 3. Change m_params.inputPath value;
+                m_params.inputPath = cypheredPath;
+                generateBiobankData(m_params.inputPath + ".biobank", randomKey, fileTag);
+            }
             lt::add_files(fs, Utils::Fs::toNativePath(m_params.inputPath).toStdString(), fileFilter);
         }
         else
@@ -158,16 +159,38 @@ void TorrentCreatorThread::run()
                 {
                     fileIter.next();
 
-                    const QString relFilePath = fileIter.filePath().mid(parentPath.length());
-                    tmpNames += relFilePath;
-                    fileSizeMap[relFilePath] = fileIter.fileInfo().size();
+                    if (m_params.isCyphered) {
+                        QString cypherDirPath = m_params.inputPath + "_cyphered";
+                        QString dirName = cypherDirPath.mid(cypherDirPath.lastIndexOf('/')).mid(1);
+                        QDir().mkdir(cypherDirPath);
+                        const QString filePath = fileIter.filePath().mid(m_params.inputPath.length()) + ".cyphered";
+                        const QString relFilePath = dirName + filePath; // <dir_selected>/<file_name>
+                        // 1. Generate random key;
+                        unsigned char* randomKey = (unsigned char*)malloc((KEY_SIZE * 2 + 1) * sizeof(unsigned char));
+                        Encryption::Encryption::generateRandomKey(randomKey);
+                        // 2. Create a cyphered copy of the input files and rename it <name>.cyphered;
+                        QString cypheredPath = cypherDirPath + filePath; // parentPath/cyphered/
+                        //QString cypheredPath = m_params.inputPath;
+                        // Declare file tag
+                        unsigned char* fileTag = (unsigned char*)malloc((KEY_SIZE + 1) * sizeof(unsigned char));
+                        Encryption::Encryption::encryptFile(fileIter.filePath(), randomKey, cypheredPath, fileTag);
+                        generateBiobankData(cypheredPath + ".biobank", randomKey, fileTag);
+                        tmpNames += relFilePath;
+                        QFile fileRef(cypheredPath);
+                        fileSizeMap[relFilePath] = fileRef.size();
+                    }
+                    else {
+                        const QString relFilePath = fileIter.filePath().mid(parentPath.length());
+                        tmpNames += relFilePath;
+                        fileSizeMap[relFilePath] = fileIter.fileInfo().size();
+                    }
                 }
 
                 std::sort(tmpNames.begin(), tmpNames.end(), Utils::String::naturalLessThan<Qt::CaseInsensitive>);
                 fileNames += tmpNames;
             }
 
-            for (const auto &fileName : asConst(fileNames))
+            for (const auto& fileName : asConst(fileNames))
                 fs.add_file(fileName.toStdString(), fileSizeMap[fileName]);
         }
 

@@ -1,5 +1,6 @@
 #include <QObject>
 #include <QFile>
+#include <QDir>
 
 #include <openssl/aes.h>
 #include <openssl/evp.h>
@@ -36,6 +37,11 @@ void Encryption::Encryption::generateRandomKey(unsigned char* randomKey) {
 
 void Encryption::Encryption::encryptFile(QString filePath, unsigned char* secretKey, QString outputPath, unsigned char* fileTag) {
     initEncryption();
+
+    
+    QDir dir(QFileInfo(outputPath).dir());
+    if (!dir.exists())
+        dir.mkpath(".");
 
     // First, i need to get files references;
     FILE* fileToEncrypt = fopen(filePath.toStdString().c_str(), "rb");
