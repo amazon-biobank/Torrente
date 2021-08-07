@@ -44,7 +44,7 @@ void Encryption::Encryption::encryptFile(QString filePath, unsigned char* secret
     unsigned char iv[AES_BLOCK_SIZE];
     unsigned char key[AES_BLOCK_SIZE];
     std::copy(secretKey, secretKey + AES_BLOCK_SIZE, iv);                           // The secret key first half will be IV
-    std::copy(secretKey + AES_BLOCK_SIZE, secretKey + (AES_BLOCK_SIZE * 2), key);   // The secret key second hald 
+    std::copy(secretKey + AES_BLOCK_SIZE, secretKey + (AES_BLOCK_SIZE * 2), key);   // The secret key second half
 
     EVP_CIPHER_CTX* e_ctx = EVP_CIPHER_CTX_new();           // Create context placeholder;
     EVP_EncryptInit(e_ctx, EVP_aes_128_gcm(), key, iv);     // Initialize encryption context with key and IV;
