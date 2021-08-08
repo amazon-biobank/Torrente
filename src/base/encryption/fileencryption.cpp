@@ -39,7 +39,6 @@ void Encryption::Encryption::encryptFile(QString filePath, unsigned char* secret
     initEncryption();
 
     unsigned char fileTag[AES_BLOCK_SIZE];
-    
     QDir dir(QFileInfo(outputPath).dir());
     if (!dir.exists())
         dir.mkpath(".");

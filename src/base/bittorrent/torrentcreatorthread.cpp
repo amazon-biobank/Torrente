@@ -167,7 +167,6 @@ void TorrentCreatorThread::run()
                         QDir().mkdir(cypherDirPath);
                         const QString filePath = fileIter.filePath().mid(m_params.inputPath.length()) + ".cyphered";
                         const QString relFilePath = dirName + filePath; // <dir_selected>/<file_name>
-                        
                         // 2. Create a cyphered copy of the input files and rename it <name>.cyphered;
                         QString cypheredPath = cypherDirPath + filePath; // parentPath/cyphered/
                         //QString cypheredPath = m_params.inputPath;
