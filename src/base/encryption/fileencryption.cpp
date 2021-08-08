@@ -35,9 +35,10 @@ void Encryption::Encryption::generateRandomKey(unsigned char* randomKey) {
     randomKey[KEY_SIZE * 2] = '\0';
 }
 
-void Encryption::Encryption::encryptFile(QString filePath, unsigned char* secretKey, QString outputPath, unsigned char* fileTag) {
+void Encryption::Encryption::encryptFile(QString filePath, unsigned char* secretKey, QString outputPath) {
     initEncryption();
 
+    unsigned char fileTag[AES_BLOCK_SIZE];
     
     QDir dir(QFileInfo(outputPath).dir());
     if (!dir.exists())
@@ -71,12 +72,13 @@ void Encryption::Encryption::encryptFile(QString filePath, unsigned char* secret
     EVP_EncryptFinal(e_ctx, encryptionBuffer, &outputLength); // Append finalizing encryption buffer;
     fwrite(encryptionBuffer, sizeof(unsigned char), outputLength, fileEncrypted); // Stores trailing buffer to output file;
     EVP_CIPHER_CTX_ctrl(e_ctx, EVP_CTRL_GCM_GET_TAG, AES_BLOCK_SIZE, fileTag);  // Generates file tag;
+    fwrite(fileTag, sizeof(unsigned char), AES_BLOCK_SIZE, fileEncrypted); // Stores trailing buffer to output file;
     EVP_CIPHER_CTX_free(e_ctx); // Free memory alocation;
     fclose(fileEncrypted);
     fclose(fileToEncrypt);
 }
 
-void Encryption::Encryption::decryptFile(QString filePath, QString secretKey, QString fileTag) {
+bool Encryption::Encryption::decryptFile(QString filePath, QString secretKey) {
     initEncryption();
 
     // First, i need to get files references;
@@ -102,14 +104,6 @@ void Encryption::Encryption::decryptFile(QString filePath, QString secretKey, QS
             Encryption::ASCIItoHex(keyString[(i * 2) + 1 + keyString.length() / 2])
             );
     }
-    std::string tagString = fileTag.toStdString();
-    for (int i = 0; i < tagString.length() / 2; i += 2)
-    {
-        tag[i] = (
-            Encryption::ASCIItoHex(tagString[i * 2]) * HEX_SIZE +
-            Encryption::ASCIItoHex(tagString[i * 2 + 1])
-            );
-    }
 
     EVP_CIPHER_CTX* d_ctx = EVP_CIPHER_CTX_new();
     EVP_DecryptInit(d_ctx, EVP_aes_128_gcm(), key, iv);
@@ -119,19 +113,26 @@ void Encryption::Encryption::decryptFile(QString filePath, QString secretKey, QS
     int numBytesRead, outputLength;
     while (true) {
         numBytesRead = fread(bufferToDecrypt, sizeof(unsigned char), ENCRYPTION_BUFFER_SIZE, fileToDecrypt);
-        EVP_DecryptUpdate(d_ctx, decryptionBuffer, &outputLength, bufferToDecrypt, ENCRYPTION_BUFFER_SIZE); // Cypher block and store in buffer
-        fwrite(decryptionBuffer, sizeof(unsigned char), outputLength, fileDecrypted); // Stores cyphered block to output file;
+        qDebug() << "numBytesRead";
+        qDebug() << numBytesRead;
         if (numBytesRead < ENCRYPTION_BUFFER_SIZE) {
+            std::copy(bufferToDecrypt, bufferToDecrypt + AES_BLOCK_SIZE, tag);
             /* Reached End of file */
             break;
         }
+        EVP_DecryptUpdate(d_ctx, decryptionBuffer, &outputLength, bufferToDecrypt, ENCRYPTION_BUFFER_SIZE); // Cypher block and store in buffer
+        fwrite(decryptionBuffer, sizeof(unsigned char), outputLength, fileDecrypted); // Stores cyphered block to output file;
     }
     EVP_CIPHER_CTX_ctrl(d_ctx, EVP_CTRL_GCM_SET_TAG, AES_BLOCK_SIZE, tag);
-    EVP_DecryptFinal(d_ctx, decryptionBuffer, &outputLength);
-    fwrite(decryptionBuffer, sizeof(unsigned char), outputLength, fileDecrypted); // Stores cyphered block to output file;
+    if (EVP_DecryptFinal(d_ctx, decryptionBuffer, &outputLength) == 0) {
+        fclose(fileDecrypted);
+        fclose(fileToDecrypt);
+        return false;
+    }
     EVP_CIPHER_CTX_free(d_ctx);
     fclose(fileDecrypted);
     fclose(fileToDecrypt);
+    return true;
 }
 
 unsigned char Encryption::Encryption::ASCIItoHex(char character) {

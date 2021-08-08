@@ -90,7 +90,7 @@ namespace BitTorrent
 
     private:
         void sendProgressSignal(int currentPieceIdx, int totalPieces);
-        void generateBiobankData(QString torrentPath, unsigned char* secretKey, unsigned char* fileTag);
+        void generateBiobankData(QString torrentPath, unsigned char* secretKey);
         TorrentCreatorParams m_params;
     };
 }

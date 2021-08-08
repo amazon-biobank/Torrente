@@ -41,7 +41,7 @@
 #include "ui_decypherdialog.h"
 #include "utils.h"
 
-#define INVALID_CREDENTIALS_EXCEPTION 1
+#define WRONG_KEY_EXCEPTION 1
 #define NO_FILE_SELECTED 2
 
 DecypherDialog::DecypherDialog(QWidget* parent)
@@ -114,9 +114,9 @@ void DecypherDialog::onDecypherButtonClicked()
 
         QJsonObject jsonObject = jsonKeyDocument.object();
         QString keyString = jsonObject["secret_key"].toString();
-        QString tagString = jsonObject["file_tag"].toString();
 
-        Encryption::Encryption::decryptFile(filePath, keyString, tagString);
+        if (!Encryption::Encryption::decryptFile(filePath, keyString))
+            throw WRONG_KEY_EXCEPTION;
 
         QApplication::restoreOverrideCursor();
         this->toggleWidgetsEnable();
@@ -126,12 +126,18 @@ void DecypherDialog::onDecypherButtonClicked()
         fileDecryptionSuccessDialogBox.exec();
         this->close();
     }
-    catch (int i) {
-        // Senha incorreta!
+    catch (int errorCode) {
         QApplication::restoreOverrideCursor();
         this->toggleWidgetsEnable();
         QMessageBox fileDecryptionErrorDialogBox;
-        fileDecryptionErrorDialogBox.setText("No files selected");
+        switch (errorCode) {
+        case WRONG_KEY_EXCEPTION:
+            fileDecryptionErrorDialogBox.setText("The key is invalid for this file");
+            break;
+        case NO_FILE_SELECTED:
+            fileDecryptionErrorDialogBox.setText("No files selected");
+            break;
+        }
         fileDecryptionErrorDialogBox.exec();
     }
 }
