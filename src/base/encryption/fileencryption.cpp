@@ -113,8 +113,6 @@ bool Encryption::Encryption::decryptFile(QString filePath, QString secretKey) {
     int numBytesRead, outputLength;
     while (true) {
         numBytesRead = fread(bufferToDecrypt, sizeof(unsigned char), ENCRYPTION_BUFFER_SIZE, fileToDecrypt);
-        qDebug() << "numBytesRead";
-        qDebug() << numBytesRead;
         if (numBytesRead < ENCRYPTION_BUFFER_SIZE) {
             std::copy(bufferToDecrypt, bufferToDecrypt + AES_BLOCK_SIZE, tag);
             /* Reached End of file */
