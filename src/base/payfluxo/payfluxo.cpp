@@ -41,9 +41,9 @@ bool Session::authenticate(QString password, QString certificatePath) {
     char* passwordString = new char[passwordStd.length() + 1];
     strcpy(passwordString, passwordStd.c_str());
 
-    char* decryptedFile = getDecryptedContentFromFile(certificatePathString, passwordString);
+    std::string decryptedFile = getDecryptedContentFromFile(certificatePathString, passwordString);
 
-    QJsonDocument jsonResponse = QJsonDocument::fromJson(decryptedFile);
+    QJsonDocument jsonResponse = QJsonDocument::fromJson(decryptedFile.c_str());
 
     if (jsonResponse.isNull()) {
         return true;
