@@ -40,6 +40,10 @@
 #include <QFileInfo>
 #include <QHash>
 
+#include <QJsonDocument>
+#include <QJsonObject>
+#include <QJsonValue>
+
 #include "base/exceptions.h"
 #include "base/global.h"
 #include "base/utils/fs.h"
@@ -47,6 +51,8 @@
 #include "base/utils/string.h"
 #include "base/version.h"
 #include "ltunderlyingtype.h"
+
+#include "base/encryption/fileencryption.h"
 
 namespace
 {
@@ -110,10 +116,28 @@ void TorrentCreatorThread::run()
         lt::file_storage fs;
         if (QFileInfo(m_params.inputPath).isFile())
         {
+            // Cypher if is file only;
+            if (m_params.isCyphered) {
+                // 1. Generate random key;
+                unsigned char* randomKey = (unsigned char*)malloc((KEY_SIZE * 2 + 1) * sizeof(unsigned char));
+                Encryption::Encryption::generateRandomKey(randomKey);
+                // 2. Create a cyphered copy of the input files and rename it <name>.cyphered;
+                QString cypheredPath = m_params.inputPath + ".cyphered";
+                //QString cypheredPath = m_params.inputPath;
+                Encryption::Encryption::encryptFile(m_params.inputPath, randomKey, cypheredPath);
+                //Encryption::Encryption::encryptFile(m_params.inputPath, randomKey, cypheredPath);
+                // 3. Change m_params.inputPath value;
+                m_params.inputPath = cypheredPath;
+                generateBiobankData(m_params.inputPath + ".biobank", randomKey);
+            }
             lt::add_files(fs, Utils::Fs::toNativePath(m_params.inputPath).toStdString(), fileFilter);
         }
         else
         {
+            // 1. Generate random key;
+            unsigned char* randomKey = (unsigned char*)malloc((KEY_SIZE * 2 + 1) * sizeof(unsigned char));
+            Encryption::Encryption::generateRandomKey(randomKey);
+            generateBiobankData(m_params.inputPath + "_key" + ".biobank", randomKey);
             // need to sort the file names by natural sort order
             QStringList dirs = {m_params.inputPath};
 
@@ -137,16 +161,32 @@ void TorrentCreatorThread::run()
                 {
                     fileIter.next();
 
-                    const QString relFilePath = fileIter.filePath().mid(parentPath.length());
-                    tmpNames += relFilePath;
-                    fileSizeMap[relFilePath] = fileIter.fileInfo().size();
+                    if (m_params.isCyphered) {
+                        QString cypherDirPath = m_params.inputPath + "_cyphered";
+                        QString dirName = cypherDirPath.mid(cypherDirPath.lastIndexOf('/')).mid(1);
+                        QDir().mkdir(cypherDirPath);
+                        const QString filePath = fileIter.filePath().mid(m_params.inputPath.length()) + ".cyphered";
+                        const QString relFilePath = dirName + filePath; // <dir_selected>/<file_name>
+                        // 2. Create a cyphered copy of the input files and rename it <name>.cyphered;
+                        QString cypheredPath = cypherDirPath + filePath; // parentPath/cyphered/
+                        //QString cypheredPath = m_params.inputPath;
+                        Encryption::Encryption::encryptFile(fileIter.filePath(), randomKey, cypheredPath);
+                        tmpNames += relFilePath;
+                        QFile fileRef(cypheredPath);
+                        fileSizeMap[relFilePath] = fileRef.size();
+                    }
+                    else {
+                        const QString relFilePath = fileIter.filePath().mid(parentPath.length());
+                        tmpNames += relFilePath;
+                        fileSizeMap[relFilePath] = fileIter.fileInfo().size();
+                    }
                 }
 
                 std::sort(tmpNames.begin(), tmpNames.end(), Utils::String::naturalLessThan<Qt::CaseInsensitive>);
                 fileNames += tmpNames;
             }
 
-            for (const auto &fileName : asConst(fileNames))
+            for (const auto& fileName : asConst(fileNames))
                 fs.add_file(fileName.toStdString(), fileSizeMap[fileName]);
         }
 
@@ -228,6 +268,26 @@ void TorrentCreatorThread::run()
     {
         emit creationFailure(e.what());
     }
+}
+
+void TorrentCreatorThread::generateBiobankData(QString outputPath, unsigned char* secretKey) {
+    // 0. Encode secret key to hex string;
+    const char* chars = "0123456789ABCDEF";
+    QString hexKey = "";
+    for (int i = 0; i < KEY_SIZE * 2; i++)
+    {
+        hexKey.append(chars[secretKey[i] / KEY_SIZE]);
+        hexKey.append(chars[secretKey[i] % KEY_SIZE]);
+    }
+    // 1. Generate json object with the random key;
+    QFile file(outputPath);
+    QJsonObject biobankDataObject;
+    biobankDataObject["secret_key"] = hexKey;
+    QJsonDocument biobankDataFile;
+    biobankDataFile.setObject(biobankDataObject);
+    file.open(QFile::WriteOnly | QFile::Text | QFile::Truncate);
+    file.write(biobankDataFile.toJson());
+    file.close();
 }
 
 #if (LIBTORRENT_VERSION_NUM >= 20000)

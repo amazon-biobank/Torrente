@@ -42,6 +42,7 @@
 #include <string>
 
 #define INVALID_CREDENTIALS_EXCEPTION 1
+#define NO_KEY_INPUT 2
 
 AuthDialog::AuthDialog(QWidget *parent)
     : QDialog(parent)
@@ -70,7 +71,9 @@ void AuthDialog::onImportButtonClicked()
         QDir::homePath(),
         tr("Key Files (*.pem *.key)")
         );
-
+    if (fileName == "")
+        fileName = "No file chosen";
+    m_ui->keyPathLabel->setText(fileName);
     AuthDialog::certificatePath = fileName;
 }
 
@@ -88,6 +91,9 @@ void AuthDialog::setCredentials()
     QString password = this->m_ui->lineEdit->text();
 
     try {
+        if (certificatePath == "")
+            throw NO_KEY_INPUT;
+
         bool authResult = Payfluxo::Session::instance()->authenticate(password, this->certificatePath);
 
         if (authResult) {
@@ -99,11 +105,17 @@ void AuthDialog::setCredentials()
         this->close();
     }
     catch (int i) {
-        // Senha incorreta!
         QApplication::restoreOverrideCursor();
         this->toggleWidgetsEnable();
         QMessageBox fileDecryptionErrorDialogBox;
-        fileDecryptionErrorDialogBox.setText("wrong password");
+        switch (i) {
+        case INVALID_CREDENTIALS_EXCEPTION:
+            fileDecryptionErrorDialogBox.setText("Wrong password");
+            break;
+        case NO_KEY_INPUT:
+            fileDecryptionErrorDialogBox.setText("No key file input");
+            break;
+        }
         fileDecryptionErrorDialogBox.exec();
     }
 }

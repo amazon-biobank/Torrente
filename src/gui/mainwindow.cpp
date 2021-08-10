@@ -79,6 +79,7 @@
 #include "authdialog.h"
 #include "balancedialog.h"
 #include "cookiesdialog.h"
+#include "decypherdialog.h"
 #include "downloadfromurldialog.h"
 #include "executionlogwidget.h"
 #include "hidabletabwidget.h"
@@ -190,6 +191,7 @@ MainWindow::MainWindow(QWidget *parent)
     m_ui->actionDocumentation->setIcon(UIThemeManager::instance()->getIcon("help-contents"));
     m_ui->actionDonateMoney->setIcon(UIThemeManager::instance()->getIcon("wallet-open"));
     m_ui->actionExit->setIcon(UIThemeManager::instance()->getIcon("application-exit"));
+    m_ui->actionDecrypt->setIcon(UIThemeManager::instance()->getIcon("decrypt-button"));
     m_ui->actionLock->setIcon(UIThemeManager::instance()->getIcon("object-locked"));
     m_ui->actionAuth->setIcon(UIThemeManager::instance()->getIcon("auth-button"));
     m_ui->actionBalance->setIcon(UIThemeManager::instance()->getIcon("authenticated-button"));
@@ -659,6 +661,15 @@ bool MainWindow::defineUIAuth()
     return true;
 }
 
+bool MainWindow::defineUIDecrypt()
+{
+    DecypherDialog decryptDialog(this);
+
+    decryptDialog.exec();
+
+    return true;
+}
+
 bool MainWindow::defineUIUserPanel()
 {
     BalanceDialog balanceDialog(this);
@@ -699,6 +710,11 @@ void MainWindow::refreshAuthenticationState() {
 
     this->m_ui->actionAuth->setVisible(!isAuthenticated);
     this->m_ui->actionBalance->setVisible(isAuthenticated);
+}
+
+void MainWindow::on_actionDecrypt_triggered()
+{
+    defineUIDecrypt();
 }
 
 void MainWindow::on_actionAuth_triggered()

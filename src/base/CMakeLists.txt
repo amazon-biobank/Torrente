@@ -32,6 +32,7 @@ add_library(qbt_base STATIC
     bittorrent/torrentinfo.h
     bittorrent/tracker.h
     bittorrent/trackerentry.h
+    encryption/fileencryption.h
     digest32.h
     exceptions.h
     filesystemwatcher.h
@@ -116,6 +117,7 @@ add_library(qbt_base STATIC
     bittorrent/torrentinfo.cpp
     bittorrent/tracker.cpp
     bittorrent/trackerentry.cpp
+    encryption/fileencryption.cpp
     exceptions.cpp
     filesystemwatcher.cpp
     http/connection.cpp

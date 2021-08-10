@@ -184,7 +184,11 @@ void TorrentCreatorDialog::onCreateButtonClicked()
     input = fi.canonicalFilePath();
 
     // get save path
-    const QString savePath = m_storeLastSavePath.get(QDir::homePath()) + QLatin1Char('/') + fi.fileName() + QLatin1String(".torrent");
+    QString savePath;
+    if (m_ui->checkCyphered->isChecked())
+        savePath = m_storeLastSavePath.get(QDir::homePath()) + QLatin1Char('/') + fi.fileName() + QLatin1String(".cyphered") + QLatin1String(".torrent");
+    else
+        savePath = m_storeLastSavePath.get(QDir::homePath()) + QLatin1Char('/') + fi.fileName() + QLatin1String(".torrent");
     QString destination = QFileDialog::getSaveFileName(this, tr("Select where to save the new torrent"), savePath, tr("Torrent Files (*.torrent)"));
     if (destination.isEmpty())
         return;
@@ -201,6 +205,7 @@ void TorrentCreatorDialog::onCreateButtonClicked()
     const BitTorrent::TorrentCreatorParams params
     {
         m_ui->checkPrivate->isChecked()
+        , m_ui->checkCyphered->isChecked()
 #if (LIBTORRENT_VERSION_NUM >= 20000)
         , getTorrentFormat()
 #else

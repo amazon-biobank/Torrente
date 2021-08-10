@@ -298,6 +298,13 @@
            </widget>
           </item>
           <item>
+              <widget class="QCheckBox" name="checkCyphered">
+                  <property name="text">
+                      <string>Cypher files (used for Biobank)</string>
+                  </property>
+              </widget>
+          </item>
+          <item>
            <widget class="QCheckBox" name="checkStartSeeding">
             <property name="text">
              <string>Start seeding immediately</string>
@@ -476,6 +483,7 @@
   <tabstop>addFolderButton</tabstop>
   <tabstop>comboPieceSize</tabstop>
   <tabstop>checkPrivate</tabstop>
+  <tabstop>checkCyphered</tabstop>
   <tabstop>checkStartSeeding</tabstop>
   <tabstop>checkIgnoreShareLimits</tabstop>
   <tabstop>checkOptimizeAlignment</tabstop>
