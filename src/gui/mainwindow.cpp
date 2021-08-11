@@ -774,7 +774,6 @@ void MainWindow::on_actionBalance_triggered()
                 if (torrents[index]->isPaidTorrent())
                     torrents[index]->pause();
             }
-            
         }
         this->refreshAuthenticationState();
     }
