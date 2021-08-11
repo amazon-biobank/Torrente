@@ -667,6 +667,8 @@ bool MainWindow::defineUIDecrypt()
     DecypherDialog decryptDialog(this);
 
     decryptDialog.exec();
+
+    return true;
 }
 
 bool MainWindow::defineUIPayChoice(QVector<BitTorrent::Torrent*> notPaidTorrents)
