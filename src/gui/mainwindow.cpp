@@ -744,6 +744,7 @@ void MainWindow::on_actionAuth_triggered()
                     notPaidTorrents.append(torrents[index]);
                 else
                 {
+                    torrents[index]->turnTorrentPaid();
                     Payfluxo::Session::instance()->declareDownloadIntention(
                         torrents[index]->createMagnetURI(),
                         torrents[index]->piecesCount(),

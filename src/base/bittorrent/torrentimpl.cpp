@@ -1964,6 +1964,7 @@ void TorrentImpl::handleAppendExtensionToggled()
 
 void TorrentImpl::handleBlockFinishedAlert(const lt::block_finished_alert* p)
 {
+    // Paid handler;
     if (Payfluxo::Session::instance()->isAuthenticated()) {
         PayfluxoService* service = Payfluxo::Session::instance()->getService();
         service->sendBlockDownloadedMessage(
@@ -1976,6 +1977,7 @@ void TorrentImpl::handleBlockFinishedAlert(const lt::block_finished_alert* p)
 
 void TorrentImpl::handleBlockUploadedAlert(const lt::block_uploaded_alert* p)
 {
+    // Paid handler;
     if (Payfluxo::Session::instance()->isAuthenticated()) {
         QString downloaderIp = QString::fromStdString(p->endpoint.address().to_string());
 
@@ -1984,6 +1986,7 @@ void TorrentImpl::handleBlockUploadedAlert(const lt::block_uploaded_alert* p)
 }
 
 void TorrentImpl::handleIncomingRequestAlert(const lt::incoming_request_alert* p){
+    // Paid handler;
     if (Payfluxo::Session::instance()->isAuthenticated()) {
         QString requesterIp = QString::fromStdString(p->endpoint.address().to_string());
 

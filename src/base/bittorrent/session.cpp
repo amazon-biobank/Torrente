@@ -4555,7 +4555,20 @@ void Session::dispatchTorrentAlert(const lt::alert *a)
     TorrentImpl *const torrent = m_torrents.value(static_cast<const lt::torrent_alert*>(a)->handle.info_hash());
     if (torrent)
     {
-        torrent->handleAlert(a);
+        if (torrent->isPaidTorrent()) {
+            torrent->handleAlert(a);
+        }
+        else {
+            switch (a->type()) {
+            case lt::block_finished_alert::alert_type:
+            case lt::block_uploaded_alert::alert_type:
+            case lt::incoming_request_alert::alert_type:
+                break;
+            default:
+                torrent->handleAlert(a);
+                break;
+            }
+        }
         return;
     }
 
@@ -4630,6 +4643,7 @@ void Session::createTorrent(const lt::torrent_handle &nativeHandle)
     {
         Payfluxo::Session* payfluxoSession = Payfluxo::Session::instance();
         torrent->pause();
+        torrent->turnTorrentPaid();
         payfluxoSession->declareDownloadIntention(
             torrent->createMagnetURI(),
             torrent->piecesCount(),
