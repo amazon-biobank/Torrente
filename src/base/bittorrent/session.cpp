@@ -488,26 +488,24 @@ Session::Session(QObject* parent)
 
             m_tags = List::toSet(m_storedTags.get());
 
-            //initiate blacklist
-            m_mapBlacklist = m_blacklist;
             time_t timer;
             timer = time(0);
+
+            m_mapBlacklist = m_blacklist;
+
             struct tm tm;
             char buffer[26];
 
-            //iterate over blacklist and check if any ip was added over a period of N days
             for (auto e : m_mapBlacklist.toStdMap())
             {
                 std::string timeString = e.second.toUtf8().constData();
 
                 std::istringstream ss(timeString);
-                ss >> std::get_time(&tm, "%Y-%m-%d %H:%M:%S");
+                ss >> std::get_time(&tm, "%Y-%m-%d %H:%M:%S"); // or just %T in this case
                 std::time_t time = mktime(&tm);
 
                 //strftime(time, "%Y-%m-%d %H:%M:%S", &tm);
                 //time_t t = mktime(&tm);
-                
-                //if ip was added over N days, remove from blacklist
                 if ((std::difftime(time, timer) / (60 * 60 * 24) ) >= 1)
                 {
                     removeIpBlacklist(e.first);
