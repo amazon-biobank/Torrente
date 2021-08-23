@@ -14,6 +14,8 @@
 #define PAYFLUXO_SOCKET "ws://127.0.0.1:7933"
 #define RECONNECT_WAIT 100
 
+#define RECOVERY_FROM_BLACK_LIST_TOLERANCE 4
+
 #define INTENTION_DECLARATION_SUCCESS 0
 #define INTENTION_DECLARATION_NO_FUNDS 1
 
@@ -58,7 +60,7 @@ void PayfluxoService::handlePaymentNotification(QString ip)
     session->decreaseIpPaymentPendent(ip);
     session->setRedeemableCoins(session->getRedeemableCoins() + 1);
 
-    if (session->getIpPendentPayment(ip) < 1)
+    if (session->getIpPendentPayment(ip) < RECOVERY_FROM_BLACK_LIST_TOLERANCE)
         BitTorrent::Session::instance()->unbanIP(ip);
 }
 
