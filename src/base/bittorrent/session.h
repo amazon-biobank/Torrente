@@ -32,6 +32,7 @@
 #include <memory>
 #include <variant>
 #include <vector>
+#include <ctime>
 
 #include <libtorrent/add_torrent_params.hpp>
 #include <libtorrent/fwd.hpp>
@@ -745,7 +746,8 @@ namespace BitTorrent
         CachedSettingValue<int> m_peerTurnoverCutoff;
         CachedSettingValue<int> m_peerTurnoverInterval;
         CachedSettingValue<QStringList> m_bannedIPs;
-        CachedSettingValue<QMap<QString, QString>> m_blacklist;
+        //CachedSettingValue<QMap<QString, QString>> m_blacklist;
+        CachedSettingValue<std::unordered_map<std::string, std::time_t>> m_blacklist;
 #if defined(Q_OS_WIN)
         CachedSettingValue<OSMemoryPriority> m_OSMemoryPriority;
 #endif
@@ -798,7 +800,8 @@ namespace BitTorrent
 
         QList<MoveStorageJob> m_moveStorageQueue;
 
-        QMap<QString, QString> m_mapBlacklist;
+        //QMap<QString, QString> m_mapBlacklist;
+        std::unordered_map<std::string, std::time_t > m_mapBlacklist;
 
         static Session* m_instance;
     };
