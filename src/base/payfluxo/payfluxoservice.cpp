@@ -140,7 +140,7 @@ void PayfluxoService::sendAuthenticatedMessage(QString certificate, QString priv
     QJsonObject dataObj;
     dataObj.insert("certificate", certificate);
     dataObj.insert("privateKey", privateKey);
-    dataObj.insert("orgMSP", orgMSP);
+    dataObj.insert("mspId", orgMSP);
     QJsonObject messageObj;
     messageObj.insert("type", QString("Authenticated"));
     messageObj.insert("data", dataObj);
