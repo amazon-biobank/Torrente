@@ -49,12 +49,11 @@ bool Session::authenticate(QString password, QString certificatePath) {
         return true;
     }
 
-    QJsonObject jsonObject = jsonResponse.object();
-    QJsonObject credentialsJson = jsonObject["credentials"].toObject();
+    QJsonObject credentialsJson = jsonResponse.object();
 
     QString certificateString = credentialsJson["certificate"].toString();
     QString privateKeyString = credentialsJson["privateKey"].toString();
-    QString mspIdString = jsonObject["mspId"].toString();
+    QString mspIdString = credentialsJson["orgMSPID"].toString();
 
     m_userDecryptedCertificateString = certificateString;
     m_userDecryptedPrivateKeyString = privateKeyString;
