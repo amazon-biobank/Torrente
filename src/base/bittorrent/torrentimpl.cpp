@@ -262,6 +262,8 @@ TorrentImpl::TorrentImpl(Session *session, lt::session *nativeSession
     , m_isStopped(params.paused)
     , m_ltAddTorrentParams(params.ltAddTorrentParams)
 {
+    m_paidTorrent = false;
+
     if (m_useAutoTMM)
         m_savePath = Utils::Fs::toNativePath(m_session->categorySavePath(m_category));
 
@@ -435,6 +437,16 @@ void TorrentImpl::setAutoTMMEnabled(bool enabled)
 QString TorrentImpl::actualStorageLocation() const
 {
     return QString::fromStdString(m_nativeStatus.save_path);
+}
+
+void TorrentImpl::turnTorrentPaid()
+{
+    m_paidTorrent = true;
+}
+
+bool TorrentImpl::isPaidTorrent()
+{
+    return m_paidTorrent;
 }
 
 void TorrentImpl::setAutoManaged(const bool enable)
@@ -1522,36 +1534,42 @@ void TorrentImpl::pause()
 
 void TorrentImpl::resume(const TorrentOperatingMode mode)
 {
-    if (hasError())
-        m_nativeHandle.clear_error();
-
-    m_operatingMode = mode;
-
-    if (m_hasMissingFiles)
+    // Don't let the torrent be resumed if it's a paid torrent and user is unauthenticated
+    bool userIsAuthenticated = Payfluxo::Session::instance()->isAuthenticated();
+    bool letResumeCondition = (userIsAuthenticated || !this->m_paidTorrent);
+    if (letResumeCondition)
     {
-        m_hasMissingFiles = false;
-        m_isStopped = false;
-        m_ltAddTorrentParams.ti = std::const_pointer_cast<lt::torrent_info>(m_nativeHandle.torrent_file());
-        reload();
-        updateStatus();
-        return;
-    }
+        if (hasError())
+            m_nativeHandle.clear_error();
 
-    if (m_isStopped)
-    {
-        // Torrent may have been temporarily resumed to perform checking files
-        // so we have to ensure it will not pause after checking is done.
-        m_nativeHandle.unset_flags(lt::torrent_flags::stop_when_ready);
+        m_operatingMode = mode;
 
-        m_isStopped = false;
-        m_session->handleTorrentResumed(this);
-    }
+        if (m_hasMissingFiles)
+        {
+            m_hasMissingFiles = false;
+            m_isStopped = false;
+            m_ltAddTorrentParams.ti = std::const_pointer_cast<lt::torrent_info>(m_nativeHandle.torrent_file());
+            reload();
+            updateStatus();
+            return;
+        }
 
-    if (m_maintenanceJob == MaintenanceJob::None)
-    {
-        setAutoManaged(m_operatingMode == TorrentOperatingMode::AutoManaged);
-        if (m_operatingMode == TorrentOperatingMode::Forced)
-            m_nativeHandle.resume();
+        if (m_isStopped)
+        {
+            // Torrent may have been temporarily resumed to perform checking files
+            // so we have to ensure it will not pause after checking is done.
+            m_nativeHandle.unset_flags(lt::torrent_flags::stop_when_ready);
+
+            m_isStopped = false;
+            m_session->handleTorrentResumed(this);
+        }
+
+        if (m_maintenanceJob == MaintenanceJob::None)
+        {
+            setAutoManaged(m_operatingMode == TorrentOperatingMode::AutoManaged);
+            if (m_operatingMode == TorrentOperatingMode::Forced)
+                m_nativeHandle.resume();
+        }
     }
 }
 
@@ -1946,6 +1964,7 @@ void TorrentImpl::handleAppendExtensionToggled()
 
 void TorrentImpl::handleBlockFinishedAlert(const lt::block_finished_alert* p)
 {
+    // Paid handler;
     if (Payfluxo::Session::instance()->isAuthenticated()) {
         PayfluxoService* service = Payfluxo::Session::instance()->getService();
         service->sendBlockDownloadedMessage(
@@ -1958,6 +1977,7 @@ void TorrentImpl::handleBlockFinishedAlert(const lt::block_finished_alert* p)
 
 void TorrentImpl::handleBlockUploadedAlert(const lt::block_uploaded_alert* p)
 {
+    // Paid handler;
     if (Payfluxo::Session::instance()->isAuthenticated()) {
         QString downloaderIp = QString::fromStdString(p->endpoint.address().to_string());
 
@@ -1966,6 +1986,7 @@ void TorrentImpl::handleBlockUploadedAlert(const lt::block_uploaded_alert* p)
 }
 
 void TorrentImpl::handleIncomingRequestAlert(const lt::incoming_request_alert* p){
+    // Paid handler;
     if (Payfluxo::Session::instance()->isAuthenticated()) {
         QString requesterIp = QString::fromStdString(p->endpoint.address().to_string());
 

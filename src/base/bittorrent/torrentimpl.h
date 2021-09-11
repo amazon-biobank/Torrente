@@ -256,6 +256,9 @@ namespace BitTorrent
 
         QString actualStorageLocation() const;
 
+        void turnTorrentPaid();
+        bool isPaidTorrent();
+
     private:
         typedef std::function<void ()> EventTrigger;
 
@@ -336,6 +339,8 @@ namespace BitTorrent
         bool m_hasFirstLastPiecePriority = false;
         bool m_useAutoTMM;
         bool m_isStopped;
+
+        bool m_paidTorrent = false;
 
         bool m_unchecked = false;
 
