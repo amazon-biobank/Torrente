@@ -761,12 +761,9 @@ void MainWindow::on_actionAuth_triggered()
 
 void MainWindow::on_actionBalance_triggered()
 {
-    bool authStateBefore = Payfluxo::Session::instance()->isAuthenticated();
     if(defineUIUserPanel())
     {
-        bool authStateAfter = Payfluxo::Session::instance()->isAuthenticated();
-        // logout?
-        if (authStateAfter != authStateBefore)
+        if (Payfluxo::Session::instance()->isAuthenticated())
         {
             QVector<BitTorrent::Torrent *> torrents = BitTorrent::Session::instance()->torrents();
             for (int index = 0; index < torrents.length(); index++)
