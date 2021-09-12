@@ -753,11 +753,13 @@ void MainWindow::on_actionAuth_triggered()
                 else
                 {
                     torrents[index]->turnTorrentPaid();
-                    Payfluxo::Session::instance()->declareDownloadIntention(
-                        torrents[index]->createMagnetURI(),
-                        torrents[index]->piecesCount(),
-                        torrents[index]->id().toString()
-                    );
+                    if (!torrents[index]->isCompleted()) {
+                        Payfluxo::Session::instance()->declareDownloadIntention(
+                            torrents[index]->createMagnetURI(),
+                            torrents[index]->piecesCount(),
+                            torrents[index]->id().toString()
+                        );
+                    }
                 }
             }
             if (!notPaidTorrents.empty())
