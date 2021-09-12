@@ -159,4 +159,8 @@ void Session::updateWallet(float newAvailable, float newFrozen, float newRedeema
     emit walletUpdated();
 }
 
+void Session::NotifyFailed(){
+    emit NATFailed();
+}
+
 Session* Session::m_instance = nullptr;

@@ -41,10 +41,13 @@ namespace Payfluxo {
         void logout();
         void closePayfluxo();
 
+        void NotifyFailed();
+
         static Session* m_instance;
 
     signals:
         void walletUpdated();
+        void NATFailed();
 
     private:
         QString m_userDecryptedCertificateString;

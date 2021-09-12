@@ -116,6 +116,10 @@ void PayfluxoService::onTextMessageReceived(QString message)
         );
     }
 
+    else if (QString::compare(type, "NATNotifcation", Qt::CaseSensitive) == 0) {
+        Payfluxo::Session::instance()->NotifyFailed();
+    }
+
     if (m_debug)
         qDebug() << "Message received:" << message;
 

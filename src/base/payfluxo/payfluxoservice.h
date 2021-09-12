@@ -4,7 +4,7 @@
 #include <QWebSocket>
 
 class PayfluxoService : public QObject {
-
+    Q_OBJECT
 private:
     bool m_debug;
     QWebSocket m_webSocket;
