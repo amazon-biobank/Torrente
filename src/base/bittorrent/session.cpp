@@ -4645,7 +4645,7 @@ void Session::createTorrent(const lt::torrent_handle &nativeHandle)
         torrent->pause();
         torrent->turnTorrentPaid();
         // if is new, declare intention
-        if (!torrent->isCompleted()) {
+        if (!params.hasSeedStatus) {
             payfluxoSession->declareDownloadIntention(
                 torrent->createMagnetURI(),
                 torrent->piecesCount(),
