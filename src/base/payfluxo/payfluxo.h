@@ -16,9 +16,9 @@ namespace Payfluxo {
         bool authenticate(QString password, QString certificatePath);
         bool isAuthenticated();
 
-        void increaseIpPaymentPendent(QString ip);
-        void decreaseIpPaymentPendent(QString ip);
-        void clearIpPaymentPendency(QString ip);
+        void increaseIpBlocksDownloaded(QString ip);
+        void setIpMadePayment(QString ip, int madePayments);
+        void clearIpPaymentRegistry(QString ip);
         int  getIpPendentPayment(QString ip);
         bool ipExceededPendentPayment(QString ip);
 
@@ -41,10 +41,13 @@ namespace Payfluxo {
         void logout();
         void closePayfluxo();
 
+        void NotifyFailed();
+
         static Session* m_instance;
 
     signals:
         void walletUpdated();
+        void NATFailed();
 
     private:
         QString m_userDecryptedCertificateString;
@@ -56,7 +59,8 @@ namespace Payfluxo {
         float m_redeemableCoins;
 
         PayfluxoService* m_payfluxoService;
-        QHash<QString, int> m_ipPaymentPendencies;
+        QHash<QString, int> m_ipPaymentsMade;
+        QHash<QString, int> m_ipBlocksDownloaded;
         bool m_authenticated;
 
         explicit Session();

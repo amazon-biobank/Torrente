@@ -222,6 +222,8 @@ MainWindow::MainWindow(QWidget *parent)
     connect(BitTorrent::Session::instance(), &BitTorrent::Session::speedLimitModeChanged, this, &MainWindow::updateAltSpeedsBtn);
     connect(BitTorrent::Session::instance(), &BitTorrent::Session::recursiveTorrentDownloadPossible, this, &MainWindow::askRecursiveTorrentDownloadConfirmation);
 
+    connect(Payfluxo::Session::instance(), &Payfluxo::Session::NATFailed, this, &MainWindow::NATerror);
+
     qDebug("create tabWidget");
     m_tabs = new HidableTabWidget(this);
     connect(m_tabs.data(), &QTabWidget::currentChanged, this, &MainWindow::tabChanged);
@@ -653,6 +655,12 @@ void MainWindow::toolbarFollowSystem()
     Preferences::instance()->setToolbarTextPosition(Qt::ToolButtonFollowStyle);
 }
 
+void MainWindow::NATerror() {
+    QMessageBox NATErrorDialogBox;
+    NATErrorDialogBox.setText("Payfluxo failed to open port 9003 on router. Please, open this port manually on your router");
+    NATErrorDialogBox.exec();
+}
+
 bool MainWindow::defineUIAuth()
 {
     AuthDialog authDialog(this);
@@ -745,11 +753,13 @@ void MainWindow::on_actionAuth_triggered()
                 else
                 {
                     torrents[index]->turnTorrentPaid();
-                    Payfluxo::Session::instance()->declareDownloadIntention(
-                        torrents[index]->createMagnetURI(),
-                        torrents[index]->piecesCount(),
-                        torrents[index]->id().toString()
-                    );
+                    if (!torrents[index]->isCompleted()) {
+                        Payfluxo::Session::instance()->declareDownloadIntention(
+                            torrents[index]->createMagnetURI(),
+                            torrents[index]->piecesCount(),
+                            torrents[index]->id().toString()
+                        );
+                    }
                 }
             }
             if (!notPaidTorrents.empty())

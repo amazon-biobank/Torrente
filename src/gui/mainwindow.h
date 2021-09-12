@@ -107,6 +107,7 @@ public:
     void showNotificationBaloon(const QString &title, const QString &msg) const;
 
 private slots:
+    void NATerror();
     void showFilterContextMenu(const QPoint &);
     void balloonClicked();
     void writeSettings();

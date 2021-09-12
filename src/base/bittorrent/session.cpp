@@ -4644,11 +4644,14 @@ void Session::createTorrent(const lt::torrent_handle &nativeHandle)
         Payfluxo::Session* payfluxoSession = Payfluxo::Session::instance();
         torrent->pause();
         torrent->turnTorrentPaid();
-        payfluxoSession->declareDownloadIntention(
-            torrent->createMagnetURI(),
-            torrent->piecesCount(),
-            torrent->id().toString()
-        );
+        // if is new, declare intention
+        if (!torrent->isCompleted()) {
+            payfluxoSession->declareDownloadIntention(
+                torrent->createMagnetURI(),
+                torrent->piecesCount(),
+                torrent->id().toString()
+            );
+        }
     }
 
     // Torrent could have error just after adding to libtorrent

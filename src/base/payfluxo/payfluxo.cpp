@@ -92,27 +92,26 @@ PayfluxoService* Session::getService() {
     return m_payfluxoService;
 }
 
-void Session::increaseIpPaymentPendent(QString ip) {
-    if (this->m_ipPaymentPendencies.contains(ip))
-        this->m_ipPaymentPendencies[ip] = 0;
-
-    this->m_ipPaymentPendencies[ip] += 1;
+void Session::setIpMadePayment(QString ip, int madePayments) {
+    this->m_ipPaymentsMade[ip] = madePayments;
 }
 
-void Session::decreaseIpPaymentPendent(QString ip) {
-    this->m_ipPaymentPendencies[ip] -= 1;
+void Session::increaseIpBlocksDownloaded(QString ip) {
+    this->m_ipBlocksDownloaded[ip]++;
 }
 
-void Session::clearIpPaymentPendency(QString ip) {
-    this->m_ipPaymentPendencies.remove(ip);
+void Session::clearIpPaymentRegistry(QString ip) {
+    this->m_ipPaymentsMade.remove(ip);
+    this->m_ipBlocksDownloaded.remove(ip);
 }
 
 bool Session::ipExceededPendentPayment(QString ip) {
-    return this->m_ipPaymentPendencies[ip] >= PENDENCE_TOLERANCE;
+    int pendentPayments = this->m_ipBlocksDownloaded[ip] - this->m_ipPaymentsMade[ip];
+    return pendentPayments >= PENDENCE_TOLERANCE;
 }
 
 int Session::getIpPendentPayment(QString ip) {
-    return this->m_ipPaymentPendencies[ip];
+    return this->m_ipBlocksDownloaded[ip] - this->m_ipPaymentsMade[ip];
 }
 
 QString Session::getCertificate() {
@@ -157,6 +156,10 @@ void Session::updateWallet(float newAvailable, float newFrozen, float newRedeema
     this->setRedeemableCoins(newRedeemable);
 
     emit walletUpdated();
+}
+
+void Session::NotifyFailed(){
+    emit NATFailed();
 }
 
 Session* Session::m_instance = nullptr;

@@ -53,11 +53,11 @@ void PayfluxoService::closed() {
 
 }
 
-void PayfluxoService::handlePaymentNotification(QString ip)
+void PayfluxoService::handlePaymentNotification(QString ip, int blocksPaid)
 {
     Payfluxo::Session* session = Payfluxo::Session::instance();
 
-    session->decreaseIpPaymentPendent(ip);
+    session->setIpMadePayment(ip, blocksPaid);
     session->setRedeemableCoins(session->getRedeemableCoins() + 1);
 
     if (session->getIpPendentPayment(ip) < RECOVERY_FROM_BLACK_LIST_TOLERANCE)
@@ -97,7 +97,7 @@ void PayfluxoService::onTextMessageReceived(QString message)
     QJsonObject dataJson = jsonObject["data"].toObject();
 
     if (QString::compare(type, "PaymentNotification", Qt::CaseSensitive) == 0) {
-        this->handlePaymentNotification(dataJson["ip"].toString());
+        this->handlePaymentNotification(dataJson["payerIp"].toString(), dataJson["blocksPaid"].toInt());
     }
 
     else if (QString::compare(type, "IntentionDeclaredNotification", Qt::CaseSensitive) == 0) {
@@ -114,6 +114,10 @@ void PayfluxoService::onTextMessageReceived(QString message)
             walletObject["frozen"].toDouble(),
             walletObject["redeemable"].toDouble()
         );
+    }
+
+    else if (QString::compare(type, "NATNotifcation", Qt::CaseSensitive) == 0) {
+        Payfluxo::Session::instance()->NotifyFailed();
     }
 
     if (m_debug)

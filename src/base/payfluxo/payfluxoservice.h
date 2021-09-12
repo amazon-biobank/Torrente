@@ -4,13 +4,13 @@
 #include <QWebSocket>
 
 class PayfluxoService : public QObject {
-
+    Q_OBJECT
 private:
     bool m_debug;
     QWebSocket m_webSocket;
     void sendMessage(QString message);
 
-    void handlePaymentNotification(QString ip);
+    void handlePaymentNotification(QString ip, int blocksPaid);
     void handleIntentionDeclaredNotification(QString torrentIdString, int status);
     void handleWalletNotification(float newAvailable, float newFrozen, float newRedeemable);
 
