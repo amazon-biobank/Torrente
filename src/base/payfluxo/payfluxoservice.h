@@ -10,7 +10,7 @@ private:
     QWebSocket m_webSocket;
     void sendMessage(QString message);
 
-    void handlePaymentNotification(QString ip);
+    void handlePaymentNotification(QString ip, int blocksPaid);
     void handleIntentionDeclaredNotification(QString torrentIdString, int status);
     void handleWalletNotification(float newAvailable, float newFrozen, float newRedeemable);
 

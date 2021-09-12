@@ -1981,7 +1981,7 @@ void TorrentImpl::handleBlockUploadedAlert(const lt::block_uploaded_alert* p)
     if (Payfluxo::Session::instance()->isAuthenticated()) {
         QString downloaderIp = QString::fromStdString(p->endpoint.address().to_string());
 
-        Payfluxo::Session::instance()->increaseIpPaymentPendent(downloaderIp);
+        Payfluxo::Session::instance()->increaseIpBlocksDownloaded(downloaderIp);
     }
 }
 
