@@ -89,7 +89,7 @@ void PayChoiceDialog::onSelectButtonClicked()
         if (torrentState == Qt::CheckState::Checked)
         {
             torrentOptions[i]->turnTorrentPaid();
-            if (!torrentOptions[i]->isCompleted()) {
+            if (!(torrentOptions[i]->isCompleted() || torrentOptions[i]->isSeed())) {
                 Payfluxo::Session::instance()->declareDownloadIntention(
                     torrentOptions[i]->createMagnetURI(),
                     torrentOptions[i]->piecesCount(),

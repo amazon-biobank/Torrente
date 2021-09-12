@@ -753,7 +753,7 @@ void MainWindow::on_actionAuth_triggered()
                 else
                 {
                     torrents[index]->turnTorrentPaid();
-                    if (!torrents[index]->isCompleted()) {
+                    if (!(torrents[index]->isCompleted() || torrents[index]->isSeed())) {
                         Payfluxo::Session::instance()->declareDownloadIntention(
                             torrents[index]->createMagnetURI(),
                             torrents[index]->piecesCount(),
