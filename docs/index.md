@@ -1,4 +1,5 @@
-## Torrente: mecanismo seguro de distribuição de dados de biodiversidade via Torrent com remuneração para o Biobank
+# Torrente 
+## Mecanismo seguro de distribuição de dados de biodiversidade via Torrent com remuneração para o Biobank
 
 You can use the [editor on GitHub](https://github.com/amazon-biobank/Torrente/edit/Torrente/docs/index.md) to maintain and preview the content for your website in Markdown files.
 
