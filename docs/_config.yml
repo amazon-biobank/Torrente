@@ -2,3 +2,6 @@ theme: jekyll-theme-cayman
 
 title: Torrente
 description: Mecanismo seguro de distribuição de dados de biodiversidade via Torrent com remuneração para o Biobank
+github:
+  windows_url: https://github.com/amazon-biobank/Torrente/wiki/Windows-build-instructions
+  linux_url: https://github.com/amazon-biobank/Torrente/wiki/Ubuntu-Debian-build-instructions
