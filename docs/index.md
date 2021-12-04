@@ -13,11 +13,16 @@ Como a natureza do projeto é distribuída, o seu sistema de pagamentos deve ser
 
 ## Arquitetura
 
+![Architeture](/assets/architecture.png)
+
 ## Video de Apresentação
 
 <style>.embed-container { position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden; max-width: 100%; } .embed-container iframe, .embed-container object, .embed-container embed { position: absolute; top: 0; left: 0; width: 100%; height: 100%; }</style><div class='embed-container'><iframe src='https://www.youtube.com/embed/gYcLkmv6e0E' frameborder='0' allowfullscreen></iframe></div>
 
 ## Conclusão
+
+O Torrente se apresenta como uma solução interessante para contextos distribuídos optando tanto por meios de pagamento tradicionais no meio digital, quanto por meios de pagamento baseados em um livro razão público de Blockhain. 
+Ao atender os requisitos de segurança específicos do contexto motivador do Biobank, este projeto também sugere viabilidade de aplicação em outros contextos que, semelhantemente, demandem disponibilidade, integridade e confidencialidade na transmissão de dados, bem como um sistema de pagamentos dotado de autenticidade e não repúdio em ambiente de confiança zero entre os pares.
 
 ## Referências
 
