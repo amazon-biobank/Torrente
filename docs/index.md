@@ -13,7 +13,9 @@ Como a natureza do projeto é distribuída, o seu sistema de pagamentos deve ser
 
 ## Arquitetura
 
-![Architeture](/assets/architecture.png)
+<p align="center">
+  <img src="/Torrente/assets/architecture.png" />
+</p>
 
 ## Video de Apresentação
 
