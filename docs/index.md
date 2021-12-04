@@ -26,16 +26,6 @@ Como a natureza do projeto é distribuída, o seu sistema de pagamentos deve ser
 O Torrente se apresenta como uma solução interessante para contextos distribuídos optando tanto por meios de pagamento tradicionais no meio digital, quanto por meios de pagamento baseados em um livro razão público de Blockhain. 
 Ao atender os requisitos de segurança específicos do contexto motivador do Biobank, este projeto também sugere viabilidade de aplicação em outros contextos que, semelhantemente, demandem disponibilidade, integridade e confidencialidade na transmissão de dados, bem como um sistema de pagamentos dotado de autenticidade e não repúdio em ambiente de confiança zero entre os pares.
 
-## Referências
-
-¹ KIMURA, Leonardo, SILVA, Gustavo, KOGACHI, Lucas. Amazon Biobank:
-Blockchain para processamento de DNA. 2020. Escola
-Politécnica de Engenharia, Universidade de São Paulo, São Paulo, 2020. Disponível
-em: <https://pcs.usp.br/pcspf/projetos-anteriores/2020-2/>. Acesso em: 03/02/2021.
-² HANG, Kan, ANTONOPOULOS, Nick, MAHMOOD, Zaigham. A Review of Incentive Mechanisms in Peer-to-Peer Systems. School of Computing, University
-of Derby, Derby, UK, 2009.
-
-
 ## Orientadores e Integrantes
 
 **Orientadores:**
@@ -48,6 +38,18 @@ of Derby, Derby, UK, 2009.
 - Felipe Kenzo Shiraishi
 - Hector Kobayashi Yassuda
 - Vitor Hugo Perles
+
+## Referências
+
+1. KIMURA, Leonardo, SILVA, Gustavo, KOGACHI, Lucas. Amazon Biobank:
+Blockchain para processamento de DNA. 2020. Escola
+Politécnica de Engenharia, Universidade de São Paulo, São Paulo, 2020. Disponível
+em: <https://pcs.usp.br/pcspf/projetos-anteriores/2020-2/>. Acesso em: 03/02/2021.
+2. HANG, Kan, ANTONOPOULOS, Nick, MAHMOOD, Zaigham. A Review of Incentive Mechanisms in Peer-to-Peer Systems. School of Computing, University
+of Derby, Derby, UK, 2009.
+
+
+
 
 
 
