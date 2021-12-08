@@ -16,7 +16,7 @@ Como a natureza do projeto é distribuída, o seu sistema de pagamentos deve ser
 O Torrente é a aplicação utilizada pelos usuários (peers) na rede swarm, para distribuição e armazenamento de dados. Ela é formada pelo protocolo BitTorrent que foi utilizado como base e modificado para atender os requisitos do projeto.
 
 <p align="center">
-  <img src="/Torrente/assets/architecture.png" />
+  <img src="/Torrente/assets/torrente_flow.jpeg" />
 </p>
 
 Para viabilizar as rotinas de pagamento seguro, o sistema conta com o Payfluxo, uma aplicação que se comunica com a infraestrutura baseada em Fabric Hyperledger SDK.
@@ -25,7 +25,7 @@ O sistema permite aos usuários a cifração dos conteúdos transmitidos de tal 
 Os usuários adquirem pedaços de arquivos incrementalmente pela rede efetuando micro pagamentos diretamente aos seus pares. Estes fundos então podem ser convertidos e consolidados frente ao árbitro financeiro do sistema, que pode ser tanto um Smart Contract, quanto um provedor de pagamentos tradicional.
 
 <p align="center">
-  <img src="/Torrente/assets/torrente.png" />
+  <img src="/Torrente/assets/architecture.jpeg" />
 </p>
 
 ## Video de Apresentação
