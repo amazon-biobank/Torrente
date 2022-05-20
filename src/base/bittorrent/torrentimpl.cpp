@@ -1990,8 +1990,9 @@ void TorrentImpl::handleIncomingRequestAlert(const lt::incoming_request_alert* p
     if (Payfluxo::Session::instance()->isAuthenticated()) {
         QString requesterIp = QString::fromStdString(p->endpoint.address().to_string());
 
-        if (Payfluxo::Session::instance()->ipExceededPendentPayment(requesterIp))
+        if (Payfluxo::Session::instance()->ipExceededPendentPayment(requesterIp)) {
             BitTorrent::Session::instance()->banIP(requesterIp);
+        }
     }
 }
 
