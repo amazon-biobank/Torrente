@@ -7,7 +7,7 @@
 
 using namespace Payfluxo;
 
-#define PENDENCE_TOLERANCE 1024000 
+#define PENDENCE_TOLERANCE 1024000
 
 Session::Session() {
     m_authenticated = false;
