@@ -50,7 +50,7 @@ DecypherDialog::DecypherDialog(QWidget* parent)
 {
     m_ui->setupUi(this);
 
-    m_ui->cypheredFileButton->setText(tr("Choose file"));
+    m_ui->encryptedFileButton->setText(tr("Choose file"));
     m_ui->importKeyButton->setText(tr("Import file key"));
     m_ui->decypherButton->setText(tr("Decrypt file"));
     this->setWindowTitle(tr("Decrypt file"));
@@ -68,7 +68,7 @@ void DecypherDialog::onImportFileButtonClicked()
         this,
         tr("Open file"),
         QDir::homePath(),
-        tr("Cyphered files (*.cyphered)")
+        tr("Encrypted files (*.encrypted)")
     );
     if (fileName == "")
         fileName = "No file chosen";
@@ -91,7 +91,7 @@ void DecypherDialog::onImportKeyButtonClicked()
 }
 
 void DecypherDialog::toggleWidgetsEnable() {
-    m_ui->cypheredFileButton->setEnabled(!m_ui->cypheredFileButton->isEnabled());
+    m_ui->encryptedFileButton->setEnabled(!m_ui->encryptedFileButton->isEnabled());
     m_ui->importKeyButton->setEnabled(!m_ui->importKeyButton->isEnabled());
     m_ui->decypherButton->setEnabled(!m_ui->decypherButton->isEnabled());
 }
