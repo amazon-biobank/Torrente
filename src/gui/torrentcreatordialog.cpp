@@ -36,6 +36,7 @@
 #include <QUrl>
 
 #include "base/bittorrent/session.h"
+#include "base/payfluxo/payfluxo.h"
 #include "base/bittorrent/torrentinfo.h"
 #include "base/global.h"
 #include "base/utils/fs.h"
@@ -43,6 +44,8 @@
 #include "utils.h"
 
 #define SETTINGS_KEY(name) "TorrentCreator/" name
+#define MINIMUM_PIECE_SIZE 16
+#define MINIMUM_PIECE_SIZE_INDEX 1
 
 TorrentCreatorDialog::TorrentCreatorDialog(QWidget *parent, const QString &defaultPath)
     : QDialog(parent)
@@ -89,6 +92,11 @@ TorrentCreatorDialog::TorrentCreatorDialog(QWidget *parent, const QString &defau
 #else
     m_ui->widgetTorrentFormat->hide();
 #endif
+
+    if (Payfluxo::Session::instance()->isAuthenticated()) {
+        m_ui->comboPieceSize->setCurrentIndex(MINIMUM_PIECE_SIZE_INDEX);
+        m_ui->comboPieceSize->setDisabled(true);
+    }
 
     show();
 }
@@ -185,8 +193,8 @@ void TorrentCreatorDialog::onCreateButtonClicked()
 
     // get save path
     QString savePath;
-    if (m_ui->checkCyphered->isChecked())
-        savePath = m_storeLastSavePath.get(QDir::homePath()) + QLatin1Char('/') + fi.fileName() + QLatin1String(".cyphered") + QLatin1String(".torrent");
+    if (m_ui->checkEncrypted->isChecked())
+        savePath = m_storeLastSavePath.get(QDir::homePath()) + QLatin1Char('/') + fi.fileName() + QLatin1String(".encrypted") + QLatin1String(".torrent");
     else
         savePath = m_storeLastSavePath.get(QDir::homePath()) + QLatin1Char('/') + fi.fileName() + QLatin1String(".torrent");
     QString destination = QFileDialog::getSaveFileName(this, tr("Select where to save the new torrent"), savePath, tr("Torrent Files (*.torrent)"));
@@ -205,7 +213,7 @@ void TorrentCreatorDialog::onCreateButtonClicked()
     const BitTorrent::TorrentCreatorParams params
     {
         m_ui->checkPrivate->isChecked()
-        , m_ui->checkCyphered->isChecked()
+        , m_ui->checkEncrypted->isChecked()
 #if (LIBTORRENT_VERSION_NUM >= 20000)
         , getTorrentFormat()
 #else
@@ -220,6 +228,9 @@ void TorrentCreatorDialog::onCreateButtonClicked()
         , m_ui->URLSeedsList->toPlainText().split('\n', QString::SkipEmptyParts)
     };
 
+    //  Benchmarking init
+    //      Start measuring time taken by the torrent creation
+    m_torrent_creation_elapsed_time = clock();
     // run the creator thread
     m_creatorThread->create(params);
 }
@@ -234,6 +245,14 @@ void TorrentCreatorDialog::handleCreationFailure(const QString &msg)
 
 void TorrentCreatorDialog::handleCreationSuccess(const QString &path, const QString &branchPath)
 {
+    // Benchmarking end;
+    //      End benchmarking routine. Presents the seconds taken for a torrent
+    //      creation with a dialog box.
+    m_torrent_creation_elapsed_time = clock() - m_torrent_creation_elapsed_time;
+    double time_taken = ((double)m_torrent_creation_elapsed_time) / CLOCKS_PER_SEC;
+    QMessageBox::information(this, tr("Torrent creator")
+        , QString::fromLatin1("%1\n%2 seconds").arg(tr("Time taken for torrent creation:"), QString::number(time_taken)));
+
     // Remove busy cursor
     setCursor(QCursor(Qt::ArrowCursor));
     if (m_ui->checkStartSeeding->isChecked())
@@ -284,13 +303,21 @@ void TorrentCreatorDialog::updatePiecesCount()
 
 void TorrentCreatorDialog::setInteractionEnabled(const bool enabled) const
 {
+    bool shouldEnableComboPieceSize;
+    if (Payfluxo::Session::instance()->isAuthenticated()) {
+        shouldEnableComboPieceSize = false;
+    }
+    else {
+        shouldEnableComboPieceSize = enabled;
+    }
+
     m_ui->textInputPath->setEnabled(enabled);
     m_ui->addFileButton->setEnabled(enabled);
     m_ui->addFolderButton->setEnabled(enabled);
     m_ui->trackersList->setEnabled(enabled);
     m_ui->URLSeedsList->setEnabled(enabled);
     m_ui->txtComment->setEnabled(enabled);
-    m_ui->comboPieceSize->setEnabled(enabled);
+    m_ui->comboPieceSize->setEnabled(shouldEnableComboPieceSize);
     m_ui->buttonCalcTotalPieces->setEnabled(enabled);
     m_ui->checkPrivate->setEnabled(enabled);
     m_ui->checkStartSeeding->setEnabled(enabled);

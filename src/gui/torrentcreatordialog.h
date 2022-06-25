@@ -33,6 +33,8 @@
 
 #include <QDialog>
 
+#include <time.h>
+
 #include "base/bittorrent/torrentcreatorthread.h"
 #include "base/settingvalue.h"
 
@@ -76,6 +78,9 @@ private:
 
     Ui::TorrentCreatorDialog *m_ui;
     BitTorrent::TorrentCreatorThread *m_creatorThread;
+
+    // Benchmarking variables
+    clock_t m_torrent_creation_elapsed_time;
 
     // settings
     SettingValue<QSize> m_storeDialogSize;
