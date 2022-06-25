@@ -117,17 +117,17 @@ void TorrentCreatorThread::run()
         if (QFileInfo(m_params.inputPath).isFile())
         {
             // Cypher if is file only;
-            if (m_params.isCyphered) {
+            if (m_params.isEncrypted) {
                 // 1. Generate random key;
                 unsigned char* randomKey = (unsigned char*)malloc((KEY_SIZE * 2 + 1) * sizeof(unsigned char));
                 Encryption::Encryption::generateRandomKey(randomKey);
-                // 2. Create a cyphered copy of the input files and rename it <name>.cyphered;
-                QString cypheredPath = m_params.inputPath + ".cyphered";
-                //QString cypheredPath = m_params.inputPath;
-                Encryption::Encryption::encryptFile(m_params.inputPath, randomKey, cypheredPath);
-                //Encryption::Encryption::encryptFile(m_params.inputPath, randomKey, cypheredPath);
+                // 2. Create a encrypted copy of the input files and rename it <name>.encrypted;
+                QString encryptedPath = m_params.inputPath + ".encrypted";
+                //QString encryptedPath = m_params.inputPath;
+                Encryption::Encryption::encryptFile(m_params.inputPath, randomKey, encryptedPath);
+                //Encryption::Encryption::encryptFile(m_params.inputPath, randomKey, encryptedPath);
                 // 3. Change m_params.inputPath value;
-                m_params.inputPath = cypheredPath;
+                m_params.inputPath = encryptedPath;
                 generateBiobankData(m_params.inputPath + ".biobank", randomKey);
             }
             lt::add_files(fs, Utils::Fs::toNativePath(m_params.inputPath).toStdString(), fileFilter);
@@ -161,18 +161,18 @@ void TorrentCreatorThread::run()
                 {
                     fileIter.next();
 
-                    if (m_params.isCyphered) {
-                        QString cypherDirPath = m_params.inputPath + "_cyphered";
-                        QString dirName = cypherDirPath.mid(cypherDirPath.lastIndexOf('/')).mid(1);
-                        QDir().mkdir(cypherDirPath);
-                        const QString filePath = fileIter.filePath().mid(m_params.inputPath.length()) + ".cyphered";
+                    if (m_params.isEncrypted) {
+                        QString encryptedDirPath = m_params.inputPath + "_encrypted";
+                        QString dirName = encryptedDirPath.mid(encryptedDirPath.lastIndexOf('/')).mid(1);
+                        QDir().mkdir(encryptedDirPath);
+                        const QString filePath = fileIter.filePath().mid(m_params.inputPath.length()) + ".encrypted";
                         const QString relFilePath = dirName + filePath; // <dir_selected>/<file_name>
-                        // 2. Create a cyphered copy of the input files and rename it <name>.cyphered;
-                        QString cypheredPath = cypherDirPath + filePath; // parentPath/cyphered/
-                        //QString cypheredPath = m_params.inputPath;
-                        Encryption::Encryption::encryptFile(fileIter.filePath(), randomKey, cypheredPath);
+                        // 2. Create a encrypted copy of the input files and rename it <name>.encrypted;
+                        QString encryptedPath = encryptedDirPath + filePath; // parentPath/encrypted/
+                        //QString encrypteddPath = m_params.inputPath;
+                        Encryption::Encryption::encryptFile(fileIter.filePath(), randomKey, encryptedPath);
                         tmpNames += relFilePath;
-                        QFile fileRef(cypheredPath);
+                        QFile fileRef(encryptedPath);
                         fileSizeMap[relFilePath] = fileRef.size();
                     }
                     else {
