@@ -1,15 +1,15 @@
-# Torrente 
+# Torrente
 
 
 ## Contexto e Motivação
 
-O Torrente surge da necessidade de uma ferramenta que atenda os requisitos de segurança necessários para a iniciativa do Amazon Biobank, um banco de dados de biodiversidade da amazônia em blockchain¹. 
+O Torrente surge da necessidade de uma ferramenta que atenda os requisitos de segurança necessários para a iniciativa do Amazon Biobank, um banco de dados de biodiversidade da amazônia em blockchain¹.
 Buscando alcançar disponibilidade, integridade e confiabilidade em um contexto de transmissão de arquivos distribuído, o projeto viabiliza incentivos financeiros em um ambiente de confiança zero.
 
 ## Objetivo
 
 O objetivo do projeto é implementar um sistema de armazenamento e compartilhamento de dados distribuído com mecanismos de incentivo econômico para estimular a colaboração dos usuários e mecanismos de punição para evitar a prática de free riding ².
-Como a natureza do projeto é distribuída, o seu sistema de pagamentos deve ser capaz de funcionar em ambiente de confiança zero entre os pares. 
+Como a natureza do projeto é distribuída, o seu sistema de pagamentos deve ser capaz de funcionar em ambiente de confiança zero entre os pares.
 
 ## Arquitetura
 
@@ -34,7 +34,7 @@ Os usuários adquirem pedaços de arquivos pela rede efetuando micro pagamentos 
 
 ## Conclusão
 
-O Torrente se apresenta como uma solução interessante para contextos distribuídos optando tanto por meios de pagamento tradicionais no meio digital, quanto por meios de pagamento baseados em um livro razão público de Blockhain. 
+O Torrente se apresenta como uma solução interessante para contextos distribuídos optando tanto por meios de pagamento tradicionais no meio digital, quanto por meios de pagamento baseados em um livro razão público de Blockhain.
 Ao atender os requisitos de segurança específicos do contexto motivador do Biobank, este projeto também sugere viabilidade de aplicação em outros contextos que, semelhantemente, demandem disponibilidade, integridade e confidencialidade na transmissão de dados, bem como um sistema de pagamentos dotado de autenticidade e não repúdio em ambiente de confiança zero entre os pares.
 
 ## Orientadores e Integrantes
@@ -58,9 +58,3 @@ Politécnica de Engenharia, Universidade de São Paulo, São Paulo, 2020. Dispon
 em: <https://pcs.usp.br/pcspf/projetos-anteriores/2020-2/>. Acesso em: 03/02/2021.
 2. HANG, Kan, ANTONOPOULOS, Nick, MAHMOOD, Zaigham. A Review of Incentive Mechanisms in Peer-to-Peer Systems. School of Computing, University
 of Derby, Derby, UK, 2009.
-
-
-
-
-
-
