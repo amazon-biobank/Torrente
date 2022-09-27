@@ -47,7 +47,7 @@ namespace BitTorrent
     struct TorrentCreatorParams
     {
         bool isPrivate;
-        bool isCyphered;
+        bool isEncrypted;
 #if (LIBTORRENT_VERSION_NUM >= 20000)
         TorrentFormat torrentFormat;
 #else

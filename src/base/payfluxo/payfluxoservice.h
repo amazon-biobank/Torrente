@@ -13,6 +13,8 @@ private:
     void handlePaymentNotification(QString ip, int blocksPaid);
     void handleIntentionDeclaredNotification(QString torrentIdString, int status);
     void handleWalletNotification(float newAvailable, float newFrozen, float newRedeemable);
+    void handleAuthNotification(QString certificate, QString orgMSPID);
+    void handleAuthFailedNotification();
 
 public:
     explicit PayfluxoService(bool debug, QObject* parent);
@@ -21,7 +23,7 @@ public:
     void onWebSocketError(QAbstractSocket::SocketError error);
     void onTextMessageReceived(QString message);
     void sendBlockDownloadedMessage(QString ip, QString torrentId, QString fileSize);
-    void sendAuthenticatedMessage(QString certificate, QString privateKey, QString orgMSP);
+    void sendAuthenticationMessage(QString encryptedContent, QString salt, QString password);
     void sendDeauthMessage();
     void sendDownloadIntentionMessage(QString magneticLink, int piecesNumber, QString torrentId);
     void sendCloseMessage();

@@ -35,6 +35,7 @@ namespace Payfluxo {
         void setRedeemableCoins(float newAmount);
 
         void updateWallet(float newAvailable, float newFrozen, float newRedeemable);
+        //void updateUser(QString certificate, QString orgMSPId);
 
         QString getCertificate();
 
@@ -42,16 +43,19 @@ namespace Payfluxo {
         void closePayfluxo();
 
         void NotifyFailed();
+        void NotifyAuthFailed();
+        void NotifyAuthentication(QString certificate, QString orgMSPid);
 
         static Session* m_instance;
 
     signals:
         void walletUpdated();
         void NATFailed();
+        void authenticationFailed();
+        void authenticationSucceeded();
 
     private:
         QString m_userDecryptedCertificateString;
-        QString m_userDecryptedPrivateKeyString;
         QString m_userMSPIdString;
 
         float m_availableCoins;

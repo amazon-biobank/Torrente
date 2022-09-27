@@ -9,7 +9,7 @@ set -o nounset
 regressions=0
 
 # exclusions (these are just grep extended regular expressions to match against paths relative to the root of the repository)
-exclusions_nonutf8='(.*(7z|gif|ic(ns|o)|png|qm|zip))'
+exclusions_nonutf8='(.*(7z|gif|ic(ns|o)|png|qm|zip|jpg|jpeg))'
 exclusions_bom='src/base/unicodestrings.h'
 exclusions_tw='(*.ts)|src/webui/www/private/scripts/lib/mootools-1.2-more.js'
 exclusions_trailing_newline='configure'

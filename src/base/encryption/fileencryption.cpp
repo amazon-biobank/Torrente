@@ -118,7 +118,7 @@ bool Encryption::Encryption::decryptFile(QString filePath, QString secretKey) {
             break;
         }
         EVP_DecryptUpdate(d_ctx, decryptionBuffer, &outputLength, bufferToDecrypt, ENCRYPTION_BUFFER_SIZE); // Cypher block and store in buffer
-        fwrite(decryptionBuffer, sizeof(unsigned char), outputLength, fileDecrypted); // Stores cyphered block to output file;
+        fwrite(decryptionBuffer, sizeof(unsigned char), outputLength, fileDecrypted); // Stores encrypted block to output file;
     }
     EVP_CIPHER_CTX_ctrl(d_ctx, EVP_CTRL_GCM_SET_TAG, AES_BLOCK_SIZE, tag);
     if (EVP_DecryptFinal(d_ctx, decryptionBuffer, &outputLength) == 0) {

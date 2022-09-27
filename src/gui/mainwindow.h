@@ -108,6 +108,8 @@ public:
 
 private slots:
     void NATerror();
+    void authenticationFailed();
+    void authenticationSucceeded();
     void showFilterContextMenu(const QPoint &);
     void balloonClicked();
     void writeSettings();

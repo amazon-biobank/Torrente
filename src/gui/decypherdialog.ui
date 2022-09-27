@@ -28,7 +28,7 @@
       </widget>
      </item>
    <item alignment="Qt::AlignHCenter">
-    <widget class="QPushButton" name="cypheredFileButton">
+    <widget class="QPushButton" name="encryptedFileButton">
      <property name="minimumSize">
       <size>
        <width>250</width>
@@ -97,7 +97,7 @@
  <resources/>
  <connections>
  <connection>
-   <sender>cypheredFileButton</sender>
+   <sender>encryptedFileButton</sender>
    <signal>clicked()</signal>
    <receiver>DecypherDialog</receiver>
    <slot>onImportFileButtonClicked()</slot>
