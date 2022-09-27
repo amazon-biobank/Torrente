@@ -94,11 +94,7 @@ void AuthDialog::setCredentials()
         if (certificatePath == "")
             throw NO_KEY_INPUT;
 
-        bool authResult = Payfluxo::Session::instance()->authenticate(password, this->certificatePath);
-
-        if (authResult) {
-            throw INVALID_CREDENTIALS_EXCEPTION;
-        }
+        Payfluxo::Session::instance()->authenticate(password, this->certificatePath);
 
         QApplication::restoreOverrideCursor();
         this->toggleWidgetsEnable();

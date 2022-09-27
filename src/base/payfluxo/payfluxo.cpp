@@ -1,9 +1,9 @@
 #include "payfluxo.h"
-#include "Lyra2FileEncryptor.h"
 
 #include <QJsonDocument>
 #include <QJsonObject>
 #include <QJsonValue>
+#include <QFile>
 
 using namespace Payfluxo;
 
@@ -13,7 +13,6 @@ Session::Session() {
     m_authenticated = false;
 
     m_userDecryptedCertificateString = QString("");
-    m_userDecryptedPrivateKeyString = QString("");
     m_userMSPIdString = QString("");
 }
 
@@ -33,34 +32,17 @@ Session* Session::instance() {
 }
 
 bool Session::authenticate(QString password, QString certificatePath) {
-    std::string certificatePathStd = certificatePath.toUtf8().constData();
-    char* certificatePathString = new char[certificatePathStd.length() + 1];
-    strcpy(certificatePathString, certificatePathStd.c_str());
-
-    std::string passwordStd = password.toUtf8().constData();
-    char* passwordString = new char[passwordStd.length() + 1];
-    strcpy(passwordString, passwordStd.c_str());
-
-    std::string decryptedFile = getDecryptedContentFromFile(certificatePathString, passwordString);
-
-    QJsonDocument jsonResponse = QJsonDocument::fromJson(decryptedFile.c_str());
-
-    if (jsonResponse.isNull()) {
+    QFile encryptedCredentialsFile = QFile(certificatePath);
+    if (!encryptedCredentialsFile.open(QFile::ReadOnly | QFile::Text))
         return true;
-    }
+    QTextStream in(&encryptedCredentialsFile);
+    QString encryptedCredentialsContent = in.readAll();
+    QJsonDocument encryptedCredentials = QJsonDocument::fromJson(encryptedCredentialsContent.toUtf8());
 
-    QJsonObject credentialsJson = jsonResponse.object();
+    QString encryptedContent = encryptedCredentials["encrypted_content"].toString();
+    QString salt = encryptedCredentials["salt"].toString();
 
-    QString certificateString = credentialsJson["certificate"].toString();
-    QString privateKeyString = credentialsJson["privateKey"].toString();
-    QString mspIdString = credentialsJson["orgMSPID"].toString();
-
-    m_userDecryptedCertificateString = certificateString;
-    m_userDecryptedPrivateKeyString = privateKeyString;
-    m_userMSPIdString = mspIdString;
-
-    m_authenticated = true;
-    m_payfluxoService->sendAuthenticatedMessage(certificateString, privateKeyString, mspIdString);
+    m_payfluxoService->sendAuthenticationMessage(encryptedContent, salt, password);
 
     // TODO: Recover from safe persistence
     m_availableCoins = 0;
@@ -72,7 +54,6 @@ bool Session::authenticate(QString password, QString certificatePath) {
 
 void Session::logout() {
     m_userDecryptedCertificateString = nullptr;
-    m_userDecryptedPrivateKeyString = nullptr;
     m_userMSPIdString = nullptr;
 
     m_authenticated = false;
@@ -160,6 +141,19 @@ void Session::updateWallet(float newAvailable, float newFrozen, float newRedeema
 
 void Session::NotifyFailed(){
     emit NATFailed();
+}
+
+void Session::NotifyAuthFailed() {
+    emit authenticationFailed();
+}
+
+void Session::NotifyAuthentication(QString certificate, QString orgMSPid) {
+    m_userDecryptedCertificateString = certificate;
+    m_userMSPIdString = orgMSPid;
+
+    m_authenticated = true;
+
+    emit authenticationSucceeded();
 }
 
 Session* Session::m_instance = nullptr;

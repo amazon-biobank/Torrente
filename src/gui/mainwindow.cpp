@@ -223,6 +223,8 @@ MainWindow::MainWindow(QWidget *parent)
     connect(BitTorrent::Session::instance(), &BitTorrent::Session::recursiveTorrentDownloadPossible, this, &MainWindow::askRecursiveTorrentDownloadConfirmation);
 
     connect(Payfluxo::Session::instance(), &Payfluxo::Session::NATFailed, this, &MainWindow::NATerror);
+    connect(Payfluxo::Session::instance(), &Payfluxo::Session::authenticationFailed, this, &MainWindow::authenticationFailed);
+    connect(Payfluxo::Session::instance(), &Payfluxo::Session::authenticationSucceeded, this, &MainWindow::authenticationSucceeded);
 
     qDebug("create tabWidget");
     m_tabs = new HidableTabWidget(this);
@@ -659,6 +661,16 @@ void MainWindow::NATerror() {
     QMessageBox NATErrorDialogBox;
     NATErrorDialogBox.setText("Payfluxo failed to open port 9003 on router. Please, open this port manually on your router");
     NATErrorDialogBox.exec();
+}
+
+void MainWindow::authenticationFailed() {
+    QMessageBox AuthErrorDialogBox;
+    AuthErrorDialogBox.setText("Provided credentials weren't accepted. Ensure either if the password was correct or if it was a valid encrypted certificate");
+    AuthErrorDialogBox.exec();
+}
+
+void MainWindow::authenticationSucceeded() {
+    this->refreshAuthenticationState();
 }
 
 bool MainWindow::defineUIAuth()

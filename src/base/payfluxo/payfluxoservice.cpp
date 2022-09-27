@@ -88,6 +88,18 @@ void PayfluxoService::handleWalletNotification(float newAvailable, float newFroz
     session->updateWallet(newAvailable, newFrozen, newRedeemable);
 }
 
+void PayfluxoService::handleAuthFailedNotification()
+{
+    Payfluxo::Session::instance()->NotifyAuthFailed();
+}
+
+void PayfluxoService::handleAuthNotification(QString certificate, QString orgMSPID)
+{
+    Payfluxo::Session* session = Payfluxo::Session::instance();
+
+    session->NotifyAuthentication(certificate, orgMSPID);
+}
+
 void PayfluxoService::onTextMessageReceived(QString message)
 {
     QJsonDocument jsonResponse = QJsonDocument::fromJson(message.toUtf8());
@@ -120,6 +132,17 @@ void PayfluxoService::onTextMessageReceived(QString message)
         Payfluxo::Session::instance()->NotifyFailed();
     }
 
+    else if (QString::compare(type, "AuthenticationNotification", Qt::CaseSensitive) == 0) {
+        this->handleAuthNotification(
+            dataJson["certificate"].toString(),
+            dataJson["orgMSPID"].toString()
+        );
+    }
+
+    else if (QString::compare(type, "AuthenticationFailedNotification", Qt::CaseSensitive) == 0) {
+        this->handleAuthFailedNotification();
+    }
+
     if (m_debug)
         qDebug() << "Message received:" << message;
 
@@ -139,14 +162,14 @@ void PayfluxoService::sendBlockDownloadedMessage(QString ip, QString magneticLin
     this->sendMessage(QString(serializedMessage));
 }
 
-void PayfluxoService::sendAuthenticatedMessage(QString certificate, QString privateKey, QString orgMSP)
+void PayfluxoService::sendAuthenticationMessage(QString encryptedContent, QString salt, QString password)
 {
     QJsonObject dataObj;
-    dataObj.insert("certificate", certificate);
-    dataObj.insert("privateKey", privateKey);
-    dataObj.insert("mspId", orgMSP);
+    dataObj.insert("encrypted_content", encryptedContent);
+    dataObj.insert("salt", salt);
+    dataObj.insert("password", password);
     QJsonObject messageObj;
-    messageObj.insert("type", QString("Authenticated"));
+    messageObj.insert("type", QString("Authentication"));
     messageObj.insert("data", dataObj);
     QJsonDocument messageDoc(messageObj);
     QByteArray serializedMessage = messageDoc.toJson();
