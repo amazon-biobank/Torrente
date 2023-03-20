@@ -610,8 +610,8 @@ MAKEFLAGS=
 # Identity of this package.
 PACKAGE_NAME='Torrente'
 PACKAGE_TARNAME='Torrente'
-PACKAGE_VERSION='v3.0.0'
-PACKAGE_STRING='Torrente v3.0.0'
+PACKAGE_VERSION='v4.0.0'
+PACKAGE_STRING='Torrente v4.0.0'
 PACKAGE_BUGREPORT='bugs.torrente.org'
 PACKAGE_URL='https://www.torrente.org/'
 

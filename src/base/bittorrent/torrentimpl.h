@@ -135,6 +135,8 @@ namespace BitTorrent
         int piecesHave() const override;
         qreal progress() const override;
         QDateTime addedTime() const override;
+        QDateTime firstPieceTime() const override;
+        bool receivedFirstPiece() const override;
         qreal ratioLimit() const override;
         int seedingTimeLimit() const override;
 
@@ -345,5 +347,8 @@ namespace BitTorrent
         bool m_unchecked = false;
 
         lt::add_torrent_params m_ltAddTorrentParams;
+
+        bool m_receivedFirstPiece = false;
+        QDateTime m_firstPieceTime;
     };
 }
