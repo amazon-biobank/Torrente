@@ -250,6 +250,8 @@ void PropertiesWidget::clear()
     m_ui->labelSeedsVal->clear();
     m_ui->labelPeersVal->clear();
     m_ui->labelDlSpeedVal->clear();
+    m_ui->labelDlDurationVal->clear();
+    m_ui->labelFirstPieceVal->clear();
     m_ui->labelUpSpeedVal->clear();
     m_ui->labelTotalSizeVal->clear();
     m_ui->labelCompletedOnVal->clear();
@@ -452,16 +454,29 @@ void PropertiesWidget::loadDynamicData()
             m_ui->labelDlSpeedVal->setText(tr("%1 (%2 avg.)", "%1 and %2 are speed rates, e.g. 200KiB/s (100KiB/s avg.)")
                 .arg(Utils::Misc::friendlyUnit(m_torrent->downloadPayloadRate(), true), dlAvg));
 
+            const qlonglong dlDurationMins = (dlDuration / 60) % 60;
+            const qlonglong dlDurationHours = dlDuration / 3600;
+            const qlonglong dlDurationSeconds = dlDuration % 60;
+
+            m_ui->labelDlDurationVal->setText(tr("%1h %2m %3s").arg(
+                QString::number(dlDurationHours),
+                QString::number(dlDurationMins),
+                QString::number(dlDurationSeconds)
+            ));
+
+            m_ui->labelFirstPieceVal->setText(
+                m_torrent->firstPieceTime().isValid() ? QLocale().toString(m_torrent->firstPieceTime(), QLocale::LongFormat) : QString{});
+
             const qlonglong ulDuration = m_torrent->activeTime();
             const QString ulAvg = Utils::Misc::friendlyUnit((m_torrent->totalUpload() / ((ulDuration == 0) ? -1 : ulDuration)), true);
             m_ui->labelUpSpeedVal->setText(tr("%1 (%2 avg.)", "%1 and %2 are speed rates, e.g. 200KiB/s (100KiB/s avg.)")
                 .arg(Utils::Misc::friendlyUnit(m_torrent->uploadPayloadRate(), true), ulAvg));
 
-            m_ui->labelLastSeenCompleteVal->setText(m_torrent->lastSeenComplete().isValid() ? QLocale().toString(m_torrent->lastSeenComplete(), QLocale::ShortFormat) : tr("Never"));
+            m_ui->labelLastSeenCompleteVal->setText(m_torrent->lastSeenComplete().isValid() ? QLocale().toString(m_torrent->lastSeenComplete(), QLocale::LongFormat) : tr("Never"));
 
-            m_ui->labelCompletedOnVal->setText(m_torrent->completedTime().isValid() ? QLocale().toString(m_torrent->completedTime(), QLocale::ShortFormat) : QString {});
+            m_ui->labelCompletedOnVal->setText(m_torrent->completedTime().isValid() ? QLocale().toString(m_torrent->completedTime(), QLocale::LongFormat) : QString {});
 
-            m_ui->labelAddedOnVal->setText(QLocale().toString(m_torrent->addedTime(), QLocale::ShortFormat));
+            m_ui->labelAddedOnVal->setText(QLocale().toString(m_torrent->addedTime(), QLocale::LongFormat));
 
             if (m_torrent->hasMetadata())
             {

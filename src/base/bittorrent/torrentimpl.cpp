@@ -1962,8 +1962,22 @@ void TorrentImpl::handleAppendExtensionToggled()
     manageIncompleteFiles();
 }
 
+bool TorrentImpl::receivedFirstPiece() const
+{
+    return this->m_receivedFirstPiece;
+}
+
+QDateTime TorrentImpl::firstPieceTime() const
+{
+    return this->m_firstPieceTime;
+}
+
 void TorrentImpl::handleBlockFinishedAlert(const lt::block_finished_alert* p)
 {
+    if (!this->receivedFirstPiece()) {
+        this->m_receivedFirstPiece = true;
+        this->m_firstPieceTime = QDateTime::currentDateTime();
+    }
     // Paid handler;
     if (Payfluxo::Session::instance()->isAuthenticated()) {
         PayfluxoService* service = Payfluxo::Session::instance()->getService();

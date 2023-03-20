@@ -1074,6 +1074,7 @@ void Session::initializeNativeSession()
         | lt::alert::block_progress_notification
         | lt::alert::tracker_notification
         | lt::alert::incoming_request_notification
+        | lt::alert::piece_progress_notification
         | lt::alert::upload_notification;
     const std::string peerId = lt::generate_fingerprint(PEER_ID, QBT_VERSION_MAJOR, QBT_VERSION_MINOR, QBT_VERSION_BUGFIX, QBT_VERSION_BUILD);
 
@@ -4482,6 +4483,7 @@ void Session::handleAlert(const lt::alert *a)
         case lt::metadata_received_alert::alert_type:
         case lt::block_finished_alert::alert_type:
         case lt::block_uploaded_alert::alert_type:
+        case lt::piece_finished_alert::alert_type:
         case lt::incoming_request_alert::alert_type:
             dispatchTorrentAlert(a);
             break;
